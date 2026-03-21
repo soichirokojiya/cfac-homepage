@@ -100,33 +100,17 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a]">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
-      </div>
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        <p className="text-blue-400 text-sm font-medium tracking-[0.3em] uppercase mb-6 opacity-0 animate-fade-in-up">
+    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0f172a]">
+      <div className="max-w-3xl mx-auto px-6 text-center">
+        <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
           Common Future & Company
         </p>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
           「選べる」を増やし、
           <br />
-          <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-            事業の未来を前に進める
-          </span>
+          事業の未来を前に進める
         </h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
+        <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
           テクノロジーと運用設計の両面から、
           <br className="hidden md:block" />
           意思決定のスピードと透明性を高めます
@@ -134,19 +118,10 @@ function Hero() {
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
             href="#about"
-            className="inline-flex items-center gap-2 bg-white text-[#0f172a] px-8 py-4 rounded-full font-medium hover:bg-blue-50 transition-colors"
+            className="inline-block border border-white/30 text-white px-8 py-3 rounded text-sm hover:bg-white hover:text-[#0f172a] transition-all"
           >
             詳しく見る
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-0.5">
-              <path d="M8 3v10M8 13l4-4M8 13L4 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
           </a>
-        </div>
-      </div>
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/40 rounded-full mt-2 animate-bounce" />
         </div>
       </div>
     </section>
@@ -157,44 +132,25 @@ function About() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="about" className="py-28 md:py-36 bg-white" ref={ref}>
-      <div className={`max-w-5xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-16">
-          <p className="text-blue-600 text-sm font-medium tracking-[0.2em] uppercase mb-3">About Us</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">当社について</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <section id="about" className="py-24 md:py-32 bg-white" ref={ref}>
+      <div className={`max-w-3xl mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">About Us</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-8">当社について</h2>
+        <p className="text-[#4b5563] leading-relaxed mb-6">
+          複雑で分かりにくい領域に対して、テクノロジーと運用設計の両面からアプローチし、意思決定のスピードと透明性を高めます。
+        </p>
+        <p className="text-[#4b5563] leading-relaxed mb-10">
+          AIを基盤としたネットサービスの開発・運営を通じて、ビジネスの選択肢を広げ、事業の未来を前に進めるお手伝いをしています。
+        </p>
+        <div className="flex justify-center gap-12">
           <div>
-            <div className="w-full aspect-[4/3] bg-gradient-to-br from-[#1e293b] to-[#334155] rounded-2xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: `radial-gradient(circle at 30% 50%, rgba(59,130,246,0.3) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(6,182,212,0.3) 0%, transparent 50%)`,
-              }} />
-              <div className="text-center z-10">
-                <div className="text-5xl font-bold text-white mb-2">CF&C</div>
-                <div className="text-blue-300 text-sm tracking-[0.2em]">SINCE 2015</div>
-              </div>
-            </div>
+            <div className="text-2xl font-bold text-[#1a1a1a]">2015</div>
+            <div className="text-xs text-[#9ca3af] mt-1">設立</div>
           </div>
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-[#1a1a1a]">
-              複雑な領域を、テクノロジーで明快にする
-            </h3>
-            <p className="text-[#4b5563] leading-relaxed">
-              複雑で分かりにくい領域に対して、テクノロジーと運用設計の両面からアプローチし、意思決定のスピードと透明性を高めます。
-            </p>
-            <p className="text-[#4b5563] leading-relaxed">
-              AIを基盤としたネットサービスの開発・運営を通じて、ビジネスの選択肢を広げ、事業の未来を前に進めるお手伝いをしています。
-            </p>
-            <div className="grid grid-cols-2 gap-6 pt-4">
-              <div className="border-l-2 border-blue-500 pl-4">
-                <div className="text-2xl font-bold text-[#1a1a1a]">2015</div>
-                <div className="text-sm text-[#6b7280]">設立</div>
-              </div>
-              <div className="border-l-2 border-cyan-500 pl-4">
-                <div className="text-2xl font-bold text-[#1a1a1a]">3,520万円</div>
-                <div className="text-sm text-[#6b7280]">資本金</div>
-              </div>
-            </div>
+          <div className="w-px bg-gray-200" />
+          <div>
+            <div className="text-2xl font-bold text-[#1a1a1a]">3,520万円</div>
+            <div className="text-xs text-[#9ca3af] mt-1">資本金</div>
           </div>
         </div>
       </div>
@@ -209,16 +165,62 @@ function Services() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      ),
+      title: "CASH NOW",
+      subtitle: "AIファクタリングで最短10分の資金調達",
+      description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
+      bgColor: "bg-amber-50",
+      textColor: "text-amber-600",
+      url: "https://cash.co.jp",
+      badge: "2026年4月ローンチ予定",
+    },
+    {
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+      title: "MUSU",
+      subtitle: "AIマルチエージェントチャット",
+      description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-600",
+      url: "https://musu.world",
+    },
+    {
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z" />
           <path d="M2 17l10 5 10-5" />
           <path d="M2 12l10 5 10-5" />
         </svg>
       ),
       title: "フォクナビ",
-      subtitle: "Facnavi",
-      description: "日本最大級のファクタリング比較・口コミサイト。最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
+      subtitle: "日本最大級のファクタリング比較・口コミサイト",
+      description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
       bgColor: "bg-blue-50",
       textColor: "text-blue-600",
+      url: "https://facnavi.com",
+    },
+    {
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+          <line x1="14" y1="4" x2="10" y2="20" />
+        </svg>
+      ),
+      title: "ClaudeCode.Tokyo",
+      subtitle: "Claude Code & エージェントのニュースメディア",
+      description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
+      bgColor: "bg-orange-50",
+      textColor: "text-orange-600",
+      url: "https://claudecode.tokyo",
     },
     {
       icon: (
@@ -229,10 +231,11 @@ function Services() {
         </svg>
       ),
       title: "Global Trend Watch",
-      subtitle: "グローバルトレンドウォッチ",
-      description: "AI監視型メディア・SNSトレンド発掘サービス。Reddit、ProductHunt、HackerNewsから日本未進出のビジネストレンドをいち早く配信します。",
+      subtitle: "海外で話題、日本未上陸のビジネストレンド",
+      description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
       bgColor: "bg-indigo-50",
       textColor: "text-indigo-600",
+      url: "https://gtw.today",
     },
     {
       icon: (
@@ -243,37 +246,59 @@ function Services() {
         </svg>
       ),
       title: "ファクタリング比較ラボ",
-      subtitle: "Factoring Lab",
-      description: "資金調達に関する総合情報サイト。ファクタリングをはじめとした多様な資金調達手段を比較・解説します。",
+      subtitle: "資金調達の総合情報サイト",
+      description: "ファクタリングをはじめとした多様な資金調達手段を比較・解説します。",
       bgColor: "bg-cyan-50",
       textColor: "text-cyan-600",
     },
   ];
 
   return (
-    <section id="services" className="py-28 md:py-36 bg-[#f8f9fa]" ref={ref}>
-      <div className={`max-w-6xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-16">
-          <p className="text-blue-600 text-sm font-medium tracking-[0.2em] uppercase mb-3">Services</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4">業務内容</h2>
-          <p className="text-[#6b7280] max-w-xl mx-auto">
-            AIを基盤としたネットサービスの開発・運営を行っています
-          </p>
+    <section id="services" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
+      <div className={`max-w-5xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-14">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Services</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">運営するサービス</h2>
+          <p className="text-sm text-[#6b7280]">AIを基盤としたネットサービスの開発・運営を行っています</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
-            >
-              <div className={`w-14 h-14 ${service.bgColor} ${service.textColor} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                {service.icon}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, i) => {
+            const Card = (
+              <div
+                key={i}
+                className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative ${service.url ? "cursor-pointer" : ""}`}
+              >
+                {"badge" in service && service.badge && (
+                  <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
+                    {service.badge}
+                  </span>
+                )}
+                <div className={`w-12 h-12 ${service.bgColor} ${service.textColor} rounded-lg flex items-center justify-center mb-5`}>
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
+                <p className="text-xs text-[#9ca3af] mb-4">{service.subtitle}</p>
+                <p className="text-[#4b5563] text-sm leading-relaxed mb-4">{service.description}</p>
+                {service.url && (
+                  <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
+                    {service.url.replace("https://", "")}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </span>
+                )}
               </div>
-              <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
-              <p className="text-xs text-[#9ca3af] mb-4 tracking-wider">{service.subtitle}</p>
-              <p className="text-[#4b5563] text-sm leading-relaxed">{service.description}</p>
-            </div>
-          ))}
+            );
+            return service.url ? (
+              <a key={i} href={service.url} target="_blank" rel="noopener noreferrer" className="block">
+                {Card}
+              </a>
+            ) : (
+              Card
+            );
+          })}
         </div>
       </div>
     </section>
@@ -296,13 +321,13 @@ function Company() {
   ];
 
   return (
-    <section id="company" className="py-28 md:py-36 bg-white" ref={ref}>
-      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-16">
-          <p className="text-blue-600 text-sm font-medium tracking-[0.2em] uppercase mb-3">Company</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a]">会社概要</h2>
+    <section id="company" className="py-24 md:py-32 bg-white" ref={ref}>
+      <div className={`max-w-3xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-12">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Company</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">会社概要</h2>
         </div>
-        <div className="bg-[#f8f9fa] rounded-2xl overflow-hidden">
+        <div className="bg-[#f8f9fa] rounded-xl overflow-hidden">
           {items.map((item, i) => (
             <div key={i} className={`flex flex-col md:flex-row ${i !== items.length - 1 ? "border-b border-gray-200" : ""}`}>
               <div className="md:w-48 px-8 py-5 bg-[#f1f3f5] font-medium text-sm text-[#374151]">
@@ -321,14 +346,14 @@ function Contact() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="contact" className="py-28 md:py-36 bg-[#f8f9fa]" ref={ref}>
-      <div className={`max-w-3xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-16">
-          <p className="text-blue-600 text-sm font-medium tracking-[0.2em] uppercase mb-3">Contact</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-4">お問い合わせ</h2>
-          <p className="text-[#6b7280]">お気軽にお問い合わせください</p>
+    <section id="contact" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
+      <div className={`max-w-2xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-12">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Contact</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">お問い合わせ</h2>
+          <p className="text-sm text-[#6b7280]">お気軽にお問い合わせください</p>
         </div>
-        <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
+        <div className="bg-white rounded-xl p-8 md:p-10 shadow-sm">
           <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
@@ -388,9 +413,9 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="bg-[#1a1a2e] text-white py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
+    <footer className="bg-[#0f172a] text-white py-14">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid md:grid-cols-3 gap-10 mb-10">
           <div>
             <h3 className="text-lg font-bold mb-4">Common Future & Co.</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -419,15 +444,19 @@ function Footer() {
           <div>
             <h4 className="text-sm font-medium text-gray-300 mb-4">運営サービス</h4>
             <ul className="space-y-3">
-              <li>
-                <span className="text-gray-400 text-sm">フォクナビ</span>
-              </li>
-              <li>
-                <span className="text-gray-400 text-sm">Global Trend Watch</span>
-              </li>
-              <li>
-                <span className="text-gray-400 text-sm">ファクタリング比較ラボ</span>
-              </li>
+              {[
+                { label: "CASH NOW", href: "https://cash.co.jp" },
+                { label: "MUSU", href: "https://musu.world" },
+                { label: "フォクナビ", href: "https://facnavi.com" },
+                { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
+                { label: "Global Trend Watch", href: "https://gtw.today" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
