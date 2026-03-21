@@ -190,7 +190,7 @@ function Services() {
       badge: "2026年4月ローンチ予定",
     },
     {
-      logo: "https://musu.world/favicon.svg",
+      logo: "/logos/musu.svg",
       title: "MUSU",
       subtitle: "AIマルチエージェントチャット",
       description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
@@ -204,14 +204,14 @@ function Services() {
       url: "https://facnavi.com",
     },
     {
-      logo: "https://claudecode.tokyo/favicon.ico",
+      logo: "/logos/claudecode.svg",
       title: "ClaudeCode.Tokyo",
       subtitle: "Claude Code & エージェントのニュースメディア",
       description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
       url: "https://claudecode.tokyo",
     },
     {
-      logo: "https://gtw.today/favicon.ico",
+      logo: "/logos/gtw.svg",
       title: "Global Trend Watch",
       subtitle: "海外で話題、日本未上陸のビジネストレンド",
       description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
