@@ -57,7 +57,7 @@ function Header() {
               key={item.href}
               href={item.href}
               className={`text-sm font-medium transition-colors ${
-                scrolled ? "text-[#4b5563] hover:text-[#1a1a1a]" : "text-gray-300 hover:text-white"
+                scrolled ? "text-[#374151] hover:text-[#1a1a1a]" : "text-gray-300 hover:text-white"
               }`}
             >
               {item.label}
@@ -86,7 +86,7 @@ function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="block px-6 py-3 text-sm text-[#4b5563] hover:text-[#1a1a1a] hover:bg-gray-50"
+              className="block px-6 py-3 text-sm text-[#374151] hover:text-[#1a1a1a] hover:bg-gray-50"
               onClick={() => setMenuOpen(false)}
             >
               {item.label}
@@ -133,26 +133,15 @@ function About() {
 
   return (
     <section id="about" className="py-24 md:py-32 bg-white" ref={ref}>
-      <div className={`max-w-3xl mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">About Us</p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-8">当社について</h2>
-        <p className="text-[#4b5563] leading-relaxed mb-6">
+      <div className={`max-w-2xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3 text-center">About Us</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-8 text-center">当社について</h2>
+        <p className="text-[#374151] leading-loose mb-5 text-[15px]">
           複雑で分かりにくい領域に対して、テクノロジーと運用設計の両面からアプローチし、意思決定のスピードと透明性を高めます。
         </p>
-        <p className="text-[#4b5563] leading-relaxed mb-10">
+        <p className="text-[#374151] leading-loose text-[15px]">
           AIを基盤としたネットサービスの開発・運営を通じて、ビジネスの選択肢を広げ、事業の未来を前に進めるお手伝いをしています。
         </p>
-        <div className="flex justify-center gap-12">
-          <div>
-            <div className="text-2xl font-bold text-[#1a1a1a]">2015</div>
-            <div className="text-xs text-[#9ca3af] mt-1">設立</div>
-          </div>
-          <div className="w-px bg-gray-200" />
-          <div>
-            <div className="text-2xl font-bold text-[#1a1a1a]">3,520万円</div>
-            <div className="text-xs text-[#9ca3af] mt-1">資本金</div>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -278,7 +267,7 @@ function Services() {
                 </div>
                 <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
                 <p className="text-xs text-[#9ca3af] mb-4">{service.subtitle}</p>
-                <p className="text-[#4b5563] text-sm leading-relaxed mb-4">{service.description}</p>
+                <p className="text-[#374151] text-sm leading-loose mb-4">{service.description}</p>
                 {service.url && (
                   <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
                     {service.url.replace("https://", "")}
@@ -333,7 +322,7 @@ function Company() {
               <div className="md:w-48 px-8 py-5 bg-[#f1f3f5] font-medium text-sm text-[#374151]">
                 {item.label}
               </div>
-              <div className="flex-1 px-8 py-5 text-sm text-[#4b5563]">{item.value}</div>
+              <div className="flex-1 px-8 py-5 text-sm text-[#374151]">{item.value}</div>
             </div>
           ))}
         </div>
