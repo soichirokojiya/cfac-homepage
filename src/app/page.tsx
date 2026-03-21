@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { LogoFull } from "./logo";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,8 +48,8 @@ function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className={`text-xl font-bold tracking-tight ${scrolled ? "text-[#1a1a1a]" : "text-white"}`}>
-          Common Future & Co.
+        <a href="#">
+          <LogoFull height={30} color={scrolled ? "#1a1a1a" : "#ffffff"} />
         </a>
         {/* Desktop nav */}
         <nav className="hidden md:flex gap-8">
@@ -406,7 +407,7 @@ function Footer() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid md:grid-cols-3 gap-10 mb-10">
           <div>
-            <h3 className="text-lg font-bold mb-4">Common Future & Co.</h3>
+            <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
             <p className="text-gray-400 text-sm leading-relaxed">
               AIを基盤としたネットサービスの
               <br />
