@@ -9,9 +9,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Common Future & Company 株式会社 | AIを基盤としたサービス開発・運営",
+  title: "Common Future & Company 株式会社 | ひとりを、つよく。",
   description:
-    "Common Future & Company株式会社は、AIを基盤としたネットサービスの開発・運営を行う企業です。ファクタリング比較サイト「フォクナビ」やAI監視型トレンド発掘サービス「Global Trend Watch」を運営しています。",
+    "ソロプレナーの時代に必要なサービスを、AIとテクノロジーの力で届ける。CASH NOW、MUSU、ファクナビ、ClaudeCode.Tokyo、Global Trend Watchを運営。",
   icons: {
     icon: "/favicon.svg",
     apple: "/icon.svg",

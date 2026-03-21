@@ -35,8 +35,8 @@ function Header() {
   }, []);
 
   const navItems = [
-    { label: "当社について", href: "#about" },
-    { label: "業務内容", href: "#services" },
+    { label: "ビジョン", href: "#vision" },
+    { label: "サービス", href: "#services" },
     { label: "会社概要", href: "#company" },
     { label: "お問い合わせ", href: "#contact" },
   ];
@@ -51,7 +51,6 @@ function Header() {
         <a href="#">
           <LogoFull height={30} color={scrolled ? "#1a1a1a" : "#ffffff"} />
         </a>
-        {/* Desktop nav */}
         <nav className="hidden md:flex gap-8">
           {navItems.map((item) => (
             <a
@@ -65,22 +64,16 @@ function Header() {
             </a>
           ))}
         </nav>
-        {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="メニュー"
         >
-          <span
-            className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-          />
+          <span className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
           <span className={`w-6 h-0.5 transition-opacity ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
-          <span
-            className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-          />
+          <span className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </div>
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 pb-4">
           {navItems.map((item) => (
@@ -104,24 +97,22 @@ function Hero() {
     <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0f172a]">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
-          Common Future & Company
+          For Solopreneurs, by Technology
         </p>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
-          「選べる」を増やし、
-          <br />
-          事業の未来を前に進める
+          ひとりを、つよく。
         </h1>
         <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
-          テクノロジーと運用設計の両面から、
+          ソロプレナーの時代に必要なサービスを、
           <br className="hidden md:block" />
-          意思決定のスピードと透明性を高めます
+          AIとテクノロジーの力で届ける。
         </p>
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
-            href="#about"
+            href="#vision"
             className="inline-block border border-white/30 text-white px-8 py-3 rounded text-sm hover:bg-white hover:text-[#0f172a] transition-all"
           >
-            詳しく見る
+            私たちについて
           </a>
         </div>
       </div>
@@ -129,20 +120,58 @@ function Hero() {
   );
 }
 
-function About() {
+function Vision() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-white" ref={ref}>
+    <section id="vision" className="py-24 md:py-32 bg-white" ref={ref}>
       <div className={`max-w-2xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3 text-center">About Us</p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-8 text-center">当社について</h2>
-        <p className="text-[#374151] leading-loose mb-5 text-[15px]">
-          複雑で分かりにくい領域に対して、テクノロジーと運用設計の両面からアプローチし、意思決定のスピードと透明性を高めます。
-        </p>
-        <p className="text-[#374151] leading-loose text-[15px]">
-          AIを基盤としたネットサービスの開発・運営を通じて、ビジネスの選択肢を広げ、事業の未来を前に進めるお手伝いをしています。
-        </p>
+        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3 text-center">Vision & Mission</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-10 text-center">ビジョン・ミッション</h2>
+
+        {/* Vision */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Vision</span>
+            <span className="flex-1 h-px bg-gray-200" />
+          </div>
+          <p className="text-xl md:text-2xl font-bold text-[#1a1a1a] leading-relaxed">
+            ひとりで挑むすべての人が、<br />チームの力を手にできる世界をつくる。
+          </p>
+        </div>
+
+        {/* Mission */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Mission</span>
+            <span className="flex-1 h-px bg-gray-200" />
+          </div>
+          <p className="text-[#374151] leading-loose text-[15px]">
+            AIとテクノロジーの力で、ソロプレナー・フリーランス・個人事業主が大企業と同じ土俵で戦えるサービスをつくる。資金調達、情報収集、業務自動化——ひとりの挑戦に必要なインフラを、私たちが届けます。
+          </p>
+        </div>
+
+        {/* Values */}
+        <div>
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Values</span>
+            <span className="flex-1 h-px bg-gray-200" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">Solo-First</h4>
+              <p className="text-[#6b7280] text-sm leading-relaxed">すべてのプロダクトを「ひとりで使える」を前提に設計する。</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">AI-Native</h4>
+              <p className="text-[#6b7280] text-sm leading-relaxed">AIを補助ツールではなく、サービスの中核に据える。</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">三方よし</h4>
+              <p className="text-[#6b7280] text-sm leading-relaxed">利用者・社会・私たち、三方に価値が還る事業だけを行う。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -153,93 +182,40 @@ function Services() {
 
   const services = [
     {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-        </svg>
-      ),
+      logo: "/logos/cashnow.svg",
       title: "CASH NOW",
       subtitle: "AIファクタリングで最短10分の資金調達",
       description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
-      bgColor: "bg-amber-50",
-      textColor: "text-amber-600",
       url: "https://cash.co.jp",
       badge: "2026年4月ローンチ予定",
     },
     {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      ),
+      logo: "https://musu.world/favicon.svg",
       title: "MUSU",
       subtitle: "AIマルチエージェントチャット",
       description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
-      bgColor: "bg-purple-50",
-      textColor: "text-purple-600",
       url: "https://musu.world",
     },
     {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
-        </svg>
-      ),
-      title: "フォクナビ",
+      logo: "/logos/facnavi.svg",
+      title: "ファクナビ",
       subtitle: "日本最大級のファクタリング比較・口コミサイト",
       description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
-      bgColor: "bg-blue-50",
-      textColor: "text-blue-600",
       url: "https://facnavi.com",
     },
     {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="16 18 22 12 16 6" />
-          <polyline points="8 6 2 12 8 18" />
-          <line x1="14" y1="4" x2="10" y2="20" />
-        </svg>
-      ),
+      logo: "https://claudecode.tokyo/favicon.ico",
       title: "ClaudeCode.Tokyo",
       subtitle: "Claude Code & エージェントのニュースメディア",
       description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
-      bgColor: "bg-orange-50",
-      textColor: "text-orange-600",
       url: "https://claudecode.tokyo",
     },
     {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="2" y1="12" x2="22" y2="12" />
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-        </svg>
-      ),
+      logo: "https://gtw.today/favicon.ico",
       title: "Global Trend Watch",
       subtitle: "海外で話題、日本未上陸のビジネストレンド",
       description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
-      bgColor: "bg-indigo-50",
-      textColor: "text-indigo-600",
       url: "https://gtw.today",
-    },
-    {
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      ),
-      title: "ファクタリング比較ラボ",
-      subtitle: "資金調達の総合情報サイト",
-      description: "ファクタリングをはじめとした多様な資金調達手段を比較・解説します。",
-      bgColor: "bg-cyan-50",
-      textColor: "text-cyan-600",
     },
   ];
 
@@ -249,46 +225,39 @@ function Services() {
         <div className="text-center mb-14">
           <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Services</p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">運営するサービス</h2>
-          <p className="text-sm text-[#6b7280]">AIを基盤としたネットサービスの開発・運営を行っています</p>
+          <p className="text-sm text-[#6b7280]">ソロプレナーの挑戦を支えるプロダクト群</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, i) => {
-            const Card = (
-              <div
-                key={i}
-                className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative ${service.url ? "cursor-pointer" : ""}`}
-              >
+          {services.map((service, i) => (
+            <a key={i} href={service.url} target="_blank" rel="noopener noreferrer" className="block">
+              <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative cursor-pointer h-full">
                 {"badge" in service && service.badge && (
                   <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
                     {service.badge}
                   </span>
                 )}
-                <div className={`w-12 h-12 ${service.bgColor} ${service.textColor} rounded-lg flex items-center justify-center mb-5`}>
-                  {service.icon}
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={service.logo}
+                  alt={`${service.title} logo`}
+                  width={36}
+                  height={36}
+                  className="w-9 h-9 mb-5 rounded-lg object-contain"
+                />
                 <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
                 <p className="text-xs text-[#9ca3af] mb-4">{service.subtitle}</p>
                 <p className="text-[#374151] text-sm leading-loose mb-4">{service.description}</p>
-                {service.url && (
-                  <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
-                    {service.url.replace("https://", "")}
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  </span>
-                )}
+                <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
+                  {service.url.replace("https://", "")}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </span>
               </div>
-            );
-            return service.url ? (
-              <a key={i} href={service.url} target="_blank" rel="noopener noreferrer" className="block">
-                {Card}
-              </a>
-            ) : (
-              Card
-            );
-          })}
+            </a>
+          ))}
         </div>
       </div>
     </section>
@@ -337,65 +306,21 @@ function Contact() {
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
-      <div className={`max-w-2xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-12">
-          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Contact</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">お問い合わせ</h2>
-          <p className="text-sm text-[#6b7280]">お気軽にお問い合わせください</p>
-        </div>
-        <div className="bg-white rounded-xl p-8 md:p-10 shadow-sm">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-[#374151] mb-2">お名前</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-sm"
-                  placeholder="山田 太郎"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#374151] mb-2">メールアドレス</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-sm"
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#374151] mb-2">件名</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-sm"
-                placeholder="お問い合わせ件名"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#374151] mb-2">お問い合わせ内容</label>
-              <textarea
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-sm resize-none"
-                placeholder="お問い合わせ内容をご記入ください"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-[#1a1a2e] text-white py-4 rounded-lg font-medium hover:bg-[#2a2a4e] transition-colors"
-            >
-              送信する
-            </button>
-          </form>
-          <div className="mt-8 pt-8 border-t border-gray-100 text-center">
-            <p className="text-sm text-[#6b7280]">
-              メールでのお問い合わせ：
-              <a href="mailto:info@cfac.co.jp" className="text-blue-600 hover:underline ml-1">
-                info@cfac.co.jp
-              </a>
-            </p>
-            <p className="text-sm text-[#6b7280] mt-2">営業時間：平日 10:00～18:00</p>
-          </div>
-        </div>
+      <div className={`max-w-md mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Contact</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">お問い合わせ</h2>
+        <p className="text-sm text-[#6b7280] mb-8">お気軽にお問い合わせください</p>
+        <a
+          href="mailto:info@cfac.co.jp"
+          className="inline-flex items-center gap-2 text-lg font-medium text-[#1a1a1a] hover:text-blue-600 transition-colors"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          info@cfac.co.jp
+        </a>
+        <p className="text-sm text-[#9ca3af] mt-4">営業時間：平日 10:00～18:00</p>
       </div>
     </section>
   );
@@ -409,17 +334,17 @@ function Footer() {
           <div>
             <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              AIを基盤としたネットサービスの
+              ソロプレナーの時代に必要な
               <br />
-              開発・運営を行っています。
+              サービスをAIの力で届ける。
             </p>
           </div>
           <div>
             <h4 className="text-sm font-medium text-gray-300 mb-4">ナビゲーション</h4>
             <ul className="space-y-3">
               {[
-                { label: "当社について", href: "#about" },
-                { label: "業務内容", href: "#services" },
+                { label: "ビジョン", href: "#vision" },
+                { label: "サービス", href: "#services" },
                 { label: "会社概要", href: "#company" },
                 { label: "お問い合わせ", href: "#contact" },
               ].map((item) => (
@@ -437,7 +362,7 @@ function Footer() {
               {[
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "MUSU", href: "https://musu.world" },
-                { label: "フォクナビ", href: "https://facnavi.com" },
+                { label: "ファクナビ", href: "https://facnavi.com" },
                 { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
                 { label: "Global Trend Watch", href: "https://gtw.today" },
               ].map((item) => (
@@ -464,7 +389,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <About />
+        <Vision />
         <Services />
         <Company />
         <Contact />
