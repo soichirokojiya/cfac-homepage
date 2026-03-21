@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   title: "Common Future & Company 株式会社 | AIを基盤としたサービス開発・運営",
   description:
     "Common Future & Company株式会社は、AIを基盤としたネットサービスの開発・運営を行う企業です。ファクタリング比較サイト「フォクナビ」やAI監視型トレンド発掘サービス「Global Trend Watch」を運営しています。",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

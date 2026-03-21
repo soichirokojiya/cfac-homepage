@@ -1,33 +1,40 @@
 export function Logo({ size = 40, color = "currentColor" }: { size?: number; color?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Outer hexagon shape - represents "Common" / community */}
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/*
+        Design concept: Two overlapping arcs forming C & F
+        - Left arc (C) = "Common" — community, connection
+        - Right arc opening forward (F) = "Future" — progress, forward motion
+        - The overlap = "&" — partnership, shared vision
+        - Negative space creates a forward-pointing opening
+      */}
+      {/* C arc - larger, grounding */}
       <path
-        d="M60 8L108 32V80L60 112L12 80V32L60 8Z"
+        d="M58 16A38 38 0 1 0 58 84"
         stroke={color}
-        strokeWidth="4"
-        fill="none"
-      />
-      {/* Inner arrow pointing forward - represents "Future" / progress */}
-      <path
-        d="M42 60H78M78 60L64 46M78 60L64 74"
-        stroke={color}
-        strokeWidth="5"
+        strokeWidth="6"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
+      {/* F arc - smaller, forward-leaning */}
+      <path
+        d="M42 24A30 30 0 0 1 42 76"
+        stroke={color}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      {/* Center dot - the "&" point of connection */}
+      <circle cx="50" cy="50" r="4" fill={color} />
     </svg>
   );
 }
 
 export function LogoFull({ height = 32, color = "currentColor" }: { height?: number; color?: string }) {
-  const scale = height / 40;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2.5">
       <Logo size={height} color={color} />
-      <div style={{ fontSize: height * 0.4, lineHeight: 1.2, color }} className="font-bold tracking-tight">
-        <span>Common Future</span>
-        <span className="font-normal opacity-60"> & Co.</span>
+      <div style={{ fontSize: height * 0.38, lineHeight: 1.1, color, letterSpacing: "-0.02em" }} className="font-bold">
+        Common Future
+        <span className="font-light opacity-50">&nbsp;&&nbsp;Co.</span>
       </div>
     </div>
   );
