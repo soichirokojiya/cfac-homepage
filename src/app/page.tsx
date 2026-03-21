@@ -97,15 +97,15 @@ function Hero() {
     <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0f172a]">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
-          For Solopreneurs, by Technology
+          Unlock the power of one
         </p>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
-          ひとりを、つよく。
+          ひとりの可能性を、<br />解放する。
         </h1>
         <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
-          ソロプレナーの時代に必要なサービスを、
+          資金も、仲間も、情報も——AIが、あなたのそばに。
           <br className="hidden md:block" />
-          AIとテクノロジーの力で届ける。
+          ソロプレナーの時代を切り拓くサービスを届けます。
         </p>
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
@@ -130,24 +130,27 @@ function Vision() {
         <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-10 text-center">ビジョン・ミッション</h2>
 
         {/* Vision */}
-        <div className="mb-10">
+        <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Vision</span>
             <span className="flex-1 h-px bg-gray-200" />
           </div>
-          <p className="text-xl md:text-2xl font-bold text-[#1a1a1a] leading-relaxed">
-            ひとりで挑むすべての人が、<br />チームの力を手にできる世界をつくる。
+          <p className="text-xl md:text-2xl font-bold text-[#1a1a1a] leading-relaxed mb-4">
+            ひとりで始めた挑戦が、<br />世界を変える力になる未来を。
+          </p>
+          <p className="text-[#6b7280] text-sm leading-relaxed">
+            かつて事業を興すには、資金・人材・情報という3つの壁があった。AIの時代、その壁は溶けはじめている。私たちは、ひとりの意志と行動力があれば誰もが事業を創り、育てられる世界を実現します。
           </p>
         </div>
 
         {/* Mission */}
-        <div className="mb-10">
+        <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Mission</span>
             <span className="flex-1 h-px bg-gray-200" />
           </div>
           <p className="text-[#374151] leading-loose text-[15px]">
-            AIとテクノロジーの力で、ソロプレナー・フリーランス・個人事業主が大企業と同じ土俵で戦えるサービスをつくる。資金調達、情報収集、業務自動化——ひとりの挑戦に必要なインフラを、私たちが届けます。
+            ソロプレナー・フリーランス・個人事業主の「ひとりの限界」を、AIとテクノロジーで解放する。資金調達、チームワーク、情報収集、意思決定——事業に必要なすべてを、ひとりの手の中に届けます。
           </p>
         </div>
 
@@ -160,15 +163,15 @@ function Vision() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">Solo-First</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">すべてのプロダクトを「ひとりで使える」を前提に設計する。</p>
+              <p className="text-[#6b7280] text-sm leading-relaxed">「ひとりで完結できるか」をすべての設計基準にする。</p>
             </div>
             <div>
               <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">AI-Native</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">AIを補助ツールではなく、サービスの中核に据える。</p>
+              <p className="text-[#6b7280] text-sm leading-relaxed">AIを補助でなく、プロダクトの核として組み込む。</p>
             </div>
             <div>
               <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">三方よし</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">利用者・社会・私たち、三方に価値が還る事業だけを行う。</p>
+              <p className="text-[#6b7280] text-sm leading-relaxed">使う人・社会・私たち、三方に価値が巡る事業だけをやる。</p>
             </div>
           </div>
         </div>
@@ -332,9 +335,7 @@ function Footer() {
           <div>
             <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              ソロプレナーの時代に必要な
-              <br />
-              サービスをAIの力で届ける。
+              ひとりの可能性を、解放する。
             </p>
           </div>
           <div>
