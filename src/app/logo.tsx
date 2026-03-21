@@ -1,25 +1,19 @@
 export function Logo({ size = 40, color = "currentColor" }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/*
-        Refined concept: Two precisely balanced arcs
-        - Left arc (C) = open circle, community
-        - Right arc (F) = counter-arc, forward momentum
-        - The gap between them = the connection point, "&"
-        - Clean, geometric, balanced proportions
-      */}
-      {/* C arc — 270° open circle, opening to the right */}
+      {/* Concept A: 解放 — The Release
+          円が上方へ解き放たれる瞬間。
+          開口部＝解放された可能性。 */}
       <path
-        d="M62 18.5A36 36 0 1 0 62 81.5"
+        d="M68 22A32 32 0 1 0 68 78"
         stroke={color}
-        strokeWidth="5.5"
+        strokeWidth="5"
         strokeLinecap="round"
       />
-      {/* F arc — tighter counter-curve, forward-facing */}
       <path
-        d="M38 28A26 26 0 0 1 38 72"
+        d="M68 22L74 16"
         stroke={color}
-        strokeWidth="5.5"
+        strokeWidth="5"
         strokeLinecap="round"
       />
     </svg>
