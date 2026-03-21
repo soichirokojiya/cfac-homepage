@@ -303,7 +303,7 @@ function Company() {
     { label: "代表取締役", value: "鼈屋 総一朗" },
     { label: "設立", value: "2015年10月5日" },
     { label: "資本金", value: "3,520万円" },
-    { label: "所在地", value: "神奈川県横浜市中区小伝6-6-46" },
+    { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
     { label: "メール", value: "info@cfac.co.jp" },
     { label: "営業時間", value: "平日 10:00～18:00" },
     { label: "事業内容", value: "AI基盤ネットサービスの開発・運営" },
