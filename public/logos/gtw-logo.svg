@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#a5f3fc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#a5f3fc" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#a5f3fc" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Outer radar ring -->
+  <circle cx="256" cy="268" r="155" stroke="white" stroke-width="8" stroke-opacity="0.15" fill="none"/>
+  <!-- Middle radar ring -->
+  <circle cx="256" cy="268" r="105" stroke="white" stroke-width="6" stroke-opacity="0.12" fill="none"/>
+  <!-- Inner radar ring -->
+  <circle cx="256" cy="268" r="55" stroke="white" stroke-width="5" stroke-opacity="0.1" fill="none"/>
+  <!-- Center dot (earth core) -->
+  <circle cx="256" cy="268" r="10" fill="white" fill-opacity="0.6"/>
+  <!-- Horizontal meridian hint -->
+  <path d="M101 268 Q256 220 411 268" stroke="white" stroke-width="5" stroke-opacity="0.12" fill="none"/>
+  <!-- Scan line (doubles as trend upward line) -->
+  <line x1="256" y1="268" x2="380" y2="148" stroke="url(#scan)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Glow at detection point -->
+  <circle cx="380" cy="148" r="40" fill="url(#glow)"/>
+  <!-- Detection point (discovered trend) -->
+  <circle cx="380" cy="148" r="10" fill="#a5f3fc"/>
+  <!-- Small pulse ring around detection -->
+  <circle cx="380" cy="148" r="20" stroke="#a5f3fc" stroke-width="2.5" stroke-opacity="0.4" fill="none"/>
+</svg>

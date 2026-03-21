@@ -182,7 +182,7 @@ function Services() {
 
   const services = [
     {
-      logo: "/logos/cashnow.svg",
+      logo: "/logos/cashnow.png",
       title: "CASH NOW",
       subtitle: "AIファクタリングで最短10分の資金調達",
       description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
@@ -204,14 +204,14 @@ function Services() {
       url: "https://facnavi.com",
     },
     {
-      logo: "/logos/claudecode.svg",
+      logo: "/logos/claudecode-logo.svg",
       title: "ClaudeCode.Tokyo",
       subtitle: "Claude Code & エージェントのニュースメディア",
       description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
       url: "https://claudecode.tokyo",
     },
     {
-      logo: "/logos/gtw.svg",
+      logo: "/logos/gtw-logo.svg",
       title: "Global Trend Watch",
       subtitle: "海外で話題、日本未上陸のビジネストレンド",
       description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
@@ -240,9 +240,7 @@ function Services() {
                 <img
                   src={service.logo}
                   alt={`${service.title} logo`}
-                  width={36}
-                  height={36}
-                  className="w-9 h-9 mb-5 rounded-lg object-contain"
+                  className="h-8 max-w-[160px] mb-5 object-contain object-left"
                 />
                 <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
                 <p className="text-xs text-[#9ca3af] mb-4">{service.subtitle}</p>
