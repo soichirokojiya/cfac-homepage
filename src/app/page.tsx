@@ -97,15 +97,15 @@ function Hero() {
     <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0f172a]">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
-          Unlock the power of one
+          Common Future & Company
         </p>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
-          ひとりの可能性を、<br />解放する。
+          ひとりを、拓く。
         </h1>
         <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
-          資金も、仲間も、情報も——AIが、あなたのそばに。
+          資金、仲間、情報——かつて組織にしかなかったものを、
           <br className="hidden md:block" />
-          ソロプレナーの時代を切り拓くサービスを届けます。
+          AIとテクノロジーで、ひとりの手の中に。
         </p>
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
@@ -136,10 +136,10 @@ function Vision() {
             <span className="flex-1 h-px bg-gray-200" />
           </div>
           <p className="text-xl md:text-2xl font-bold text-[#1a1a1a] leading-relaxed mb-4">
-            ひとりで始めた挑戦が、<br />世界を変える力になる未来を。
+            ひとりの挑戦が、<br />あたりまえに実る社会をつくる。
           </p>
           <p className="text-[#6b7280] text-sm leading-relaxed">
-            かつて事業を興すには、資金・人材・情報という3つの壁があった。AIの時代、その壁は溶けはじめている。私たちは、ひとりの意志と行動力があれば誰もが事業を創り、育てられる世界を実現します。
+            事業を興すのに、大きな組織はもういらない。AIの時代、ひとりの意志と行動力があれば、誰もが事業を創り、育てられる。私たちはその未来を、プロダクトで証明します。
           </p>
         </div>
 
@@ -150,7 +150,7 @@ function Vision() {
             <span className="flex-1 h-px bg-gray-200" />
           </div>
           <p className="text-[#374151] leading-loose text-[15px]">
-            ソロプレナー・フリーランス・個人事業主の「ひとりの限界」を、AIとテクノロジーで解放する。資金調達、チームワーク、情報収集、意思決定——事業に必要なすべてを、ひとりの手の中に届けます。
+            資金調達、情報収集、業務自動化、意思決定——組織にしかなかった力を、AIとテクノロジーでひとりに届ける。ソロプレナー・フリーランス・個人事業主が、大企業と同じ土俵に立てるインフラをつくる。
           </p>
         </div>
 
@@ -271,7 +271,7 @@ function Company() {
   const items = [
     { label: "会社名", value: "Common Future & Company 株式会社" },
     { label: "法人番号", value: "9011001105902" },
-    { label: "代表取締役", value: "鼈屋 総一朗" },
+    { label: "代表取締役", value: "糀屋 総一朗" },
     { label: "設立", value: "2015年10月5日" },
     { label: "資本金", value: "3,520万円" },
     { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
@@ -335,7 +335,7 @@ function Footer() {
           <div>
             <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              ひとりの可能性を、解放する。
+              ひとりを、拓く。
             </p>
           </div>
           <div>

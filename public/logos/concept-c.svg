@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Concept C: "共鳴 — Resonance"
+
+    中心の一点から、同心の弧が外に広がる。
+    ひとりの行動が波紋のように世界に広がっていく。
+
+    内側の弧＝個人（C = Common, 自分自身）
+    外側の弧＝未来（F = Future, 到達する先）
+    どちらも右に開いている＝前進。
+
+    ラジオの電波マークのようにも見え、
+    「発信する個人」のメタファーにもなる。
+  -->
+  <!-- 中心点（ひとり） -->
+  <circle cx="30" cy="50" r="4" fill="#1a1a1a" />
+  <!-- 第一の波紋（自分の力） -->
+  <path
+    d="M42 34A20 20 0 0 1 42 66"
+    stroke="#1a1a1a"
+    stroke-width="4.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- 第二の波紋（世界への影響） -->
+  <path
+    d="M54 22A34 34 0 0 1 54 78"
+    stroke="#1a1a1a"
+    stroke-width="4.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+</svg>

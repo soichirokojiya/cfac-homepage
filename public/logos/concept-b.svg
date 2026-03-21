@@ -1,0 +1,22 @@
+<svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Concept B: "一粒 — The Seed"
+
+    ひとつの点（ソロプレナー）から弧が生まれ、
+    上に向かって広がっていく。
+
+    点＝ひとり。弧＝可能性が広がる軌跡。
+    書道の一筆のような、始点と軌跡の関係。
+    日本的な「間」と余白を活かした構成。
+  -->
+  <!-- 種（ひとり） -->
+  <circle cx="32" cy="68" r="5" fill="#1a1a1a" />
+  <!-- 芽吹き（可能性の弧） -->
+  <path
+    d="M32 60 C32 36, 56 24, 72 28"
+    stroke="#1a1a1a"
+    stroke-width="4.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+</svg>

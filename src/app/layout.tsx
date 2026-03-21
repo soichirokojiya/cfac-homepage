@@ -9,9 +9,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Common Future & Company 株式会社 | ひとりの可能性を、解放する。",
+  title: "Common Future & Company 株式会社 | ひとりを、拓く。",
   description:
-    "ソロプレナー・フリーランス・個人事業主の「ひとりの限界」をAIとテクノロジーで解放する。CASH NOW、MUSU、ファクナビ、ClaudeCode.Tokyo、Global Trend Watchを運営。",
+    "組織にしかなかった力を、AIとテクノロジーでひとりに届ける。ソロプレナーのためのサービスを開発・運営。CASH NOW、MUSU、ファクナビ、ClaudeCode.Tokyo、Global Trend Watchを展開。",
   icons: {
     icon: "/favicon.svg",
     apple: "/icon.svg",

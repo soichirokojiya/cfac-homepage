@@ -1,0 +1,26 @@
+<svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Concept A: "解放 — The Release"
+
+    ひとつの円が、上方へ解き放たれる瞬間。
+    閉じた円＝制約。開いた部分＝解放された可能性。
+    ストロークが途切れる場所が「未来への開口部」。
+
+    Cの文字にも見えるが、それ以上に
+    「閉じていたものが開く」ダイナミズムを宿す。
+    ネガティブスペース（開口部）こそが主役。
+  -->
+  <path
+    d="M68 22A32 32 0 1 0 68 78"
+    stroke="#1a1a1a"
+    stroke-width="5"
+    stroke-linecap="round"
+  />
+  <!-- 解放の瞬間 — 上端が少し外に跳ねる -->
+  <path
+    d="M68 22L74 16"
+    stroke="#1a1a1a"
+    stroke-width="5"
+    stroke-linecap="round"
+  />
+</svg>
