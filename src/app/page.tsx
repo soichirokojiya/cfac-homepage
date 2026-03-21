@@ -375,7 +375,7 @@ function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 pt-8 text-center">
-          <p className="text-gray-500 text-sm">&copy; 2026 Common Future & Co. 株式会社 All rights reserved.</p>
+          <p className="text-gray-500 text-sm">&copy; 2026 <a href="https://cfac.co.jp" className="hover:text-gray-300 transition-colors">Common Future & Co. 株式会社</a> All rights reserved.</p>
         </div>
       </div>
     </footer>
