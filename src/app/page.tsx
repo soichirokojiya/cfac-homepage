@@ -99,8 +99,8 @@ function Hero() {
         <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
           Common Future & Company
         </p>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200 whitespace-nowrap">
-          ソロプレナーに、参謀と実行部隊を。
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
+          ソロプレナーに、<br />参謀と実行部隊を。
         </h1>
         <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
           資金、仲間、情報——かつて組織にしかなかったものを、
