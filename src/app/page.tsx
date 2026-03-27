@@ -220,6 +220,13 @@ function Services() {
       description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
       url: "https://gtw.today",
     },
+    {
+      logo: "/logos/umeko.png",
+      title: "うめこ",
+      subtitle: "LINEで使える会話整理AI",
+      description: "言いづらいことを、やわらかく。グループの見守り、1対1の相談、言い換え、要約に対応。すれ違いをやさしく整えるAIアシスタント。",
+      url: "https://umeko.life",
+    },
   ];
 
   return (
@@ -364,6 +371,7 @@ function Footer() {
                 { label: "ファクナビ", href: "https://facnavi.com" },
                 { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
                 { label: "Global Trend Watch", href: "https://gtw.today" },
+                { label: "うめこ", href: "https://umeko.life" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
