@@ -4,5 +4,5 @@
     <path d="M68 22L74 16" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/>
   </g>
   <text x="48" y="30" fill="#1a1a1a" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="-0.3">Common Future</text>
-  <text x="218" y="30" fill="#1a1a1a" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="300" opacity="0.4">&amp; Co.</text>
+  <text x="188" y="30" fill="#1a1a1a" font-family="'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="300" opacity="0.4">&amp; Co.</text>
 </svg>

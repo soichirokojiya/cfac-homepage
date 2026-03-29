@@ -35,8 +35,8 @@ function Header() {
   }, []);
 
   const navItems = [
-    { label: "ビジョン", href: "#vision" },
-    { label: "サービス", href: "#services" },
+    { label: "私たちについて", href: "#about" },
+    { label: "プロダクト", href: "#products" },
     { label: "会社概要", href: "#company" },
     { label: "お問い合わせ", href: "#contact" },
   ];
@@ -100,16 +100,23 @@ function Hero() {
           Common Future & Company
         </p>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
-          ソロプレナーに、<br />参謀と実行部隊を。
+          人が、もっと人間らしいことに
+          <br />
+          向かえる社会へ。
         </h1>
-        <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
-          資金、仲間、情報——かつて組織にしかなかったものを、
+        <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-4 opacity-0 animate-fade-in-up animate-delay-400">
+          面倒な仕事を減らし、伝わらないすれ違いをやわらげる。
           <br className="hidden md:block" />
-          AIとテクノロジーで、ひとりの手の中に。
+          AIの力で、人の時間と余白を取り戻すプロダクトをつくっています。
+        </p>
+        <p className="text-sm text-gray-500 max-w-lg mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
+          不要な業務負荷の削減とコミュニケーションの円滑化——
+          <br className="hidden md:block" />
+          この2つの領域で、AIプロダクトを開発・運営する会社です。
         </p>
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
-            href="#vision"
+            href="#about"
             className="inline-block border border-white/30 text-white px-8 py-3 rounded text-sm hover:bg-white hover:text-[#0f172a] transition-all"
           >
             私たちについて
@@ -120,59 +127,42 @@ function Hero() {
   );
 }
 
-function Vision() {
+function PainPoints() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="vision" className="py-24 md:py-32 bg-white" ref={ref}>
-      <div className={`max-w-2xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3 text-center">Vision & Mission</p>
-        <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-10 text-center">ビジョン・ミッション</h2>
-
-        {/* Vision */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Vision</span>
-            <span className="flex-1 h-px bg-gray-200" />
-          </div>
-          <p className="text-xl md:text-2xl font-bold text-[#1a1a1a] leading-relaxed mb-4">
-            ひとりの挑戦が、<br />あたりまえに実る社会をつくる。
-          </p>
-          <p className="text-[#6b7280] text-sm leading-relaxed">
-            事業を興すのに、大きな組織はもういらない。AIの時代、ひとりの意志と行動力があれば、誰もが事業を創り、育てられる。私たちはその未来を、プロダクトで証明します。
-          </p>
+    <section id="about" className="py-24 md:py-32 bg-white" ref={ref}>
+      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-14">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">What We Reduce</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">なくしたい、ふたつの消耗。</h2>
         </div>
-
-        {/* Mission */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Mission</span>
-            <span className="flex-1 h-px bg-gray-200" />
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="bg-[#f8f9fa] rounded-xl p-8">
+            <div className="w-12 h-12 bg-[#0f172a] rounded-lg flex items-center justify-center mb-5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">不要な業務負荷</h3>
+            <p className="text-[#374151] text-sm leading-loose">
+              本来やらなくていい作業、繰り返しの事務処理、判断を要しない確認作業——こうした業務が、人の時間とエネルギーを静かに奪っています。
+            </p>
           </div>
-          <p className="text-[#374151] leading-loose text-[15px]">
-            資金調達、情報収集、業務自動化、意思決定——組織にしかなかった力を、AIとテクノロジーでひとりに届ける。ソロプレナー・フリーランス・個人事業主が、大企業と同じ土俵に立てるインフラをつくる。
-          </p>
-        </div>
-
-        {/* Values */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Values</span>
-            <span className="flex-1 h-px bg-gray-200" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">Solo-First</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">「ひとりで完結できるか」をすべての設計基準にする。</p>
+          <div className="bg-[#f8f9fa] rounded-xl p-8">
+            <div className="w-12 h-12 bg-[#0f172a] rounded-lg flex items-center justify-center mb-5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
             </div>
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">AI-Native</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">AIを補助でなく、プロダクトの核として組み込む。</p>
-            </div>
-            <div>
-              <h4 className="font-bold text-[#1a1a1a] mb-2 text-sm">三方よし</h4>
-              <p className="text-[#6b7280] text-sm leading-relaxed">使う人・社会・私たち、三方に価値が巡る事業だけをやる。</p>
-            </div>
+            <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">コミュニケーションの摩擦</h3>
+            <p className="text-[#374151] text-sm leading-loose">
+              言いたいことが伝わらない、意図がずれる、気まずさから言い出せない——こうしたすれ違いが、人間関係を消耗させています。
+            </p>
           </div>
         </div>
       </div>
@@ -180,93 +170,167 @@ function Vision() {
   );
 }
 
-function Services() {
+function OpenUp() {
   const { ref, isVisible } = useInView();
 
-  const services = [
+  return (
+    <section className="py-24 md:py-32 bg-[#0f172a]" ref={ref}>
+      <div className={`max-w-2xl mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <p className="text-sm text-gray-400 tracking-[0.2em] uppercase mb-3">What We Open Up</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">その先にある、人間らしい時間。</h2>
+        <p className="text-gray-400 leading-loose text-[15px]">
+          面倒が減った先にあるのは、単なる空き時間ではありません。
+          <br />
+          創造、対話、学び、遊び、文化的な営み——
+          <br />
+          人がもっと本質的なことに向かえる余白を、私たちはひらきたいと考えています。
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Approach() {
+  const { ref, isVisible } = useInView();
+
+  return (
+    <section className="py-24 md:py-32 bg-white" ref={ref}>
+      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-14">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Our Approach</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">AIで、2つのアプローチから。</h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="border border-gray-200 rounded-xl p-8">
+            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Approach 01</span>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mt-3 mb-4">業務の負荷を減らす</h3>
+            <p className="text-[#374151] text-sm leading-loose">
+              AIによる業務自動化、資金調達の効率化、情報収集の省力化。人が判断と創造に集中できる環境をつくります。
+            </p>
+          </div>
+          <div className="border border-gray-200 rounded-xl p-8">
+            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Approach 02</span>
+            <h3 className="text-xl font-bold text-[#1a1a1a] mt-3 mb-4">対話をなめらかにする</h3>
+            <p className="text-[#374151] text-sm leading-loose">
+              コミュニケーションの言い換え、要約、整理、仲介。人と人の間にある摩擦をやわらげます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Products() {
+  const { ref, isVisible } = useInView();
+
+  const productGroups = [
     {
-      logo: "/logos/cashnow.png",
-      title: "CASH NOW",
-      subtitle: "AIファクタリングで最短10分の資金調達",
-      description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
-      url: "https://cash.co.jp",
-      badge: "2026年4月ローンチ予定",
+      label: "業務の負荷を減らす",
+      products: [
+        {
+          logo: "/logos/musu.svg",
+          title: "MUSU",
+          subtitle: "AIマルチエージェントチャット",
+          description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
+          url: "https://musu.world",
+        },
+        {
+          logo: "/logos/cashnow.png",
+          title: "CASH NOW",
+          subtitle: "AIファクタリングで最短10分の資金調達",
+          description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
+          url: "https://cash.co.jp",
+          badge: "2026年4月ローンチ予定",
+        },
+        {
+          logo: "/logos/facnavi.svg",
+          title: "ファクナビ",
+          subtitle: "日本最大級のファクタリング比較・口コミサイト",
+          description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
+          url: "https://facnavi.com",
+        },
+      ],
     },
     {
-      logo: "/logos/musu.svg",
-      title: "MUSU",
-      subtitle: "AIマルチエージェントチャット",
-      description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
-      url: "https://musu.world",
+      label: "対話をなめらかにする",
+      products: [
+        {
+          logo: "/logos/umeko.png",
+          title: "うめこ",
+          subtitle: "LINEで使える会話整理AI",
+          description: "言いづらいことを、やわらかく。グループの見守り、1対1の相談、言い換え、要約に対応。すれ違いをやさしく整えるAIアシスタント。",
+          url: "https://umeko.life",
+        },
+      ],
     },
     {
-      logo: "/logos/facnavi.svg",
-      title: "ファクナビ",
-      subtitle: "日本最大級のファクタリング比較・口コミサイト",
-      description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
-      url: "https://facnavi.com",
-    },
-    {
-      logo: "/logos/claudecode-logo.svg",
-      title: "ClaudeCode.Tokyo",
-      subtitle: "Claude Code & エージェントのニュースメディア",
-      description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
-      url: "https://claudecode.tokyo",
-    },
-    {
-      logo: "/logos/gtw-logo.svg",
-      title: "Global Trend Watch",
-      subtitle: "海外で話題、日本未上陸のビジネストレンド",
-      description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
-      url: "https://gtw.today",
-    },
-    {
-      logo: "/logos/umeko.png",
-      title: "うめこ",
-      subtitle: "LINEで使える会話整理AI",
-      description: "言いづらいことを、やわらかく。グループの見守り、1対1の相談、言い換え、要約に対応。すれ違いをやさしく整えるAIアシスタント。",
-      url: "https://umeko.life",
+      label: "知をひらく",
+      products: [
+        {
+          logo: "/logos/claudecode-logo.svg",
+          title: "ClaudeCode.Tokyo",
+          subtitle: "Claude Code & エージェントのニュースメディア",
+          description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
+          url: "https://claudecode.tokyo",
+        },
+        {
+          logo: "/logos/gtw-logo.svg",
+          title: "Global Trend Watch",
+          subtitle: "海外で話題、日本未上陸のビジネストレンド",
+          description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
+          url: "https://gtw.today",
+        },
+      ],
     },
   ];
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
+    <section id="products" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
       <div className={`max-w-5xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <div className="text-center mb-14">
-          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Services</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">運営するサービス</h2>
-          <p className="text-sm text-[#6b7280]">ソロプレナーの挑戦を支えるプロダクト群</p>
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Products</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">私たちのプロダクト</h2>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, i) => (
-            <a key={i} href={service.url} target="_blank" rel="noopener noreferrer" className="block">
-              <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative cursor-pointer h-full">
-                {"badge" in service && service.badge && (
-                  <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
-                    {service.badge}
-                  </span>
-                )}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={service.logo}
-                  alt={`${service.title} logo`}
-                  className="h-8 max-w-[160px] mb-5 object-contain object-left"
-                />
-                <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{service.title}</h3>
-                <p className="text-xs text-[#9ca3af] mb-4">{service.subtitle}</p>
-                <p className="text-[#374151] text-sm leading-loose mb-4">{service.description}</p>
-                <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
-                  {service.url.replace("https://", "")}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
+
+        {productGroups.map((group) => (
+          <div key={group.label} className="mb-12 last:mb-0">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-bold tracking-[0.1em] text-[#9ca3af]">{group.label}</span>
+              <span className="flex-1 h-px bg-gray-300" />
+            </div>
+            <div className={`grid gap-8 ${group.products.length === 1 ? "md:grid-cols-1 max-w-lg" : group.products.length === 2 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}>
+              {group.products.map((product, i) => (
+                <a key={i} href={product.url} target="_blank" rel="noopener noreferrer" className="block">
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative cursor-pointer h-full">
+                    {"badge" in product && product.badge && (
+                      <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
+                        {product.badge}
+                      </span>
+                    )}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={product.logo}
+                      alt={`${product.title} logo`}
+                      className="h-8 max-w-[160px] mb-5 object-contain object-left"
+                    />
+                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{product.title}</h3>
+                    <p className="text-xs text-[#9ca3af] mb-4">{product.subtitle}</p>
+                    <p className="text-[#374151] text-sm leading-loose mb-4">{product.description}</p>
+                    <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
+                      {product.url.replace("https://", "")}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -284,7 +348,7 @@ function Company() {
     { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
     { label: "メール", value: "info@cfac.co.jp" },
     { label: "営業時間", value: "平日 10:00～18:00" },
-    { label: "事業内容", value: "AI基盤ネットサービスの開発・運営" },
+    { label: "事業内容", value: "AIを活用した業務効率化・コミュニケーション支援プロダクトの開発・運営" },
   ];
 
   return (
@@ -342,15 +406,15 @@ function Footer() {
           <div>
             <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              ソロプレナーに、参謀と実行部隊を。
+              人が、もっと人間らしいことに向かえる社会へ。
             </p>
           </div>
           <div>
             <h4 className="text-sm font-medium text-gray-300 mb-4">ナビゲーション</h4>
             <ul className="space-y-3">
               {[
-                { label: "ビジョン", href: "#vision" },
-                { label: "サービス", href: "#services" },
+                { label: "私たちについて", href: "#about" },
+                { label: "プロダクト", href: "#products" },
                 { label: "会社概要", href: "#company" },
                 { label: "お問い合わせ", href: "#contact" },
               ].map((item) => (
@@ -366,12 +430,12 @@ function Footer() {
             <h4 className="text-sm font-medium text-gray-300 mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
-                { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "MUSU", href: "https://musu.world" },
+                { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクナビ", href: "https://facnavi.com" },
+                { label: "うめこ", href: "https://umeko.life" },
                 { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
                 { label: "Global Trend Watch", href: "https://gtw.today" },
-                { label: "うめこ", href: "https://umeko.life" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
@@ -396,8 +460,10 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Vision />
-        <Services />
+        <PainPoints />
+        <OpenUp />
+        <Approach />
+        <Products />
         <Company />
         <Contact />
       </main>
