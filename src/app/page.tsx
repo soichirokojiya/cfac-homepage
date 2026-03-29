@@ -99,7 +99,7 @@ function Hero() {
         <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
           Common Future & Company
         </p>
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
+        <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
           人が、もっと人間らしいことに
           <br />
           向かえる社会へ。
