@@ -265,6 +265,18 @@ function Products() {
       ],
     },
     {
+      label: "サイト受託運営",
+      products: [
+        {
+          logo: "/logos/sokochi-logo.svg",
+          title: "底地ドットコム",
+          subtitle: "底地の共有持分専門の買取・売却相談",
+          description: "底地の共有持分に特化した専門サービス。他の共有者の同意不要で持分だけ売却可能。最短当日買取・上限価格なし。",
+          url: "https://socochi.com",
+        },
+      ],
+    },
+    {
       label: "知をひらく",
       products: [
         {
@@ -434,6 +446,7 @@ function Footer() {
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクナビ", href: "https://facnavi.com" },
                 { label: "うめこ", href: "https://umeko.life" },
+                { label: "底地ドットコム", href: "https://socochi.com" },
                 { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
                 { label: "Global Trend Watch", href: "https://gtw.today" },
               ].map((item) => (
