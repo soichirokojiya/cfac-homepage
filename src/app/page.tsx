@@ -274,6 +274,13 @@ function Products() {
           description: "底地の共有持分に特化した専門サービス。他の共有者の同意不要で持分だけ売却可能。最短当日買取・上限価格なし。",
           url: "https://socochi.com",
         },
+        {
+          logo: "/logos/alexandrite-logo.svg",
+          title: "アレキサンドライト査定.com",
+          subtitle: "アレキサンドライト買取専門の無料査定",
+          description: "世界三大希少石のひとつ、アレキサンドライトに特化した専門査定。鑑別書なしOK。全国対応・送料無料。",
+          url: "https://alexandrite.love",
+        },
       ],
     },
     {
@@ -447,6 +454,7 @@ function Footer() {
                 { label: "ファクナビ", href: "https://facnavi.com" },
                 { label: "うめこ", href: "https://umeko.life" },
                 { label: "底地ドットコム", href: "https://socochi.com" },
+                { label: "アレキサンドライト査定.com", href: "https://alexandrite-satei.vercel.app" },
                 { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
                 { label: "Global Trend Watch", href: "https://gtw.today" },
               ].map((item) => (
