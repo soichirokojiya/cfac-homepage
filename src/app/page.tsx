@@ -229,13 +229,6 @@ function Products() {
       label: "業務の負荷を減らす",
       products: [
         {
-          logo: "/logos/musu.svg",
-          title: "MUSU",
-          subtitle: "AIマルチエージェントチャット",
-          description: "AIが、あなたの仕事仲間になる。フリーランス・個人事業主のためのAIエージェントチーム。ひとりだけど、ひとりじゃない。",
-          url: "https://musu.world",
-        },
-        {
           logo: "/logos/cashnow.png",
           title: "CASH NOW",
           subtitle: "AIファクタリングで最短10分の資金調達",
@@ -262,6 +255,13 @@ function Products() {
           description: "言いづらいことを、やわらかく。グループの見守り、1対1の相談、言い換え、要約に対応。すれ違いをやさしく整えるAIアシスタント。",
           url: "https://umeko.life",
         },
+        {
+          logo: "/logos/mamoru.png",
+          title: "Mamoru AI",
+          subtitle: "管理者向け 組織会話オブザーバビリティ",
+          description: "LINE/Slackグループに常駐し、衝突・沈黙・過熱の兆候を検知。毎日18時に組織会話のサマリーと注意レポートを管理者へ届けるB2B SaaS。",
+          url: "https://mamoru.site",
+        },
       ],
     },
     {
@@ -280,25 +280,6 @@ function Products() {
           subtitle: "アレキサンドライト買取専門の無料査定",
           description: "世界三大希少石のひとつ、アレキサンドライトに特化した専門査定。鑑別書なしOK。全国対応・送料無料。",
           url: "https://alexandrite.love",
-        },
-      ],
-    },
-    {
-      label: "知をひらく",
-      products: [
-        {
-          logo: "/logos/claudecode-logo.svg",
-          title: "ClaudeCode.Tokyo",
-          subtitle: "Claude Code & エージェントのニュースメディア",
-          description: "Claude Code（Anthropic公式CLI）の使い方・Tips・最新ニュース・AIエージェント開発の情報を日本語で発信。",
-          url: "https://claudecode.tokyo",
-        },
-        {
-          logo: "/logos/gtw-logo.svg",
-          title: "Global Trend Watch",
-          subtitle: "海外で話題、日本未上陸のビジネストレンド",
-          description: "世界中のメディア・SNSをAIが24時間監視。海外でバズっているのに日本ではまだ知られていないビジネス・サービス・トレンドを配信。",
-          url: "https://gtw.today",
         },
       ],
     },
@@ -419,14 +400,27 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="bg-[#0f172a] text-white py-14">
+    <footer className="bg-[#0f172a] text-white pt-14 pb-8">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-10 mb-10">
-          <div>
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
+          <div className="md:col-span-1">
             <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
               人が、もっと人間らしいことに向かえる社会へ。
             </p>
+            <a
+              href="https://cfac.co.jp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              cfac.co.jp
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
           </div>
           <div>
             <h4 className="text-sm font-medium text-gray-300 mb-4">ナビゲーション</h4>
@@ -449,14 +443,12 @@ function Footer() {
             <h4 className="text-sm font-medium text-gray-300 mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
-                { label: "MUSU", href: "https://musu.world" },
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクナビ", href: "https://facnavi.com" },
                 { label: "うめこ", href: "https://umeko.life" },
+                { label: "Mamoru AI", href: "https://mamoru.site" },
                 { label: "底地ドットコム", href: "https://socochi.com" },
-                { label: "アレキサンドライト査定.com", href: "https://alexandrite-satei.vercel.app" },
-                { label: "ClaudeCode.Tokyo", href: "https://claudecode.tokyo" },
-                { label: "Global Trend Watch", href: "https://gtw.today" },
+                { label: "アレキサンドライト査定.com", href: "https://alexandrite.love" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
@@ -466,9 +458,30 @@ function Footer() {
               ))}
             </ul>
           </div>
+          <div>
+            <h4 className="text-sm font-medium text-gray-300 mb-4">サイトポリシー</h4>
+            <ul className="space-y-3">
+              {[
+                { label: "プライバシーポリシー", href: "/privacy" },
+                { label: "利用規約", href: "/terms" },
+                { label: "特定商取引法に基づく表記", href: "/tokushoho" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="text-gray-400 hover:text-white text-sm transition-colors">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className="border-t border-white/10 pt-8 text-center">
-          <p className="text-gray-500 text-sm">&copy; 2026 <a href="https://cfac.co.jp" className="hover:text-gray-300 transition-colors">Common Future & Co. 株式会社</a> All rights reserved.</p>
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-xs">&copy; 2026 <a href="https://cfac.co.jp" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">Common Future & Co. 株式会社</a> All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="/privacy" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">プライバシーポリシー</a>
+            <a href="/terms" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">利用規約</a>
+            <a href="/tokushoho" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">特商法表記</a>
+          </div>
         </div>
       </div>
     </footer>
