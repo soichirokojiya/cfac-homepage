@@ -241,7 +241,7 @@ function Products() {
           title: "ファクナビ",
           subtitle: "日本最大級のファクタリング比較・口コミサイト",
           description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
-          url: "https://facnavi.com",
+          url: "https://facnavi.info",
         },
       ],
     },
@@ -444,7 +444,7 @@ function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "CASH NOW", href: "https://cash.co.jp" },
-                { label: "ファクナビ", href: "https://facnavi.com" },
+                { label: "ファクナビ", href: "https://facnavi.info" },
                 { label: "うめこ", href: "https://umeko.life" },
                 { label: "Mamoru AI", href: "https://mamoru.site" },
                 { label: "底地ドットコム", href: "https://socochi.com" },
