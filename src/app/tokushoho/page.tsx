@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function TokushohoPage() {
   const items = [
     { label: "販売事業者", value: "Common Future & Company 株式会社" },
-    { label: "運営責任者", value: "代表取締役 糀屋 総一朗" },
+    { label: "運営責任者", value: "七種 一貴" },
     { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
     { label: "電話番号", value: "お問い合わせはメールにてお願いいたします" },
     {

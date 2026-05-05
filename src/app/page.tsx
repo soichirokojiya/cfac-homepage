@@ -335,7 +335,6 @@ function Company() {
   const items = [
     { label: "会社名", value: "Common Future & Company 株式会社" },
     { label: "法人番号", value: "9011001105902" },
-    { label: "代表取締役", value: "糀屋 総一朗" },
     { label: "設立", value: "2015年10月5日" },
     { label: "資本金", value: "3,520万円" },
     { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
