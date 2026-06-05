@@ -338,6 +338,7 @@ function Company() {
     { label: "設立", value: "2015年10月5日" },
     { label: "資本金", value: "3,520万円" },
     { label: "所在地", value: "神奈川県逗子市小坪6-6-46" },
+    { label: "電話番号", value: "050-6883-5819" },
     { label: "メール", value: "info@cfac.co.jp" },
     { label: "営業時間", value: "平日 10:00～18:00" },
     { label: "事業内容", value: "AIを活用した業務効率化・コミュニケーション支援プロダクトの開発・運営" },
@@ -373,7 +374,7 @@ function Contact() {
       <div className={`max-w-md mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Contact</p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">お問い合わせ</h2>
-        <p className="text-sm text-[#6b7280] mb-8">お気軽にお問い合わせください</p>
+        <p className="text-sm text-[#6b7280] mb-8">お問い合わせはメールにてお願いいたします</p>
         <a
           href="mailto:info@cfac.co.jp"
           className="inline-flex items-center gap-2 text-lg font-medium text-[#1a1a1a] hover:text-blue-600 transition-colors"
