@@ -249,11 +249,11 @@ function Products() {
           badge: "2026年4月ローンチ予定",
         },
         {
-          logo: "/logos/facnavi.svg",
-          title: "ファクナビ",
+          logo: "/logos/facutto.svg",
+          title: "ファクット",
           subtitle: "日本最大級のファクタリング比較・口コミサイト",
           description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
-          url: "https://facnavi.info",
+          url: "https://facutto.jp",
         },
       ],
     },
@@ -438,7 +438,7 @@ function Footer() {
               {[
                 { label: "クイズゲート", href: "https://quizgate.jp" },
                 { label: "CASH NOW", href: "https://cash.co.jp" },
-                { label: "ファクナビ", href: "https://facnavi.info" },
+                { label: "ファクット", href: "https://facutto.jp" },
                 { label: "うめこ", href: "https://umeko.life" },
                 { label: "Mamoru AI", href: "https://mamoru.site" },
               ].map((item) => (
