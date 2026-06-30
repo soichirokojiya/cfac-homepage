@@ -37,6 +37,7 @@ function Header() {
   const navItems = [
     { label: "私たちについて", href: "#about" },
     { label: "プロダクト", href: "#products" },
+    { label: "保有ドメイン", href: "#domains" },
     { label: "会社概要", href: "#company" },
     { label: "お問い合わせ", href: "#contact" },
   ];
@@ -329,6 +330,78 @@ function Products() {
   );
 }
 
+function Domains() {
+  const { ref, isVisible } = useInView();
+
+  const domains = [
+    "alexandrite.love",
+    "banto.biz",
+    "claudecode.tokyo",
+    "facnavi.info",
+    "facutto.jp",
+    "gtw.today",
+    "ma-radar.jp",
+    "mamoru.site",
+    "musu.world",
+    "quizgate.jp",
+    "rentalrobo.jp",
+    "rentarobo.jp",
+    "roborental.jp",
+    "robot-lease.shop",
+    "robot-lease.tokyo",
+    "robot-lease.net",
+    "robot-navi.com",
+    "robot-navi.jp",
+    "robot-rental.tokyo",
+    "robot-rental.info",
+    "robot-repair.jp",
+    "robot-repair.shop",
+    "shimasozai.shop",
+    "socochi.com",
+    "the-therm.jp",
+    "umeko.life",
+    "warrant-pricer.com",
+  ];
+
+  return (
+    <section id="domains" className="py-24 md:py-32 bg-white" ref={ref}>
+      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-12">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Domains</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">保有ドメイン</h2>
+          <p className="text-sm text-[#6b7280] leading-loose">
+            当社が保有しているドメインの一覧です。
+            <br className="hidden md:block" />
+            取得をご検討の方は、お問い合わせください。
+          </p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden">
+          {domains.map((domain) => (
+            <div
+              key={domain}
+              className="bg-white px-4 py-4 text-center text-sm text-[#374151] font-mono tracking-tight"
+            >
+              {domain}
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <a
+            href="mailto:info@cfac.co.jp?subject=ドメイン取得に関するお問い合わせ"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#1a1a1a] hover:text-blue-600 transition-colors"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            ドメインについてお問い合わせ
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Company() {
   const { ref, isVisible } = useInView();
 
@@ -421,6 +494,7 @@ function Footer() {
               {[
                 { label: "私たちについて", href: "#about" },
                 { label: "プロダクト", href: "#products" },
+                { label: "保有ドメイン", href: "#domains" },
                 { label: "会社概要", href: "#company" },
                 { label: "お問い合わせ", href: "#contact" },
               ].map((item) => (
@@ -490,6 +564,7 @@ export default function Home() {
         <OpenUp />
         <Approach />
         <Products />
+        <Domains />
         <Company />
         <Contact />
       </main>
