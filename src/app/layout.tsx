@@ -11,7 +11,7 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Common Future & Company 株式会社 | 人が、もっと人間らしいことに向かえる社会へ。",
   description:
-    "面倒な仕事を減らし、伝わらないすれ違いをやわらげる。AIの力で、人の時間と余白を取り戻すプロダクトをつくっています。クイズゲート・CASH NOW・ファクットなどを開発・運営。",
+    "面倒な仕事を減らし、伝わらないすれ違いをやわらげる。AIの力で、人の時間と余白を取り戻すプロダクトをつくっています。CASH NOW・ファクットなどを開発・運営。",
   openGraph: {
     title: "Common Future & Company 株式会社 | 人が、もっと人間らしいことに向かえる社会へ。",
     description:

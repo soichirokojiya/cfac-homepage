@@ -227,18 +227,6 @@ function Products() {
 
   const productGroups = [
     {
-      label: "暮らしと学びをひらく",
-      products: [
-        {
-          logo: "/logos/quizgate.png",
-          title: "クイズゲート",
-          subtitle: "動画の前に、学びのゲート。",
-          description: "YouTube視聴の前にクイズを挟むペアレンタルコントロール。AIが九九・漢字などのクイズを自動生成し、子どもの学習と視聴習慣を親がやさしく管理できます。",
-          url: "https://quizgate.jp",
-        },
-      ],
-    },
-    {
       label: "業務の負荷を減らす",
       products: [
         {
@@ -317,14 +305,13 @@ function Domains() {
   const domains = [
     "alexandrite.love",
     "banto.biz",
+    "cash.co.jp",
     "claudecode.tokyo",
     "facnavi.info",
     "facutto.jp",
     "gtw.today",
     "ma-radar.jp",
-    "mamoru.site",
     "musu.world",
-    "quizgate.jp",
     "rentalrobo.jp",
     "rentarobo.jp",
     "roborental.jp",
@@ -340,7 +327,6 @@ function Domains() {
     "shimasozai.shop",
     "socochi.com",
     "the-therm.jp",
-    "umeko.life",
     "warrant-pricer.com",
   ];
 
@@ -491,7 +477,6 @@ function Footer() {
             <h4 className="text-sm font-medium text-gray-300 mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
-                { label: "クイズゲート", href: "https://quizgate.jp" },
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクット", href: "https://facutto.jp" },
               ].map((item) => (
