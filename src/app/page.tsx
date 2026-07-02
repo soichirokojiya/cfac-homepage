@@ -24,6 +24,14 @@ function useInView(threshold = 0.15) {
   return { ref, isVisible };
 }
 
+const NAV_ITEMS = [
+  { label: "プロダクト", href: "#products" },
+  { label: "ニュース", href: "#news" },
+  { label: "保有ドメイン", href: "#domains" },
+  { label: "会社概要", href: "#company" },
+  { label: "お問い合わせ", href: "#contact" },
+];
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,32 +42,22 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "私たちについて", href: "#about" },
-    { label: "プロダクト", href: "#products" },
-    { label: "保有ドメイン", href: "#domains" },
-    { label: "会社概要", href: "#company" },
-    { label: "お問い合わせ", href: "#contact" },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#">
-          <LogoFull height={30} color={scrolled ? "#1a1a1a" : "#ffffff"} />
+          <LogoFull height={30} color="#1a1a1a" />
         </a>
         <nav className="hidden md:flex gap-8">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors ${
-                scrolled ? "text-[#374151] hover:text-[#1a1a1a]" : "text-gray-300 hover:text-white"
-              }`}
+              className="text-sm font-medium text-[#374151] hover:text-[#1a1a1a] transition-colors"
             >
               {item.label}
             </a>
@@ -70,14 +68,14 @@ function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="メニュー"
         >
-          <span className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`w-6 h-0.5 transition-opacity ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`w-6 h-0.5 transition-transform ${scrolled ? "bg-[#1a1a1a]" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span className={`w-6 h-0.5 bg-[#1a1a1a] transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`w-6 h-0.5 bg-[#1a1a1a] transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`w-6 h-0.5 bg-[#1a1a1a] transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </div>
       {menuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 pb-4">
-          {navItems.map((item) => (
+        <div className="md:hidden bg-white border-t border-gray-100 pb-4">
+          {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -95,127 +93,26 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center bg-[#0f172a]">
+    <section className="relative min-h-[68vh] flex items-center justify-center bg-white pt-20">
       <div className="max-w-3xl mx-auto px-6 text-center">
-        <p className="text-gray-400 text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
-          Common Future & Company
+        <p className="text-[#9ca3af] text-sm tracking-[0.3em] uppercase mb-8 opacity-0 animate-fade-in-up">
+          Common Future &amp; Company
         </p>
-        <h1 className="text-3xl md:text-[2.75rem] lg:text-5xl font-bold text-white leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
-          人が、もっと人間らしいことに
-          <br />
-          向かえる社会へ。
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a1a1a] leading-tight mb-8 opacity-0 animate-fade-in-up animate-delay-200">
+          Common Future &amp; Company
+          <br className="md:hidden" />
+          <span className="md:ml-3">株式会社</span>
         </h1>
-        <p className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-4 opacity-0 animate-fade-in-up animate-delay-400">
-          面倒な仕事を減らし、伝わらないすれ違いをやわらげる。
-          <br className="hidden md:block" />
-          AIの力で、人の時間と余白を取り戻すプロダクトをつくっています。
-        </p>
-        <p className="text-sm text-gray-500 max-w-lg mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
-          不要な業務負荷の削減とコミュニケーションの円滑化——
-          <br className="hidden md:block" />
-          この2つの領域で、AIプロダクトを開発・運営する会社です。
+        <p className="text-base md:text-lg text-[#6b7280] max-w-xl mx-auto mb-12 opacity-0 animate-fade-in-up animate-delay-400">
+          AIプロダクトの開発・運営を行う会社です。
         </p>
         <div className="opacity-0 animate-fade-in-up animate-delay-600">
           <a
-            href="#about"
-            className="inline-block border border-white/30 text-white px-8 py-3 rounded text-sm hover:bg-white hover:text-[#0f172a] transition-all"
+            href="#products"
+            className="inline-block border border-[#1a1a1a] text-[#1a1a1a] px-8 py-3 rounded text-sm hover:bg-[#1a1a1a] hover:text-white transition-all"
           >
-            私たちについて
+            プロダクトを見る
           </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PainPoints() {
-  const { ref, isVisible } = useInView();
-
-  return (
-    <section id="about" className="py-24 md:py-32 bg-white" ref={ref}>
-      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-14">
-          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">What We Reduce</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">なくしたい、ふたつの消耗。</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-10">
-          <div className="bg-[#f8f9fa] rounded-xl p-8">
-            <div className="w-12 h-12 bg-[#0f172a] rounded-lg flex items-center justify-center mb-5">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">不要な業務負荷</h3>
-            <p className="text-[#374151] text-sm leading-loose">
-              本来やらなくていい作業、繰り返しの事務処理、判断を要しない確認作業——こうした業務が、人の時間とエネルギーを静かに奪っています。
-            </p>
-          </div>
-          <div className="bg-[#f8f9fa] rounded-xl p-8">
-            <div className="w-12 h-12 bg-[#0f172a] rounded-lg flex items-center justify-center mb-5">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">コミュニケーションの摩擦</h3>
-            <p className="text-[#374151] text-sm leading-loose">
-              言いたいことが伝わらない、意図がずれる、気まずさから言い出せない——こうしたすれ違いが、人間関係を消耗させています。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function OpenUp() {
-  const { ref, isVisible } = useInView();
-
-  return (
-    <section className="py-24 md:py-32 bg-[#0f172a]" ref={ref}>
-      <div className={`max-w-2xl mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <p className="text-sm text-gray-400 tracking-[0.2em] uppercase mb-3">What We Open Up</p>
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">その先にある、人間らしい時間。</h2>
-        <p className="text-gray-400 leading-loose text-[15px]">
-          面倒が減った先にあるのは、単なる空き時間ではありません。
-          <br />
-          創造、対話、学び、遊び、文化的な営み——
-          <br />
-          人がもっと本質的なことに向かえる余白を、私たちはひらきたいと考えています。
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function Approach() {
-  const { ref, isVisible } = useInView();
-
-  return (
-    <section className="py-24 md:py-32 bg-white" ref={ref}>
-      <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
-        <div className="text-center mb-14">
-          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Our Approach</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">AIで、2つのアプローチから。</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-10">
-          <div className="border border-gray-200 rounded-xl p-8">
-            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Approach 01</span>
-            <h3 className="text-xl font-bold text-[#1a1a1a] mt-3 mb-4">業務の負荷を減らす</h3>
-            <p className="text-[#374151] text-sm leading-loose">
-              AIによる業務自動化、資金調達の効率化、情報収集の省力化。人が判断と創造に集中できる環境をつくります。
-            </p>
-          </div>
-          <div className="border border-gray-200 rounded-xl p-8">
-            <span className="text-xs font-bold tracking-[0.15em] text-[#9ca3af] uppercase">Approach 02</span>
-            <h3 className="text-xl font-bold text-[#1a1a1a] mt-3 mb-4">対話をなめらかにする</h3>
-            <p className="text-[#374151] text-sm leading-loose">
-              コミュニケーションの言い換え、要約、整理、仲介。人と人の間にある摩擦をやわらげます。
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -225,75 +122,141 @@ function Approach() {
 function Products() {
   const { ref, isVisible } = useInView();
 
-  const productGroups = [
+  const products = [
     {
-      label: "業務の負荷を減らす",
-      products: [
-        {
-          logo: "/logos/cashnow.png",
-          title: "CASH NOW",
-          subtitle: "AIファクタリングで最短10分の資金調達",
-          description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
-          url: "https://cash.co.jp",
-          badge: "2026年4月ローンチ予定",
-        },
-        {
-          logo: "/logos/facutto.svg",
-          title: "ファクット",
-          subtitle: "日本最大級のファクタリング比較・口コミサイト",
-          description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
-          url: "https://facutto.jp",
-        },
-      ],
+      logo: "/logos/cashnow.png",
+      title: "CASH NOW",
+      subtitle: "AIファクタリングで最短10分の資金調達",
+      description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
+      url: "https://cash.co.jp",
+      badge: "2026年ローンチ予定",
+    },
+    {
+      logo: "/logos/facutto.svg",
+      title: "ファクット",
+      subtitle: "日本最大級のファクタリング比較・口コミサイト",
+      description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
+      url: "https://facutto.jp",
     },
   ];
 
   return (
-    <section id="products" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
+    <section id="products" className="py-24 md:py-28 bg-white border-t border-gray-100" ref={ref}>
       <div className={`max-w-5xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <div className="text-center mb-14">
           <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Products</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">私たちのプロダクト</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">プロダクト</h2>
         </div>
+        <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
+          {products.map((product, i) => (
+            <a key={i} href={product.url} target="_blank" rel="noopener noreferrer" className="block">
+              <div className="bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:shadow-md transition-all duration-200 group relative cursor-pointer h-full">
+                {"badge" in product && product.badge && (
+                  <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
+                    {product.badge}
+                  </span>
+                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={product.logo}
+                  alt={`${product.title} logo`}
+                  className="h-8 max-w-[160px] mb-5 object-contain object-left"
+                />
+                <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{product.title}</h3>
+                <p className="text-xs text-[#9ca3af] mb-4">{product.subtitle}</p>
+                <p className="text-[#374151] text-sm leading-loose mb-4">{product.description}</p>
+                <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
+                  {product.url.replace("https://", "")}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        {productGroups.map((group) => (
-          <div key={group.label} className="mb-12 last:mb-0">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-xs font-bold tracking-[0.1em] text-[#9ca3af]">{group.label}</span>
-              <span className="flex-1 h-px bg-gray-300" />
-            </div>
-            <div className={`grid gap-8 ${group.products.length === 1 ? "md:grid-cols-1 max-w-lg" : group.products.length === 2 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}>
-              {group.products.map((product, i) => (
-                <a key={i} href={product.url} target="_blank" rel="noopener noreferrer" className="block">
-                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 group relative cursor-pointer h-full">
-                    {"badge" in product && product.badge && (
-                      <span className="absolute top-4 right-4 bg-amber-100 text-amber-700 text-[10px] font-bold px-3 py-1 rounded-full">
-                        {product.badge}
-                      </span>
-                    )}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={product.logo}
-                      alt={`${product.title} logo`}
-                      className="h-8 max-w-[160px] mb-5 object-contain object-left"
-                    />
-                    <h3 className="text-xl font-bold text-[#1a1a1a] mb-1">{product.title}</h3>
-                    <p className="text-xs text-[#9ca3af] mb-4">{product.subtitle}</p>
-                    <p className="text-[#374151] text-sm leading-loose mb-4">{product.description}</p>
-                    <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
-                      {product.url.replace("https://", "")}
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        ))}
+function News() {
+  const { ref, isVisible } = useInView();
+
+  const releases = [
+    {
+      date: "2026.07.02",
+      title:
+        "ファクタリング比較サイト「ファクット」、M&Aによる事業承継後2か月で月間リード送客数が約10倍に成長。ファクタリング会社のロールアップ型のM&Aも視野に。",
+      url: "https://prtimes.jp/main/html/rd/p/000000005.000047698.html",
+    },
+    {
+      date: "2026.06.11",
+      title:
+        "【ファクット調査】ファクタリング手数料、3年で最大約10%上昇の可能性─金利上昇は「倒産」を経由して手数料に波及",
+      url: "https://prtimes.jp/main/html/rd/p/000000004.000047698.html",
+    },
+    {
+      date: "2026.03.27",
+      title:
+        "言いづらいことを、やわらかく。伝え方に悩む場面を支える、対話サポートLINEサービス「うめこ」を公開",
+      url: "https://prtimes.jp/main/html/rd/p/000000003.000047698.html",
+    },
+    {
+      date: "2026.03.23",
+      title:
+        "ソロプレナー（非エンジニア）向けAIマルチエージェントワークスペース「musu（ムス）」ベータ版を限定公開",
+      url: "https://prtimes.jp/main/html/rd/p/000000002.000047698.html",
+    },
+    {
+      date: "2026.01.05",
+      title:
+        "過去25年分の過去問と、受験界で評価の高い模範解答を学習した、東大現代文解析AI「OSAMU」正式公開",
+      url: "https://prtimes.jp/main/html/rd/p/000000001.000047698.html",
+    },
+  ];
+
+  return (
+    <section id="news" className="py-24 md:py-28 bg-white border-t border-gray-100" ref={ref}>
+      <div className={`max-w-3xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
+        <div className="text-center mb-12">
+          <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">News</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">ニュース</h2>
+        </div>
+        <ul className="border-t border-gray-200">
+          {releases.map((item) => (
+            <li key={item.url} className="border-b border-gray-200">
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col md:flex-row md:items-start gap-2 md:gap-6 py-5 hover:bg-gray-50 -mx-4 px-4 rounded-lg transition-colors"
+              >
+                <span className="text-sm text-[#9ca3af] font-mono shrink-0 md:w-24 pt-0.5">{item.date}</span>
+                <span className="text-sm text-[#374151] leading-relaxed group-hover:text-[#1a1a1a] transition-colors">
+                  {item.title}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="text-center mt-10">
+          <a
+            href="https://prtimes.jp/main/html/searchrlp/company_id/47698"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm font-medium text-[#1a1a1a] hover:text-blue-600 transition-colors"
+          >
+            プレスリリース一覧（PR TIMES）
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -331,7 +294,7 @@ function Domains() {
   ];
 
   return (
-    <section id="domains" className="py-24 md:py-32 bg-white" ref={ref}>
+    <section id="domains" className="py-24 md:py-28 bg-white border-t border-gray-100" ref={ref}>
       <div className={`max-w-4xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <div className="text-center mb-12">
           <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Domains</p>
@@ -381,20 +344,20 @@ function Company() {
     { label: "電話番号", value: "050-6883-5819" },
     { label: "メール", value: "info@cfac.co.jp" },
     { label: "営業時間", value: "平日 10:00～18:00" },
-    { label: "事業内容", value: "AIを活用した業務効率化・コミュニケーション支援プロダクトの開発・運営" },
+    { label: "事業内容", value: "AIを活用したプロダクトの開発・運営" },
   ];
 
   return (
-    <section id="company" className="py-24 md:py-32 bg-white" ref={ref}>
+    <section id="company" className="py-24 md:py-28 bg-white border-t border-gray-100" ref={ref}>
       <div className={`max-w-3xl mx-auto px-6 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <div className="text-center mb-12">
           <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Company</p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">会社概要</h2>
         </div>
-        <div className="bg-[#f8f9fa] rounded-xl overflow-hidden">
+        <div className="border border-gray-200 rounded-xl overflow-hidden">
           {items.map((item, i) => (
             <div key={i} className={`flex flex-col md:flex-row ${i !== items.length - 1 ? "border-b border-gray-200" : ""}`}>
-              <div className="md:w-48 px-8 py-5 bg-[#f1f3f5] font-medium text-sm text-[#374151]">
+              <div className="md:w-48 px-8 py-5 bg-[#f8f9fa] font-medium text-sm text-[#374151]">
                 {item.label}
               </div>
               <div className="flex-1 px-8 py-5 text-sm text-[#374151]">{item.value}</div>
@@ -410,7 +373,7 @@ function Contact() {
   const { ref, isVisible } = useInView();
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-[#f8f9fa]" ref={ref}>
+    <section id="contact" className="py-24 md:py-28 bg-white border-t border-gray-100" ref={ref}>
       <div className={`max-w-md mx-auto px-6 text-center ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} transition-all duration-700`}>
         <p className="text-sm text-[#9ca3af] tracking-[0.2em] uppercase mb-3">Contact</p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-3">お問い合わせ</h2>
@@ -433,19 +396,16 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="bg-[#0f172a] text-white pt-14 pb-8">
+    <footer className="bg-white border-t border-gray-200 pt-14 pb-8">
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
-            <div className="mb-4"><LogoFull height={28} color="#ffffff" /></div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              人が、もっと人間らしいことに向かえる社会へ。
-            </p>
+            <div className="mb-4"><LogoFull height={28} color="#1a1a1a" /></div>
             <a
               href="https://cfac.co.jp"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+              className="inline-flex items-center gap-1 text-xs text-[#9ca3af] hover:text-[#374151] transition-colors"
             >
               cfac.co.jp
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -456,17 +416,11 @@ function Footer() {
             </a>
           </div>
           <div>
-            <h4 className="text-sm font-medium text-gray-300 mb-4">ナビゲーション</h4>
+            <h4 className="text-sm font-medium text-[#1a1a1a] mb-4">ナビゲーション</h4>
             <ul className="space-y-3">
-              {[
-                { label: "私たちについて", href: "#about" },
-                { label: "プロダクト", href: "#products" },
-                { label: "保有ドメイン", href: "#domains" },
-                { label: "会社概要", href: "#company" },
-                { label: "お問い合わせ", href: "#contact" },
-              ].map((item) => (
+              {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <a href={item.href} className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
                     {item.label}
                   </a>
                 </li>
@@ -474,14 +428,14 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-medium text-gray-300 mb-4">運営サービス</h4>
+            <h4 className="text-sm font-medium text-[#1a1a1a] mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクット", href: "https://facutto.jp" },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
                     {item.label}
                   </a>
                 </li>
@@ -489,7 +443,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-medium text-gray-300 mb-4">サイトポリシー</h4>
+            <h4 className="text-sm font-medium text-[#1a1a1a] mb-4">サイトポリシー</h4>
             <ul className="space-y-3">
               {[
                 { label: "プライバシーポリシー", href: "/privacy" },
@@ -497,7 +451,7 @@ function Footer() {
                 { label: "特定商取引法に基づく表記", href: "/tokushoho" },
               ].map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <a href={item.href} className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
                     {item.label}
                   </a>
                 </li>
@@ -505,12 +459,12 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-xs">&copy; 2026 <a href="https://cfac.co.jp" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">Common Future & Co. 株式会社</a> All rights reserved.</p>
+        <div className="border-t border-gray-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[#9ca3af] text-xs">&copy; 2026 <a href="https://cfac.co.jp" target="_blank" rel="noopener noreferrer" className="hover:text-[#374151] transition-colors">Common Future & Co. 株式会社</a> All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="/privacy" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">プライバシーポリシー</a>
-            <a href="/terms" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">利用規約</a>
-            <a href="/tokushoho" className="text-gray-500 hover:text-gray-300 text-xs transition-colors">特商法表記</a>
+            <a href="/privacy" className="text-[#9ca3af] hover:text-[#374151] text-xs transition-colors">プライバシーポリシー</a>
+            <a href="/terms" className="text-[#9ca3af] hover:text-[#374151] text-xs transition-colors">利用規約</a>
+            <a href="/tokushoho" className="text-[#9ca3af] hover:text-[#374151] text-xs transition-colors">特商法表記</a>
           </div>
         </div>
       </div>
@@ -524,10 +478,8 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <PainPoints />
-        <OpenUp />
-        <Approach />
         <Products />
+        <News />
         <Domains />
         <Company />
         <Contact />
