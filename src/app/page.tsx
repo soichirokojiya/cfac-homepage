@@ -258,25 +258,6 @@ function Products() {
         },
       ],
     },
-    {
-      label: "対話をなめらかにする",
-      products: [
-        {
-          logo: "/logos/umeko.png",
-          title: "うめこ",
-          subtitle: "LINEで使える会話整理AI",
-          description: "言いづらいことを、やわらかく。グループの見守り、1対1の相談、言い換え、要約に対応。すれ違いをやさしく整えるAIアシスタント。",
-          url: "https://umeko.life",
-        },
-        {
-          logo: "/logos/mamoru.png",
-          title: "Mamoru AI",
-          subtitle: "管理者向け 組織会話オブザーバビリティ",
-          description: "LINE/Slackグループに常駐し、衝突・沈黙・過熱の兆候を検知。毎日18時に組織会話のサマリーと注意レポートを管理者へ届けるB2B SaaS。",
-          url: "https://mamoru.site",
-        },
-      ],
-    },
   ];
 
   return (
@@ -513,8 +494,6 @@ function Footer() {
                 { label: "クイズゲート", href: "https://quizgate.jp" },
                 { label: "CASH NOW", href: "https://cash.co.jp" },
                 { label: "ファクット", href: "https://facutto.jp" },
-                { label: "うめこ", href: "https://umeko.life" },
-                { label: "Mamoru AI", href: "https://mamoru.site" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">
