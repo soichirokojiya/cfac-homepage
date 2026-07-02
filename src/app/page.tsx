@@ -424,7 +424,7 @@ function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "最短60分で入金。オンライン完結のファクタリング", href: "https://cash.co.jp" },
-                { label: "ファクット", href: "https://facutto.jp" },
+                { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
