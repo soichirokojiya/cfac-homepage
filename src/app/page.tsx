@@ -129,6 +129,7 @@ function Products() {
       subtitle: "AIファクタリングで最短10分の資金調達",
       description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
       url: "https://cash.co.jp",
+      anchor: "最短60分で入金。オンライン完結のファクタリング",
       badge: "2026年ローンチ予定",
     },
     {
@@ -137,6 +138,7 @@ function Products() {
       subtitle: "日本最大級のファクタリング比較・口コミサイト",
       description: "最適なファクタリング会社を簡単に比較・検討できるプラットフォームです。",
       url: "https://facutto.jp",
+      anchor: "ファクタリング会社の比較サイト「ファクット」",
     },
   ];
 
@@ -166,7 +168,7 @@ function Products() {
                 <p className="text-xs text-[#9ca3af] mb-4">{product.subtitle}</p>
                 <p className="text-[#374151] text-sm leading-loose mb-4">{product.description}</p>
                 <span className="text-xs text-[#9ca3af] group-hover:text-blue-500 transition-colors flex items-center gap-1">
-                  {product.url.replace("https://", "")}
+                  {product.anchor}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                     <polyline points="15 3 21 3 21 9" />
