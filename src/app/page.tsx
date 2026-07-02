@@ -270,8 +270,6 @@ function Domains() {
     "claudecode.tokyo",
     "facnavi.info",
     "facutto.jp",
-    "gtw.today",
-    "ma-radar.jp",
     "musu.world",
     "rentalrobo.jp",
     "rentarobo.jp",
