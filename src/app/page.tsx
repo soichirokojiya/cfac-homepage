@@ -266,8 +266,6 @@ function Domains() {
   const { ref, isVisible } = useInView();
 
   const domains = [
-    "alexandrite.love",
-    "banto.biz",
     "cash.co.jp",
     "claudecode.tokyo",
     "facnavi.info",
