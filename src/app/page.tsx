@@ -423,7 +423,7 @@ function Footer() {
             <h4 className="text-sm font-medium text-[#1a1a1a] mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
-                { label: "CASH NOW", href: "https://cash.co.jp" },
+                { label: "最短60分で入金。オンライン完結のファクタリング", href: "https://cash.co.jp" },
                 { label: "ファクット", href: "https://facutto.jp" },
               ].map((item) => (
                 <li key={item.label}>
