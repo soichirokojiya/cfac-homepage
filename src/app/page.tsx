@@ -270,7 +270,6 @@ function Domains() {
     "claudecode.tokyo",
     "facnavi.info",
     "facutto.jp",
-    "musu.world",
     "rentalrobo.jp",
     "rentarobo.jp",
     "roborental.jp",
@@ -283,10 +282,7 @@ function Domains() {
     "robot-rental.info",
     "robot-repair.jp",
     "robot-repair.shop",
-    "shimasozai.shop",
     "socochi.com",
-    "the-therm.jp",
-    "warrant-pricer.com",
   ];
 
   return (
