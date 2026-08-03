@@ -140,14 +140,6 @@ function Products() {
       url: "https://facutto.jp",
       anchor: "ファクタリング会社の比較サイト「ファクット」",
     },
-    {
-      logo: "/logos/hanko.png",
-      title: "PDF印影ツール",
-      subtitle: "電子印鑑をPDFに無料で押印",
-      description: "登録不要・ブラウザ完結でPDFに電子印鑑を押印できる無料ツール。印影の作成や画像の透過にも対応。",
-      url: "https://hanko.work",
-      anchor: "電子印鑑PDF押印ツール「hanko.work」",
-    },
   ];
 
   return (
@@ -435,7 +427,6 @@ function Footer() {
               {[
                 { label: "最短60分で入金。オンライン完結のファクタリング", href: "https://cash.co.jp" },
                 { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
-                { label: "電子印鑑PDF押印ツール「hanko.work」", href: "https://hanko.work" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
