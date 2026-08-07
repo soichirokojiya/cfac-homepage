@@ -140,6 +140,15 @@ function Products() {
       url: "https://facutto.jp",
       anchor: "ファクタリング会社の比較サイト「ファクット」",
     },
+    {
+      logo: "/logos/sds.png",
+      title: "ソーラーディールサーチ",
+      subtitle: "太陽光発電所の取引事例データベース",
+      description:
+        "全国の事業用太陽光発電所を無料で検索できます。あわせて、公表データを2019年から突き合わせた売買の履歴を、月次レポートと元データで提供しています。",
+      url: "https://sds.tokyo/",
+      anchor: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」",
+    },
   ];
 
   return (
@@ -284,6 +293,7 @@ function Domains() {
     "robot-rental.info",
     "robot-repair.jp",
     "robot-repair.shop",
+    "sds.tokyo",
     "socochi.com",
   ];
 
