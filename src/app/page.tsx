@@ -124,15 +124,6 @@ function Products() {
 
   const products = [
     {
-      logo: "/logos/cashnow.png",
-      title: "CASH NOW",
-      subtitle: "AIファクタリングで最短10分の資金調達",
-      description: "AIが審査するオンライン完結のファクタリングサービス。請求書を送るだけで最短10分で資金化。",
-      url: "https://cash.co.jp",
-      anchor: "最短60分で入金。オンライン完結のファクタリング",
-      badge: "2026年ローンチ予定",
-    },
-    {
       logo: "/logos/facutto.svg",
       title: "ファクット",
       subtitle: "日本最大級のファクタリング比較・口コミサイト",
@@ -277,7 +268,6 @@ function Domains() {
   const { ref, isVisible } = useInView();
 
   const domains = [
-    "cash.co.jp",
     "claudecode.tokyo",
     "facnavi.info",
     "facutto.jp",
@@ -435,7 +425,6 @@ function Footer() {
             <h4 className="text-sm font-medium text-[#1a1a1a] mb-4">運営サービス</h4>
             <ul className="space-y-3">
               {[
-                { label: "最短60分で入金。オンライン完結のファクタリング", href: "https://cash.co.jp" },
                 { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
               ].map((item) => (
                 <li key={item.label}>

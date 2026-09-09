@@ -11,11 +11,11 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Common Future & Company 株式会社",
   description:
-    "Common Future & Company 株式会社は、AIプロダクトの開発・運営を行う会社です。CASH NOW・ファクットなどを開発・運営しています。",
+    "Common Future & Company 株式会社は、AIプロダクトの開発・運営を行う会社です。ファクット・ソーラーディールサーチなどを開発・運営しています。",
   openGraph: {
     title: "Common Future & Company 株式会社",
     description:
-      "AIプロダクトの開発・運営を行う会社です。CASH NOW・ファクットなどを開発・運営しています。",
+      "AIプロダクトの開発・運営を行う会社です。ファクット・ソーラーディールサーチなどを開発・運営しています。",
     url: "https://cfac.co.jp",
     siteName: "Common Future & Company 株式会社",
     locale: "ja_JP",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Common Future & Company 株式会社",
     description:
-      "AIプロダクトの開発・運営を行う会社です。CASH NOW・ファクットなどを開発・運営しています。",
+      "AIプロダクトの開発・運営を行う会社です。ファクット・ソーラーディールサーチなどを開発・運営しています。",
     images: ["https://cfac.co.jp/og-image.png"],
   },
   icons: {
