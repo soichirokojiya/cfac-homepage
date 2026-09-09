@@ -122,7 +122,7 @@ function Hero() {
 function Products() {
   const { ref, isVisible } = useInView();
 
-  const products = [
+  const products: { logo: string; title: string; subtitle: string; description: string; url: string; anchor: string; badge?: string }[] = [
     {
       logo: "/logos/facutto.svg",
       title: "ファクット",
