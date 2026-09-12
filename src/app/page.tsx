@@ -132,6 +132,15 @@ function Products() {
       anchor: "ファクタリング会社の比較サイト「ファクット」",
     },
     {
+      logo: "/logos/waketto.svg",
+      title: "ワケット",
+      subtitle: "訳あり不動産の買取業者 比較サイト",
+      description:
+        "空き家・事故物件・再建築不可・共有持分・借地権・底地など、一般の不動産会社が扱えない物件を実際に買い取っている専門業者を、物件の事情から絞り込めます。",
+      url: "https://waketto.jp",
+      anchor: "訳あり不動産の買取業者比較サイト「ワケット」",
+    },
+    {
       logo: "/logos/sds.png",
       title: "ソーラーディールサーチ",
       subtitle: "太陽光発電所の取引事例データベース",
@@ -426,6 +435,8 @@ function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
+                { label: "訳あり不動産の買取業者比較サイト「ワケット」", href: "https://waketto.jp" },
+                { label: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」", href: "https://sds.tokyo/" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186 48" width="186" height="48" role="img" aria-label="ワケット">
+  <rect x="0" y="4" width="40" height="40" rx="9" fill="#0f2843"/>
+  <text x="20" y="32" font-family="'Noto Sans JP','Hiragino Sans',sans-serif" font-size="23" font-weight="700" fill="#ffffff" text-anchor="middle">ワ</text>
+  <text x="50" y="33" font-family="'Noto Sans JP','Hiragino Sans',sans-serif" font-size="26" font-weight="900" fill="#0f2843" letter-spacing="0.5">ワケット</text>
+  <circle cx="180" cy="30" r="3.5" fill="#e2570f"/>
+</svg>
