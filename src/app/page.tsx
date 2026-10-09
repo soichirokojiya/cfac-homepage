@@ -149,6 +149,15 @@ function Products() {
       url: "https://sds.tokyo/",
       anchor: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」",
     },
+    {
+      logo: "/logos/secutto.png",
+      title: "セキュット",
+      subtitle: "セキュリティ会社の比較・相談サイト",
+      description:
+        "中小企業向けのセキュリティ対策サービスや専門会社を、目的や予算から比較・相談できます。",
+      url: "https://secutto.com/",
+      anchor: "セキュリティ会社の比較・相談「セキュット」",
+    },
   ];
 
   return (
@@ -437,6 +446,7 @@ function Footer() {
                 { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
                 { label: "訳あり不動産の買取業者比較サイト「ワケット」", href: "https://waketto.jp" },
                 { label: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」", href: "https://sds.tokyo/" },
+                { label: "セキュリティ会社の比較・相談「セキュット」", href: "https://secutto.com/" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
