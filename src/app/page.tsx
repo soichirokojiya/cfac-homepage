@@ -132,6 +132,16 @@ function Products() {
       anchor: "ファクタリング会社の比較サイト「ファクット」",
     },
     {
+      // 2026-10-24 ユーザー指示: 運営サービスに CASH NOW を追加 (現在は新規受付を休止中なのでバッジで明示)
+      logo: "/logos/cashnow.png",
+      title: "CASH NOW",
+      subtitle: "法人・個人事業主向けのファクタリングサービス",
+      description: "請求書（売掛金）を買い取り、入金前の資金化を支援するサービスです。現在、新規のお申し込みは休止しています。",
+      url: "https://cash.co.jp/",
+      anchor: "ファクタリングサービス「CASH NOW」",
+      badge: "新規受付休止中",
+    },
+    {
       logo: "/logos/waketto.svg",
       title: "ワケット",
       subtitle: "訳あり不動産の買取業者 比較サイト",
@@ -456,6 +466,7 @@ function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "ファクタリング会社の比較サイト「ファクット」", href: "https://facutto.jp" },
+                { label: "ファクタリングサービス「CASH NOW」", href: "https://cash.co.jp/" },
                 { label: "訳あり不動産の買取業者比較サイト「ワケット」", href: "https://waketto.jp" },
                 { label: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」", href: "https://sds.tokyo/" },
                 { label: "セキュリティ会社の比較・相談「セキュット」", href: "https://secutto.com/" },
