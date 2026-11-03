@@ -1,0 +1,10 @@
+<svg width="280" height="60" viewBox="0 0 280 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon -->
+  <rect x="2" y="6" width="48" height="48" rx="11" fill="#0b1020"/>
+  <path d="M30.9 15.4a15 15 0 1 0 9.7 22.9A12.7 12.7 0 0 1 30.9 15.4z" fill="#f6f4ec"/>
+  <circle cx="35.7" cy="21.8" r="3.2" fill="#c8324c"/>
+  <!-- Text: THE FIRST 90 -->
+  <text x="64" y="40" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="3.2">
+    <tspan fill="#1a1a1c">THE FIRST </tspan><tspan fill="#a3223a">90</tspan>
+  </text>
+</svg>

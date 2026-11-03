@@ -168,6 +168,15 @@ function Products() {
       url: "https://secutto.com/",
       anchor: "セキュリティ会社の比較・相談「セキュット」",
     },
+    {
+      logo: "/logos/first90.svg",
+      title: "THE FIRST 90",
+      subtitle: "睡眠の質を上げる情報サイト",
+      description:
+        "睡眠の質を上げる方法を、海外の研究データをもとに解説。深い睡眠、理想の睡眠時間、睡眠リズム、睡眠グッズの選び方までまとめています。",
+      url: "https://first90.jp/",
+      anchor: "睡眠の質を上げる情報サイト「THE FIRST 90」",
+    },
   ];
 
   return (
@@ -470,6 +479,7 @@ function Footer() {
                 { label: "訳あり不動産の買取業者比較サイト「ワケット」", href: "https://waketto.jp" },
                 { label: "太陽光発電所の検索と取引データベース「ソーラーディールサーチ」", href: "https://sds.tokyo/" },
                 { label: "セキュリティ会社の比較・相談「セキュット」", href: "https://secutto.com/" },
+                { label: "睡眠の質を上げる情報サイト「THE FIRST 90」", href: "https://first90.jp/" },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-[#6b7280] hover:text-[#1a1a1a] text-sm transition-colors">
