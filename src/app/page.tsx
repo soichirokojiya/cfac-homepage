@@ -160,8 +160,9 @@ const DOMAINS = [
   "socochi.com",
 ];
 
-const COMPANY = [
+const COMPANY: { label: string; value: string; href?: string; linkText?: string }[] = [
   { label: "会社名", value: "Common Future & Company 株式会社" },
+  { label: "代表者", value: "代表取締役 ", linkText: "糀屋総一朗", href: "https://souichirou.org/" },
   { label: "法人番号", value: "9011001105902" },
   { label: "設立", value: "2015年10月5日" },
   { label: "資本金", value: "3,520万円" },
@@ -551,7 +552,14 @@ function About() {
               {COMPANY.map((item) => (
                 <div key={item.label} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-[var(--line)] py-4 text-sm md:grid-cols-[10rem_1fr]">
                   <dt className="text-[var(--sub)]">{item.label}</dt>
-                  <dd className="text-[var(--ink)]">{item.value}</dd>
+                  <dd className="text-[var(--ink)]">
+                    {item.value}
+                    {item.href && (
+                      <a href={item.href} className="underline underline-offset-4 decoration-[var(--line)] hover:decoration-[var(--ink)]">
+                        {item.linkText}
+                      </a>
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>
