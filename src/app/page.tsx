@@ -93,6 +93,19 @@ const PRODUCTS: Product[] = [
     domain: "first90.jp",
     anchor: "睡眠の質を上げる情報サイト「THE FIRST 90」",
   },
+  {
+    // 2026-11-05 ユーザー指示: じーざすAI(jesusai.jp)を運営サービスに追加
+    key: "jesusai",
+    logo: "/logos/jesusai.png",
+    title: "じーざすAI",
+    category: "AI Service",
+    subtitle: "LINEで相談できるイエス・キリストAI",
+    description:
+      "コテコテ大阪弁のじーざすが、LINEで心の悩みに聖書の言葉で答えるお悩み相談サービスです。無料相談は1日2回まで、12使徒性格診断もできます。",
+    url: "https://jesusai.jp/",
+    domain: "jesusai.jp",
+    anchor: "LINEで相談できるイエス・キリストAI「じーざすAI」",
+  },
 ];
 
 const NEWS = [
@@ -176,7 +189,7 @@ const COMPANY: { label: string; value: string; href?: string; linkText?: string 
 /* palette: one color per service                                      */
 /* ------------------------------------------------------------------ */
 
-const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff"];
+const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff", "#ffc21a"];
 const COLOR_BY_KEY: Record<string, string> = Object.fromEntries(PRODUCTS.map((p, i) => [p.key, COLORS[i % COLORS.length]]));
 
 /* ------------------------------------------------------------------ */
@@ -461,7 +474,7 @@ export default function Home() {
         <section id="products" className="cf-products">
           <Reveal className="cf-count">
             <p><b>{PRODUCTS.length}</b> Products</p>
-            <span>金融・不動産・エネルギー・セキュリティ・健康の領域で運営中</span>
+            <span>金融・不動産・エネルギー・セキュリティ・健康・お悩み相談の領域で運営中</span>
           </Reveal>
           <Ring />
           <div className="cf-split">
