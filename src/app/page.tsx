@@ -438,7 +438,7 @@ export default function Home() {
         {/* hero */}
         <section className="cf-hero">
           <h1 className="cf-tagline">Make choices simple.<span className="sr-only"> Common Future &amp; Company 株式会社</span></h1>
-          <p className="cf-sub">比べる、調べる、選ぶ。<br />その手間を、AIとデータで短くする</p>
+          <p className="cf-sub">比べる、調べる、選ぶ。<br />AIとデータで、もっとかんたんに</p>
           <Wordmark />
           <a href="#company" className="cf-scroll">Scroll Down</a>
         </section>
@@ -447,7 +447,7 @@ export default function Home() {
         <section id="company" className="cf-statement">
           <Reveal>
             <Label>Company</Label>
-            <h2>比べる、調べる、選ぶ。<br />その手間を、短くする</h2>
+            <h2>選ぶまでの手間を、<br />AIとデータで減らす</h2>
             <div className="cf-statement-body">
               <p>Common Future &amp; Company は、<br />比較サイトやデータベースを企画から運営まで手がけています。</p>
               <p>載っている情報が一つ違うだけで、使う人の判断は誤ります。<br />だから私たちは、公式情報や公表データを一次資料まで確かめ、<br />数字は一か所で管理し、画面は迷わない形に整えます。</p>
