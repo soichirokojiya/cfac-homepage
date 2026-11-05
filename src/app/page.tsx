@@ -106,9 +106,27 @@ const PRODUCTS: Product[] = [
     domain: "jesusai.jp",
     anchor: "LINEで相談できるキリストAI「じーざすAI」",
   },
+  {
+    // 2026-11-05 ユーザー指示: タロットノア(tarot-noa.jp、運営 Common Future & Co.)を追加
+    key: "tarot-noa",
+    logo: "/logos/tarot-noa.svg",
+    title: "タロットノア",
+    category: "AI Service",
+    subtitle: "気持ちを整理するAIタロット",
+    description:
+      "78枚のカードから自分で選び、いまの気持ちを静かな言葉で読み解きます。未来を言い当てるのではなく、絡まった心をほどくための時間をつくるサービスです。",
+    url: "https://tarot-noa.jp/",
+    domain: "tarot-noa.jp",
+    anchor: "気持ちを整理するAIタロット「タロットノア」",
+  },
 ];
 
 const NEWS = [
+  {
+    date: "2026.11.05",
+    title: "78枚のカードから自分で選び、いまの気持ちを静かに読み解く、気持ちを整理するAIタロット「タロットノア」を公開",
+    url: "https://tarot-noa.jp/",
+  },
   {
     date: "2026.10.10",
     title: "中小企業のセキュリティ対策サービスを比較・相談できるサイト「セキュット」を公開",
@@ -189,7 +207,7 @@ const COMPANY: { label: string; value: string; href?: string; linkText?: string 
 /* palette: one color per service                                      */
 /* ------------------------------------------------------------------ */
 
-const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff", "#ffc21a"];
+const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff", "#ffc21a", "#9b6bff"];
 const COLOR_BY_KEY: Record<string, string> = Object.fromEntries(PRODUCTS.map((p, i) => [p.key, COLORS[i % COLORS.length]]));
 
 /* ------------------------------------------------------------------ */
