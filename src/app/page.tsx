@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, type ReactNode } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { LogoFull } from "./logo";
 
@@ -182,523 +182,287 @@ const NAV_ITEMS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* helpers                                                             */
+/* ------------------------------------------------------------------ */
+/* wireframe objects (canvas, ink lines on white)                      */
 /* ------------------------------------------------------------------ */
 
-function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+type Geo = { v: number[][]; e: [number, number][]; s: number; tilt?: number; rotZ?: number };
+const TAU = Math.PI * 2;
+const SHAPES: Record<string, () => Geo> = {
+  stair() {
+    const v: number[][] = [], e: [number, number][] = [], n = 5, w = 0.5, prof: number[][] = [];
+    for (let i = 0; i < n; i++) { const x = -1 + (i * 2) / n, x2 = -1 + ((i + 1) * 2) / n, y = -1 + ((i + 1) * 2) / n; if (i === 0) prof.push([x, -1]); prof.push([x, y], [x2, y]); }
+    prof.push([1, -1]);
+    [-w, w].forEach((z) => prof.forEach(([x, y]) => v.push([x, -y * 0.9, z])));
+    const m = prof.length;
+    for (let i = 0; i < m; i++) e.push([i, (i + 1) % m], [i + m, ((i + 1) % m) + m], [i, i + m]);
+    return { v, e, s: 0.8 };
+  },
+  torus() {
+    const v: number[][] = [], e: [number, number][] = [], U = 36, V = 12;
+    for (let i = 0; i < U; i++) for (let j = 0; j < V; j++) {
+      const u = (i / U) * TAU, w = (j / V) * TAU;
+      v.push([(1 + 0.36 * Math.cos(w)) * Math.cos(u), 0.36 * Math.sin(w), (1 + 0.36 * Math.cos(w)) * Math.sin(u)]);
+      const k = i * V + j; e.push([k, i * V + ((j + 1) % V)]); if (j % 2 === 0) e.push([k, ((i + 1) % U) * V + j]);
+    }
+    return { v, e, s: 0.78, tilt: 0.9 };
+  },
+  globe() {
+    const v: number[][] = [], e: [number, number][] = [], L = 9, M = 20;
+    for (let i = 1; i < L; i++) for (let j = 0; j < M; j++) {
+      const p = (i / L) * Math.PI, t = (j / M) * TAU;
+      v.push([Math.sin(p) * Math.cos(t), Math.cos(p), Math.sin(p) * Math.sin(t)]);
+      const k = (i - 1) * M + j; e.push([k, (i - 1) * M + ((j + 1) % M)]); if (i < L - 1) e.push([k, i * M + j]);
+    }
+    return { v, e, s: 0.9, tilt: 0.35 };
+  },
+  wave() {
+    const v: number[][] = [], e: [number, number][] = [], X = 26, Z = 10;
+    for (let i = 0; i < X; i++) for (let j = 0; j < Z; j++) {
+      v.push([-1.6 + (i * 3.2) / (X - 1), 0, -0.6 + (j * 1.2) / (Z - 1)]);
+      const k = i * Z + j; if (i < X - 1) e.push([k, k + Z]); if (j < Z - 1) e.push([k, k + 1]);
+    }
+    return { v, e, s: 0.62, tilt: 0.55 };
+  },
+};
+
+function WireObject({ shape, seed = 0 }: { shape: keyof typeof SHAPES; seed?: number }) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const cv = ref.current; if (!cv) return;
+    const ctx = cv.getContext("2d"); if (!ctx) return;
+    const geo = SHAPES[shape]();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const d = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0, raf = 0, visible = true;
+    const resize = () => { w = cv.offsetWidth; h = cv.offsetHeight; cv.width = Math.round(w * d); cv.height = Math.round(h * d); ctx.setTransform(d, 0, 0, d, 0, 0); };
+    resize();
+    const ro = new ResizeObserver(resize); ro.observe(cv);
+    const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible && !reduce) { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); } });
+    io.observe(cv);
+    function frame(ms: number) {
+      const t = ms / 1000;
+      ctx!.clearRect(0, 0, w, h);
+      if (shape === "wave") { const X = 26, Z = 10; for (let i = 0; i < X; i++) for (let j = 0; j < Z; j++) geo.v[i * Z + j][1] = Math.sin(i * 0.45 + t * 0.9) * 0.18 + Math.cos(j * 0.7 + t * 0.6) * 0.1; }
+      const a = seed * 1.7 + t * 0.2, tx = geo.tilt ?? 0.45, rz = geo.rotZ ?? 0;
+      const ca = Math.cos(a), sa = Math.sin(a), cx = Math.cos(tx), sx = Math.sin(tx), cz = Math.cos(rz), sz = Math.sin(rz);
+      const S = Math.min(w, h) * 0.42 * geo.s, ox = w / 2, oy = h / 2;
+      const P = geo.v.map(([x, y, z]) => { const x1 = x * cz - y * sz, y1 = x * sz + y * cz; const x2 = x1 * ca + z * sa, z2 = -x1 * sa + z * ca; const y3 = y1 * cx - z2 * sx, z3 = y1 * sx + z2 * cx; const f = 3.2 / (3.2 + z3); return [ox + x2 * S * f, oy + y3 * S * f, z3]; });
+      ctx!.lineWidth = 1;
+      for (const [i, j] of geo.e) {
+        const p = P[i], q = P[j], depth = ((p[2] + q[2]) / 2 + 1.4) / 2.8, al = Math.max(0.05, Math.min(0.85, 0.72 - depth * 0.55));
+        ctx!.strokeStyle = `rgba(17,17,17,${al.toFixed(3)})`; ctx!.beginPath(); ctx!.moveTo(p[0], p[1]); ctx!.lineTo(q[0], q[1]); ctx!.stroke();
+      }
+      if (!reduce && visible) raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); };
+  }, [shape, seed]);
+  return <canvas ref={ref} className="cf-wire" aria-hidden="true" />;
+}
+
+/* ------------------------------------------------------------------ */
+/* hero: a ruled field of cards that turn over one at a time           */
+/* ------------------------------------------------------------------ */
+
+type Cell = { type: "product"; key: string; wide?: boolean } | { type: "object"; shape: keyof typeof SHAPES; wide?: boolean };
+const CELLS: Cell[] = [
+  { type: "product", key: "facutto" },
+  { type: "product", key: "sds" },
+  { type: "object", shape: "torus", wide: true },
+  { type: "product", key: "waketto", wide: true },
+  { type: "product", key: "secutto" },
+  { type: "object", shape: "globe" },
+  { type: "object", shape: "stair" },
+  { type: "product", key: "first90" },
+  { type: "product", key: "cashnow", wide: true },
+];
+const PRODUCT_BY_KEY = Object.fromEntries(PRODUCTS.map((p) => [p.key, p]));
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+function CardBack() {
+  return (
+    <span className="cf-back" aria-hidden="true">
+      <span className="cf-back-mark">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M68 22A32 32 0 1 0 68 78" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /><path d="M68 22L74 16" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /></svg>
+      </span>
+    </span>
+  );
+}
+
+function Field() {
+  const productIdx = CELLS.map((c, i) => (c.type === "product" ? i : -1)).filter((i) => i >= 0);
+  const [open, setOpen] = useState<Record<number, boolean>>({});
+  const [tease, setTease] = useState<Record<number, boolean>>({});
+  const set = (fn: typeof setOpen, i: number, v: boolean) => fn((o) => ({ ...o, [i]: v }));
+
+  const reveal = useCallback(async (i: number) => {
+    set(setTease, i, true); await wait(620); set(setTease, i, false); set(setOpen, i, true); await wait(1100);
+  }, []);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    let alive = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOpen(Object.fromEntries(productIdx.map((i) => [i, true]))); return; }
+    (async () => {
+      await wait(500);
+      const order = [...productIdx].sort(() => Math.random() - 0.5);
+      for (const i of order) { if (!alive) return; reveal(i); await wait(520); }
+      while (alive) {
+        await wait(6500);
+        if (!alive || document.hidden) continue;
+        const i = productIdx[Math.floor(Math.random() * productIdx.length)];
+        set(setOpen, i, false); await wait(1100); if (!alive) return; await reveal(i);
+      }
+    })();
+    return () => { alive = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-function Arrow({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M7 17 17 7" />
-      <path d="M8 7h9v9" />
-    </svg>
-  );
-}
-
-function SectionLabel({ en, ja, index }: { en: string; ja: string; index: string }) {
-  return (
-    <div className="flex items-baseline justify-between border-t border-[var(--line)] pt-5 mb-12 md:mb-16">
-      <div className="flex items-baseline gap-4">
-        <span className="font-display text-xs text-[var(--sub)] tabular-nums">{index}</span>
-        <h2 className="font-display text-2xl md:text-3xl tracking-tight text-[var(--ink)]">{en}</h2>
+    <section className="cf-field" aria-label="Common Future & Company の運営サービス">
+      <div className="cf-grid">
+        {CELLS.map((c, i) => {
+          if (c.type === "object") return <div key={i} className={`cf-cell${c.wide ? " wide" : ""}`}><WireObject shape={c.shape} seed={i} /></div>;
+          const p = PRODUCT_BY_KEY[c.key];
+          return (
+            <div key={i} className={`cf-cell${c.wide ? " wide" : ""}${tease[i] ? " tease" : ""}`}>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" className={`cf-card${open[i] ? " open" : ""}`} aria-label={`${p.anchor}(新しいタブで開く)`}>
+                <span className="cf-inner">
+                  <CardBack />
+                  <span className="cf-front">
+                    <Image src={`/works/${p.key}.webp`} alt="" fill unoptimized className="cf-shot" />
+                    <span className="cf-caption"><b>{p.title}</b><span>{p.domain}</span></span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          );
+        })}
       </div>
-      <span className="text-xs text-[var(--sub)] tracking-[0.15em]">{ja}</span>
-    </div>
+      <div className="cf-wordmark" aria-hidden="true"><span>Common Future</span></div>
+    </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* header + menu                                                       */
+/* round controls                                                      */
 /* ------------------------------------------------------------------ */
 
-function Header() {
+function Orbs() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
+  }, []);
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:bg-white focus:px-3 focus:py-2 focus:text-sm">
-        メインコンテンツへスキップ
+      <a href="#top" className="cf-orb cf-orb-mark" aria-label="Common Future & Company トップへ">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M68 22A32 32 0 1 0 68 78" stroke="currentColor" strokeWidth="7" strokeLinecap="round" /><path d="M68 22L74 16" stroke="currentColor" strokeWidth="7" strokeLinecap="round" /></svg>
       </a>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          scrolled && !open ? "bg-[var(--paper)]/90 backdrop-blur-md" : "bg-transparent"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 md:px-10">
-          <a href="#" aria-label="Common Future & Co. トップへ" className="relative z-[60]">
-            <LogoFull height={28} color={open ? "#ffffff" : "#111111"} />
-          </a>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            className={`relative z-[60] flex items-center gap-3 font-display text-sm tracking-wide transition-colors ${
-              open ? "text-white" : "text-[var(--ink)]"
-            }`}
-          >
-            <span>{open ? "Close" : "Menu"}</span>
-            <span className="relative block h-3 w-6" aria-hidden="true">
-              <span className={`absolute left-0 h-px w-6 bg-current transition-transform duration-300 ${open ? "top-1.5 rotate-45" : "top-0.5"}`} />
-              <span className={`absolute left-0 h-px w-6 bg-current transition-transform duration-300 ${open ? "top-1.5 -rotate-45" : "top-2.5"}`} />
-            </span>
-          </button>
-        </div>
-      </header>
-
-      <div
-        id="site-menu"
-        className={`fixed inset-0 z-[55] bg-[#111111] text-white transition-[opacity,visibility] duration-500 ${
-          open ? "visible opacity-100" : "invisible opacity-0"
-        }`}
-        aria-hidden={!open}
-      >
-        <nav className="mx-auto flex h-full max-w-[1440px] flex-col justify-center px-5 md:px-10">
-          <ul>
-            {NAV_ITEMS.map((item, i) => (
-              <li key={item.href} className="border-b border-white/15 first:border-t">
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  tabIndex={open ? 0 : -1}
-                  className="group flex items-baseline justify-between py-4 md:py-5"
-                  style={{ transitionDelay: open ? `${120 + i * 50}ms` : "0ms" }}
-                >
-                  <span className="font-display text-4xl tracking-tight transition-transform duration-300 group-hover:translate-x-2 md:text-6xl">
-                    {item.en}
-                    {item.count ? <sup className="ml-2 align-super text-sm text-white/50 md:text-base">{item.count}</sup> : null}
-                  </span>
-                  <span className="text-xs tracking-[0.15em] text-white/60 md:text-sm">{item.ja}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-xs text-white/50">
-            <a href="mailto:info@cfac.co.jp" tabIndex={open ? 0 : -1} className="hover:text-white">info@cfac.co.jp</a>
-            <a href="/privacy" tabIndex={open ? 0 : -1} className="hover:text-white">プライバシーポリシー</a>
-            <a href="/terms" tabIndex={open ? 0 : -1} className="hover:text-white">利用規約</a>
-            <a href="/tokushoho" tabIndex={open ? 0 : -1} className="hover:text-white">特定商取引法に基づく表記</a>
-          </div>
-        </nav>
+      <button type="button" className="cf-orb cf-orb-info" aria-expanded={open} aria-controls="cf-panel" onClick={() => setOpen((o) => !o)}>{open ? "×" : "?"}</button>
+      <div id="cf-panel" className={`cf-panel${open ? " show" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setOpen(false); }}>
+        <p>Common Future &amp; Company 株式会社は、比べる・調べる・選ぶといった手間のかかる判断を、AIとデータで短くするプロダクトを企画から運営まで手がけています。</p>
+        <nav aria-label="ページ内">{NAV_ITEMS.map((n) => <a key={n.href} href={n.href}>{n.en}</a>)}</nav>
       </div>
     </>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* sections                                                            */
+/* bands                                                               */
 /* ------------------------------------------------------------------ */
 
-function Hero() {
-  const featured = PRODUCTS[0];
+function Band({ id, en, ja, children }: { id: string; en: string; ja: string; children: React.ReactNode }) {
   return (
-    <section className="pt-32 md:pt-40">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <p className="mb-6 text-xs tracking-[0.2em] text-[var(--sub)] opacity-0 animate-fade-in-up">
-          Common Future &amp; Company 株式会社
-        </p>
-        <h1 className="font-display max-w-5xl text-[2.6rem] leading-[1.05] tracking-[-0.03em] text-[var(--ink)] opacity-0 animate-fade-in-up animate-delay-200 sm:text-6xl md:text-7xl lg:text-[5.75rem]">
-          Products that make
-          <br />
-          hard choices simple.
-        </h1>
-        <div className="mt-8 flex flex-col gap-6 opacity-0 animate-fade-in-up animate-delay-400 md:mt-10 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-md text-sm leading-loose text-[var(--body)] md:text-base">
-            比べる、調べる、選ぶ。手間のかかる判断を、
-            <br className="hidden sm:block" />
-            AIとデータで短くするプロダクトをつくっています。
-          </p>
-          <a href="#products" className="group inline-flex items-center gap-2 self-start font-display text-sm text-[var(--ink)] md:self-auto">
-            <span className="border-b border-current pb-0.5">View Products</span>
-            <span className="text-[var(--sub)]">{PRODUCTS.length}</span>
-          </a>
-        </div>
-      </div>
-
-      <a
-        href={featured.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group mt-14 block opacity-0 animate-fade-in-up animate-delay-600 md:mt-20"
-      >
-        <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-          <div className="relative aspect-[16/10] overflow-hidden bg-[var(--tint)] md:aspect-[2/1]">
-            <Image
-              src={`/works/${featured.key}.webp`}
-              alt={`${featured.title}のトップページ`}
-              fill
-              priority
-              sizes="(min-width: 1440px) 1360px, 100vw"
-              className="object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
-            />
-          </div>
-          <div className="mt-4 flex items-baseline justify-between gap-4 text-sm">
-            <div className="flex items-baseline gap-3">
-              <span className="text-xs text-[var(--sub)]">Featured</span>
-              <span className="font-medium text-[var(--ink)]">{featured.title}</span>
-              <span className="hidden text-[var(--sub)] sm:inline">{featured.subtitle}</span>
-            </div>
-            <span className="flex items-center gap-1 font-display text-xs text-[var(--sub)] group-hover:text-[var(--ink)]">
-              {featured.domain} <Arrow />
-            </span>
-          </div>
-        </div>
-      </a>
-    </section>
-  );
-}
-
-function Statement() {
-  return (
-    <section className="py-28 md:py-40">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 md:grid-cols-12 md:px-10">
-        <Reveal className="md:col-span-7">
-          <p className="mb-6 font-display text-sm text-[var(--sub)]">Simple on the surface. Rigorous underneath.</p>
-          <h2 className="text-2xl font-medium leading-[1.7] tracking-[0.02em] text-[var(--ink)] md:text-4xl md:leading-[1.6]">
-            見た目はシンプルに。
-            <br />
-            中身は、正確さを徹底して。
-          </h2>
-        </Reveal>
-        <Reveal className="md:col-span-5 md:pt-14" delay={150}>
-          <p className="text-sm leading-[2.2] text-[var(--body)]">
-            比較サイトやデータベースは、載っている情報が一つ違うだけで、使う人の判断を誤らせます。
-            私たちは、公式情報や公表データを一次資料まで確かめ、数字は一か所で管理し、画面はできるだけ迷わない形に整えています。
-            少人数で、AIを道具として使いながら、長く役に立つサービスを運営しています。
-          </p>
-        </Reveal>
+    <section className="cf-band" id={id}>
+      <div className="cf-band-in">
+        <div className="cf-label">{en}<b>{ja}</b></div>
+        <div className="cf-body">{children}</div>
       </div>
     </section>
-  );
-}
-
-function LogoMarquee() {
-  const logos = PRODUCTS.map((p) => ({ src: p.logo, alt: p.title }));
-  const row = [...logos, ...logos];
-  return (
-    <section aria-label="運営サービス" className="border-y border-[var(--line)] py-10 md:py-12">
-      <div className="mx-auto mb-8 flex max-w-[1440px] items-baseline justify-between px-5 md:px-10">
-        <p className="font-display text-sm text-[var(--ink)]">Our products</p>
-        <p className="text-xs text-[var(--sub)]">運営サービス</p>
-      </div>
-      <div className="marquee overflow-hidden">
-        <ul className="marquee-track flex w-max items-center gap-16 md:gap-24">
-          {row.map((l, i) => (
-            <li key={i} aria-hidden={i >= logos.length} className="shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={l.src}
-                alt={i < logos.length ? l.alt : ""}
-                className="h-7 w-auto max-w-[180px] object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 md:h-8"
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-function Products() {
-  return (
-    <section id="products" className="scroll-mt-20 py-28 md:py-36">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <SectionLabel index="01" en="Products" ja="プロダクト" />
-        <ul className="grid gap-x-10 gap-y-20 md:grid-cols-2 md:gap-y-28">
-          {PRODUCTS.map((p, i) => (
-            <li key={p.key} className={i % 2 === 1 ? "md:mt-24" : ""}>
-              <Reveal>
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[var(--tint)]">
-                    <Image
-                      src={`/works/${p.key}.webp`}
-                      alt={`${p.title}のトップページ`}
-                      fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
-                    />
-                    {p.badge && (
-                      <span className="absolute left-4 top-4 bg-[var(--ink)] px-3 py-1 text-[11px] tracking-wider text-white">
-                        {p.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-5 grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-b border-[var(--line)] pb-5">
-                    <span className="font-display text-xs tabular-nums text-[var(--sub)]">{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className="text-lg font-medium text-[var(--ink)] md:text-xl">{p.title}</h3>
-                    <span className="flex items-center gap-1 font-display text-xs text-[var(--sub)] transition-colors group-hover:text-[var(--ink)]">
-                      View <Arrow className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-display text-xs text-[var(--sub)]">
-                    <span>{p.category}</span>
-                    <span>{p.domain}</span>
-                  </div>
-                  <p className="mt-3 text-sm font-medium text-[var(--ink)]">{p.subtitle}</p>
-                  <p className="mt-2 text-sm leading-loose text-[var(--body)]">{p.description}</p>
-                  <span className="sr-only">{p.anchor}</span>
-                </a>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-function News() {
-  return (
-    <section id="news" className="scroll-mt-20 bg-[var(--tint)] py-28 md:py-36">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <SectionLabel index="02" en="News" ja="ニュース" />
-        <Reveal>
-          <ul className="border-t border-[var(--line)]">
-            {NEWS.map((item) => (
-              <li key={item.url} className="border-b border-[var(--line)]">
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid gap-2 py-6 md:grid-cols-[10rem_1fr_auto] md:gap-8"
-                >
-                  <span className="font-display text-xs tabular-nums text-[var(--sub)] md:pt-1">{item.date}</span>
-                  <span className="text-sm leading-relaxed text-[var(--body)] transition-colors group-hover:text-[var(--ink)] md:text-[15px]">
-                    {item.title}
-                  </span>
-                  <Arrow className="hidden text-[var(--sub)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)] md:block" />
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href="https://prtimes.jp/main/html/searchrlp/company_id/47698"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center gap-2 font-display text-sm text-[var(--ink)]"
-          >
-            <span className="border-b border-current pb-0.5">プレスリリース一覧（PR TIMES）</span>
-            <Arrow />
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="scroll-mt-20 py-28 md:py-36">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <SectionLabel index="03" en="About" ja="会社概要" />
-        <div className="grid gap-12 md:grid-cols-12">
-          <Reveal className="md:col-span-5">
-            <p className="text-xl font-medium leading-[1.8] text-[var(--ink)] md:text-2xl">
-              AIを活用したプロダクトの
-              <br />
-              開発・運営を行う会社です。
-            </p>
-            <p className="mt-6 text-sm leading-[2.2] text-[var(--body)]">
-              金融・不動産・エネルギー・セキュリティなど、情報が分かりにくい領域で、比較サイトやデータベースを企画から運営まで一貫して手がけています。
-            </p>
-          </Reveal>
-          <Reveal className="md:col-span-7" delay={150}>
-            <dl className="border-t border-[var(--line)]">
-              {COMPANY.map((item) => (
-                <div key={item.label} className="grid grid-cols-[7rem_1fr] gap-4 border-b border-[var(--line)] py-4 text-sm md:grid-cols-[10rem_1fr]">
-                  <dt className="text-[var(--sub)]">{item.label}</dt>
-                  <dd className="text-[var(--ink)]">
-                    {item.value}
-                    {item.href && (
-                      <a href={item.href} className="underline underline-offset-4 decoration-[var(--line)] hover:decoration-[var(--ink)]">
-                        {item.linkText}
-                      </a>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Domains() {
-  return (
-    <section id="domains" className="scroll-mt-20 pb-28 md:pb-36">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <SectionLabel index="04" en="Domains" ja="保有ドメイン" />
-        <Reveal>
-          <div className="grid gap-10 md:grid-cols-12">
-            <p className="text-sm leading-[2.2] text-[var(--body)] md:col-span-4">
-              当社が保有しているドメインの一覧です。
-              <br />
-              取得をご検討の方は、お問い合わせください。
-              <a
-                href="mailto:info@cfac.co.jp?subject=ドメイン取得に関するお問い合わせ"
-                className="mt-6 flex items-center gap-2 font-display text-sm text-[var(--ink)]"
-              >
-                <span className="border-b border-current pb-0.5">ドメインについてお問い合わせ</span>
-                <Arrow />
-              </a>
-            </p>
-            <ul className="grid grid-cols-1 border-t border-[var(--line)] sm:grid-cols-2 md:col-span-8 lg:grid-cols-3">
-              {DOMAINS.map((d) => (
-                <li key={d} className="border-b border-[var(--line)] py-3 font-display text-sm text-[var(--ink)]">
-                  {d}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="scroll-mt-20 bg-[#111111] py-28 text-white md:py-40">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <Reveal>
-          <p className="mb-8 text-xs tracking-[0.2em] text-white/50">お問い合わせ</p>
-          <h2 className="font-display text-5xl leading-none tracking-[-0.03em] md:text-8xl">Get in touch</h2>
-          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12">
-            <p className="text-sm leading-[2.2] text-white/70 md:col-span-5">
-              サービスへの掲載、事業提携、ドメイン、取材などのご相談は、メールでお受けしています。
-              内容が固まっていない段階でも、お気軽にご連絡ください。
-            </p>
-            <div className="md:col-span-6 md:col-start-7">
-              <a
-                href="mailto:info@cfac.co.jp"
-                className="group flex items-center justify-between border-b border-white/30 pb-4 font-display text-2xl transition-colors hover:border-white md:text-4xl"
-              >
-                info@cfac.co.jp
-                <Arrow className="h-6 w-6 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-              </a>
-              <p className="mt-4 text-xs text-white/50">営業時間：平日 10:00～18:00</p>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="bg-[#111111] pb-10 text-white">
-      <div className="mx-auto max-w-[1440px] border-t border-white/15 px-5 pt-14 md:px-10">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <LogoFull height={28} color="#ffffff" />
-            <p className="mt-5 text-xs leading-loose text-white/50">
-              Common Future &amp; Company 株式会社
-              <br />
-              神奈川県逗子市小坪6-6-46
-            </p>
-          </div>
-          <div className="md:col-span-2">
-            <p className="mb-4 font-display text-xs text-white/40">Menu</p>
-            <ul className="space-y-3 text-sm">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="text-white/70 transition-colors hover:text-white">
-                    {item.ja}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="md:col-span-6">
-            <p className="mb-4 font-display text-xs text-white/40">Products</p>
-            <ul className="space-y-3 text-sm">
-              {PRODUCTS.map((p) => (
-                <li key={p.key}>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-white/70 transition-colors hover:text-white">
-                    {p.anchor}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="mt-16 flex flex-col gap-4 border-t border-white/15 pt-6 text-xs text-white/50 md:flex-row md:items-center md:justify-between">
-          <p>&copy; 2026 Common Future &amp; Co. 株式会社</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <a href="/privacy" className="hover:text-white">プライバシーポリシー</a>
-            <a href="/terms" className="hover:text-white">利用規約</a>
-            <a href="/tokushoho" className="hover:text-white">特商法表記</a>
-            <a href="#" className="font-display hover:text-white">Back to top ↑</a>
-          </div>
-        </div>
-      </div>
-    </footer>
   );
 }
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <main id="main">
-        <Hero />
-        <Statement />
-        <LogoMarquee />
-        <Products />
-        <News />
-        <About />
-        <Domains />
-        <Contact />
+      <Orbs />
+      <main id="top">
+        <Field />
+
+        <Band id="statement" en="Statement" ja="私たちについて">
+          <p className="cf-statement">Products that make<br /><em>hard choices simple.</em></p>
+          <p className="cf-lead">比べる、調べる、選ぶ。手間のかかる判断を、AIとデータで短くするプロダクトをつくっています。</p>
+          <p className="cf-lead cf-mute">比較サイトやデータベースは、載っている情報が一つ違うだけで、使う人の判断を誤らせます。私たちは、公式情報や公表データを一次資料まで確かめ、数字は一か所で管理し、画面はできるだけ迷わない形に整えています。少人数で、AIを道具として使いながら、長く役に立つサービスを運営しています。</p>
+        </Band>
+
+        <Band id="products" en="Products" ja={`運営サービス(${PRODUCTS.length})`}>
+          <ul className="cf-products">
+            {PRODUCTS.map((p) => (
+              <li key={p.key}>
+                <div className="cf-p-head">
+                  <span className="cf-p-logo"><Image src={p.logo} alt={p.title} width={120} height={32} /></span>
+                  {p.badge && <span className="cf-badge">{p.badge}</span>}
+                </div>
+                <p className="cf-p-cat">{p.category}</p>
+                <h3 className="cf-p-title">{p.title}</h3>
+                <p className="cf-p-sub">{p.subtitle}</p>
+                <p className="cf-p-desc">{p.description}</p>
+                <a className="cf-more" href={p.url} target="_blank" rel="noopener noreferrer">{p.domain} ↗</a>
+              </li>
+            ))}
+          </ul>
+        </Band>
+
+        <Band id="news" en="News" ja="ニュース">
+          <ul className="cf-news">
+            {NEWS.map((n) => (
+              <li key={n.date + n.title}><span>{n.date}</span><a href={n.url} target="_blank" rel="noopener noreferrer">{n.title}</a></li>
+            ))}
+          </ul>
+          <a className="cf-more" href="https://prtimes.jp/main/html/searchrlp/company_id/47698" target="_blank" rel="noopener noreferrer">プレスリリース一覧(PR TIMES) ↗</a>
+        </Band>
+
+        <Band id="about" en="About" ja="会社概要">
+          <p className="cf-lead">AIを活用したプロダクトの開発・運営を行う会社です。金融・不動産・エネルギー・セキュリティなど、情報が分かりにくい領域で、比較サイトやデータベースを企画から運営まで一貫して手がけています。</p>
+          <dl className="cf-facts">
+            {COMPANY.map((c) => (
+              <div key={c.label} className="cf-fact"><dt>{c.label}</dt><dd>{c.value}{c.href && <a href={c.href} target="_blank" rel="noopener noreferrer">{c.linkText}</a>}</dd></div>
+            ))}
+          </dl>
+        </Band>
+
+        <Band id="domains" en="Domains" ja="保有ドメイン">
+          <p className="cf-lead cf-mute">当社が保有しているドメインの一覧です。取得をご検討の方は、お問い合わせください。</p>
+          <ul className="cf-domains">{DOMAINS.map((d) => <li key={d}>{d}</li>)}</ul>
+          <a className="cf-more" href="mailto:info@cfac.co.jp?subject=ドメイン取得に関するお問い合わせ">ドメインについてお問い合わせ ↗</a>
+        </Band>
+
+        <Band id="contact" en="Contact" ja="お問い合わせ">
+          <p className="cf-lead">サービスへの掲載、事業提携、ドメイン、取材などのご相談は、メールでお受けしています。内容が固まっていない段階でも、お気軽にご連絡ください。</p>
+          <p className="cf-mail"><a href="mailto:info@cfac.co.jp">info@cfac.co.jp</a></p>
+          <p className="cf-mute cf-small">営業時間: 平日 10:00〜18:00</p>
+        </Band>
       </main>
-      <Footer />
+
+      <footer className="cf-footer">
+        <div className="cf-footer-in">
+          <div>
+            <LogoFull height={26} color="#111111" />
+            <p className="cf-small cf-mute">Common Future &amp; Company 株式会社<br />神奈川県逗子市小坪6-6-46</p>
+          </div>
+          <ul className="cf-footer-products">
+            {PRODUCTS.map((p) => <li key={p.key}><a href={p.url} target="_blank" rel="noopener noreferrer">{p.anchor}</a></li>)}
+          </ul>
+        </div>
+        <div className="cf-footer-bottom">
+          <p>&copy; 2026 Common Future &amp; Co. 株式会社</p>
+          <nav aria-label="規約">
+            <a href="/privacy">プライバシーポリシー</a><a href="/terms">利用規約</a><a href="/tokushoho">特商法表記</a><a href="#top">Back to top ↑</a>
+          </nav>
+        </div>
+      </footer>
     </>
   );
 }
