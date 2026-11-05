@@ -101,7 +101,7 @@ const PRODUCTS: Product[] = [
     category: "AI Service",
     subtitle: "LINEで相談できるキリストAI",
     description:
-      "コテコテ大阪弁のじーざすが、LINEで心の悩みに聖書の言葉で答えるお悩み相談サービスです。無料相談は1日2回まで、12使徒性格診断もできます。",
+      "コテコテ大阪弁のじーざすが、LINEで心の悩みに聖書の言葉で答えるお悩み相談サービスです。無料相談は1日2回までです。",
     url: "https://jesusai.jp/",
     domain: "jesusai.jp",
     anchor: "LINEで相談できるキリストAI「じーざすAI」",
