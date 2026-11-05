@@ -179,11 +179,13 @@ section[id] { scroll-margin-top: 80px; }
 .cf-card-name { display: flex; align-items: center; gap: 8px; padding: 12px 4px 14px; color: #fff; font-family: var(--display); font-weight: 600; font-size: clamp(14px, 1.2vw, 18px); letter-spacing: -0.01em; line-height: 1.2; }
 .cf-card-name i, .cf-plist-name i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
 .cf-ring-label {
-  display: flex; justify-content: center; align-items: center; gap: clamp(60px, 14vw, 220px);
-  margin-top: 4px; font-family: var(--display); font-weight: 600; font-size: clamp(22px, 2.4vw, 34px); color: #666; letter-spacing: -0.01em;
+  display: flex; justify-content: center; align-items: center; gap: 0.6em;
+  margin: 4px auto 0; padding: 0 16px; max-width: 100%;
+  font-family: var(--display); font-weight: 600; font-size: clamp(20px, 2.4vw, 34px); color: #666; letter-spacing: -0.01em;
 }
-.cf-ring-label span { font-weight: 300; font-size: 1.3em; }
-.cf-ring-label b { position: absolute; left: 50%; transform: translateX(-50%); font-weight: 600; white-space: nowrap; animation: cf-fade 0.5s ease; }
+/* 名前の長さに合わせてカッコが広がる(スマホで長い名前がはみ出さない) */
+.cf-ring-label span { flex: none; font-weight: 300; font-size: 1.3em; line-height: 1; }
+.cf-ring-label b { min-width: 0; padding: 0 clamp(4px, 4vw, 72px); font-weight: 600; text-align: center; line-height: 1.3; overflow-wrap: anywhere; animation: cf-fade 0.5s ease; }
 @keyframes cf-fade { from { opacity: 0; } to { opacity: 1; } }
 
 .cf-products .cf-split { padding-top: clamp(90px, 11vw, 150px); }
