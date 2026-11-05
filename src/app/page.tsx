@@ -34,18 +34,17 @@ const PRODUCTS: Product[] = [
     anchor: "ファクタリング会社の比較サイト「ファクット」",
   },
   {
-    // 2026-10-24 ユーザー指示: 運営サービスに CASH NOW を追加 (2026-10-25 からメンテナンス中の表記に)
+    // 2026-10-24 ユーザー指示: 運営サービスに CASH NOW を追加 (2026-11-05 稼働中につきメンテナンス表記を削除)
     key: "cashnow",
     logo: "/logos/cashnow.png",
     title: "CASH NOW",
     category: "Fintech Service",
     subtitle: "法人・個人事業主向けのファクタリングサービス",
     description:
-      "請求書（売掛金）を買い取り、入金前の資金化を支援するサービスです。現在、システムメンテナンスのため新規のお申し込みを一時停止しています。",
+      "請求書（売掛金）を買い取り、入金前の資金化を支援するサービスです。お申し込みはWebで受け付け、担当者が審査します。最短即日で資金化できます。",
     url: "https://cash.co.jp/",
     domain: "cash.co.jp",
     anchor: "ファクタリングサービス「CASH NOW」",
-    badge: "メンテナンス中",
   },
   {
     key: "waketto",
