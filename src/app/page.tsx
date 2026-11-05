@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { LogoFull } from "./logo";
+import { Logo } from "./logo";
 
 /* ------------------------------------------------------------------ */
 /* data                                                                */
@@ -173,294 +173,406 @@ const COMPANY: { label: string; value: string; href?: string; linkText?: string 
   { label: "事業内容", value: "AIを活用したプロダクトの開発・運営" },
 ];
 
-const NAV_ITEMS = [
-  { en: "Products", ja: "プロダクト", href: "#products", count: PRODUCTS.length },
+/* ------------------------------------------------------------------ */
+/* palette: one color per service                                      */
+/* ------------------------------------------------------------------ */
+
+const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff"];
+const COLOR_BY_KEY: Record<string, string> = Object.fromEntries(PRODUCTS.map((p, i) => [p.key, COLORS[i % COLORS.length]]));
+
+/* ------------------------------------------------------------------ */
+/* block wordmark: C O M M O N built from rounded blocks               */
+/* ------------------------------------------------------------------ */
+
+const U = 100; // one cell
+const LETTERS: { x: number; w: number; body: React.ReactNode }[] = (() => {
+  const xs = [0, 215, 430, 745, 1060, 1275];
+  const C = (x: number) => (
+    <g key="c">
+      <rect x={x} y={0} width={2 * U} height={3 * U} rx={U} />
+      <rect x={x + U} y={U} width={U + 2} height={U} fill="var(--paper)" />
+    </g>
+  );
+  const O = (x: number, k: string) => <rect key={k} x={x} y={0} width={2 * U} height={3 * U} rx={U * 0.72} />;
+  const M = (x: number, k: string) => (
+    <g key={k}>
+      <rect x={x} y={0} width={U} height={3 * U} rx={U / 2} />
+      <rect x={x + U} y={0} width={U} height={2 * U} rx={U / 2} />
+      <rect x={x + 2 * U} y={0} width={U} height={3 * U} rx={U / 2} />
+      <rect x={x + U / 2} y={U / 2} width={2 * U} height={U} />
+      <rect x={x} y={1.5 * U} width={U / 2} height={1.5 * U} />
+      <rect x={x + 2.5 * U} y={1.5 * U} width={U / 2} height={1.5 * U} />
+    </g>
+  );
+  const N = (x: number) => (
+    <g key="n">
+      <rect x={x} y={0} width={U} height={3 * U} rx={U / 2} />
+      <rect x={x + U} y={U / 2} width={U} height={2 * U} rx={U / 2} />
+      <rect x={x + 2 * U} y={0} width={U} height={3 * U} rx={U / 2} />
+      <rect x={x + U / 2} y={0} width={U} height={1.5 * U} rx={0} />
+      <rect x={x + 1.5 * U} y={1.5 * U} width={U} height={1.5 * U} />
+      <rect x={x} y={1.5 * U} width={U / 2} height={1.5 * U} />
+      <rect x={x + 2.5 * U} y={0} width={U / 2} height={1.5 * U} />
+    </g>
+  );
+  return [
+    { x: xs[0], w: 200, body: C(xs[0]) },
+    { x: xs[1], w: 200, body: O(xs[1], "o1") },
+    { x: xs[2], w: 300, body: M(xs[2], "m1") },
+    { x: xs[3], w: 300, body: M(xs[3], "m2") },
+    { x: xs[4], w: 200, body: O(xs[4], "o2") },
+    { x: xs[5], w: 300, body: N(xs[5]) },
+  ];
+})();
+
+// [cx, cy, colorIndex]
+const DOTS: [number, number, number][] = [
+  [50, 50, 0], [150, 150, 0],
+  [265, 250, 1], [365, 50, 1],
+  [480, 50, 2], [580, 250, 2], [680, 50, 2],
+  [795, 50, 3], [895, 250, 3], [995, 250, 3],
+  [1110, 50, 4], [1210, 250, 4],
+  [1325, 250, 5], [1425, 50, 5], [1525, 250, 5],
+];
+
+function Wordmark({ dots = true, className = "" }: { dots?: boolean; className?: string }) {
+  const ref = useRef<SVGSVGElement>(null);
+  const [landed, setLanded] = useState(false);
+  const [start] = useState(() =>
+    DOTS.map((_, i) => {
+      // deterministic scatter (no hydration mismatch): above and around the mark
+      const a = (i * 137.5 * Math.PI) / 180;
+      return [Math.cos(a) * (260 + (i % 4) * 90), -260 - ((i * 53) % 260) + Math.sin(a) * 80];
+    }),
+  );
+  useEffect(() => {
+    if (!dots) return;
+    const el = ref.current; if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { const t = setTimeout(() => setLanded(true), 0); return () => clearTimeout(t); }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setTimeout(() => setLanded(true), 350); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [dots]);
+  return (
+    <svg ref={ref} className={`cf-wm ${className}${landed ? " landed" : ""}`} viewBox="-2 -2 1579 304" role="img" aria-label="COMMON">
+      <g fill="var(--ink)">{LETTERS.map((l) => l.body)}</g>
+      {dots &&
+        DOTS.map(([cx, cy, c], i) => (
+          <circle
+            key={i}
+            className="cf-dot"
+            cx={cx}
+            cy={cy}
+            r={U / 2}
+            fill={COLORS[c]}
+            style={{
+              ["--sx" as string]: `${start[i][0]}px`,
+              ["--sy" as string]: `${start[i][1]}px`,
+              transitionDelay: `${(i % 7) * 70 + Math.floor(i / 7) * 40}ms`,
+            }}
+          />
+        ))}
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* header + menu                                                       */
+/* ------------------------------------------------------------------ */
+
+const MENU = [
+  { en: "Company", ja: "私たちについて", href: "#company" },
+  { en: "Products", ja: "運営サービス", href: "#products" },
   { en: "News", ja: "ニュース", href: "#news" },
   { en: "About", ja: "会社概要", href: "#about" },
   { en: "Domains", ja: "保有ドメイン", href: "#domains" },
   { en: "Contact", ja: "お問い合わせ", href: "#contact" },
 ];
 
-/* ------------------------------------------------------------------ */
-/* ------------------------------------------------------------------ */
-/* wireframe objects (canvas, ink lines on white)                      */
-/* ------------------------------------------------------------------ */
-
-type Geo = { v: number[][]; e: [number, number][]; s: number; tilt?: number; rotZ?: number };
-const TAU = Math.PI * 2;
-const SHAPES: Record<string, () => Geo> = {
-  stair() {
-    const v: number[][] = [], e: [number, number][] = [], n = 5, w = 0.5, prof: number[][] = [];
-    for (let i = 0; i < n; i++) { const x = -1 + (i * 2) / n, x2 = -1 + ((i + 1) * 2) / n, y = -1 + ((i + 1) * 2) / n; if (i === 0) prof.push([x, -1]); prof.push([x, y], [x2, y]); }
-    prof.push([1, -1]);
-    [-w, w].forEach((z) => prof.forEach(([x, y]) => v.push([x, -y * 0.9, z])));
-    const m = prof.length;
-    for (let i = 0; i < m; i++) e.push([i, (i + 1) % m], [i + m, ((i + 1) % m) + m], [i, i + m]);
-    return { v, e, s: 0.8 };
-  },
-  torus() {
-    const v: number[][] = [], e: [number, number][] = [], U = 36, V = 12;
-    for (let i = 0; i < U; i++) for (let j = 0; j < V; j++) {
-      const u = (i / U) * TAU, w = (j / V) * TAU;
-      v.push([(1 + 0.36 * Math.cos(w)) * Math.cos(u), 0.36 * Math.sin(w), (1 + 0.36 * Math.cos(w)) * Math.sin(u)]);
-      const k = i * V + j; e.push([k, i * V + ((j + 1) % V)]); if (j % 2 === 0) e.push([k, ((i + 1) % U) * V + j]);
-    }
-    return { v, e, s: 0.78, tilt: 0.9 };
-  },
-  globe() {
-    const v: number[][] = [], e: [number, number][] = [], L = 9, M = 20;
-    for (let i = 1; i < L; i++) for (let j = 0; j < M; j++) {
-      const p = (i / L) * Math.PI, t = (j / M) * TAU;
-      v.push([Math.sin(p) * Math.cos(t), Math.cos(p), Math.sin(p) * Math.sin(t)]);
-      const k = (i - 1) * M + j; e.push([k, (i - 1) * M + ((j + 1) % M)]); if (i < L - 1) e.push([k, i * M + j]);
-    }
-    return { v, e, s: 0.9, tilt: 0.35 };
-  },
-  wave() {
-    const v: number[][] = [], e: [number, number][] = [], X = 26, Z = 10;
-    for (let i = 0; i < X; i++) for (let j = 0; j < Z; j++) {
-      v.push([-1.6 + (i * 3.2) / (X - 1), 0, -0.6 + (j * 1.2) / (Z - 1)]);
-      const k = i * Z + j; if (i < X - 1) e.push([k, k + Z]); if (j < Z - 1) e.push([k, k + 1]);
-    }
-    return { v, e, s: 0.62, tilt: 0.55 };
-  },
-};
-
-function WireObject({ shape, seed = 0 }: { shape: keyof typeof SHAPES; seed?: number }) {
-  const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const cv = ref.current; if (!cv) return;
-    const ctx = cv.getContext("2d"); if (!ctx) return;
-    const geo = SHAPES[shape]();
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const d = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0, raf = 0, visible = true;
-    const resize = () => { w = cv.offsetWidth; h = cv.offsetHeight; cv.width = Math.round(w * d); cv.height = Math.round(h * d); ctx.setTransform(d, 0, 0, d, 0, 0); };
-    resize();
-    const ro = new ResizeObserver(resize); ro.observe(cv);
-    const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible && !reduce) { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); } });
-    io.observe(cv);
-    function frame(ms: number) {
-      const t = ms / 1000;
-      ctx!.clearRect(0, 0, w, h);
-      if (shape === "wave") { const X = 26, Z = 10; for (let i = 0; i < X; i++) for (let j = 0; j < Z; j++) geo.v[i * Z + j][1] = Math.sin(i * 0.45 + t * 0.9) * 0.18 + Math.cos(j * 0.7 + t * 0.6) * 0.1; }
-      const a = seed * 1.7 + t * 0.2, tx = geo.tilt ?? 0.45, rz = geo.rotZ ?? 0;
-      const ca = Math.cos(a), sa = Math.sin(a), cx = Math.cos(tx), sx = Math.sin(tx), cz = Math.cos(rz), sz = Math.sin(rz);
-      const S = Math.min(w, h) * 0.42 * geo.s, ox = w / 2, oy = h / 2;
-      const P = geo.v.map(([x, y, z]) => { const x1 = x * cz - y * sz, y1 = x * sz + y * cz; const x2 = x1 * ca + z * sa, z2 = -x1 * sa + z * ca; const y3 = y1 * cx - z2 * sx, z3 = y1 * sx + z2 * cx; const f = 3.2 / (3.2 + z3); return [ox + x2 * S * f, oy + y3 * S * f, z3]; });
-      ctx!.lineWidth = 1;
-      for (const [i, j] of geo.e) {
-        const p = P[i], q = P[j], depth = ((p[2] + q[2]) / 2 + 1.4) / 2.8, al = Math.max(0.05, Math.min(0.85, 0.72 - depth * 0.55));
-        ctx!.strokeStyle = `rgba(17,17,17,${al.toFixed(3)})`; ctx!.beginPath(); ctx!.moveTo(p[0], p[1]); ctx!.lineTo(q[0], q[1]); ctx!.stroke();
-      }
-      if (!reduce && visible) raf = requestAnimationFrame(frame);
-    }
-    raf = requestAnimationFrame(frame);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); };
-  }, [shape, seed]);
-  return <canvas ref={ref} className="cf-wire" aria-hidden="true" />;
-}
-
-/* ------------------------------------------------------------------ */
-/* hero: a ruled field of cards that turn over one at a time           */
-/* ------------------------------------------------------------------ */
-
-type Cell = { type: "product"; key: string; wide?: boolean } | { type: "object"; shape: keyof typeof SHAPES; wide?: boolean };
-const CELLS: Cell[] = [
-  { type: "product", key: "facutto" },
-  { type: "product", key: "sds" },
-  { type: "object", shape: "torus", wide: true },
-  { type: "product", key: "waketto", wide: true },
-  { type: "product", key: "secutto" },
-  { type: "object", shape: "globe" },
-  { type: "object", shape: "stair" },
-  { type: "product", key: "first90" },
-  { type: "product", key: "cashnow", wide: true },
-];
-const PRODUCT_BY_KEY = Object.fromEntries(PRODUCTS.map((p) => [p.key, p]));
-const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-function CardBack() {
-  return (
-    <span className="cf-back" aria-hidden="true">
-      <span className="cf-back-mark">
-        <svg viewBox="0 0 100 100" fill="none"><path d="M68 22A32 32 0 1 0 68 78" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /><path d="M68 22L74 16" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /></svg>
-      </span>
-    </span>
-  );
-}
-
-function Field() {
-  const productIdx = CELLS.map((c, i) => (c.type === "product" ? i : -1)).filter((i) => i >= 0);
-  const [open, setOpen] = useState<Record<number, boolean>>({});
-  const [tease, setTease] = useState<Record<number, boolean>>({});
-  const set = (fn: typeof setOpen, i: number, v: boolean) => fn((o) => ({ ...o, [i]: v }));
-
-  const reveal = useCallback(async (i: number) => {
-    set(setTease, i, true); await wait(620); set(setTease, i, false); set(setOpen, i, true); await wait(1100);
-  }, []);
-
-  useEffect(() => {
-    let alive = true;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOpen(Object.fromEntries(productIdx.map((i) => [i, true]))); return; }
-    (async () => {
-      await wait(500);
-      const order = [...productIdx].sort(() => Math.random() - 0.5);
-      for (const i of order) { if (!alive) return; reveal(i); await wait(520); }
-      while (alive) {
-        await wait(6500);
-        if (!alive || document.hidden) continue;
-        const i = productIdx[Math.floor(Math.random() * productIdx.length)];
-        set(setOpen, i, false); await wait(1100); if (!alive) return; await reveal(i);
-      }
-    })();
-    return () => { alive = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <section className="cf-field" aria-label="Common Future & Company の運営サービス">
-      <div className="cf-grid">
-        {CELLS.map((c, i) => {
-          if (c.type === "object") return <div key={i} className={`cf-cell${c.wide ? " wide" : ""}`}><WireObject shape={c.shape} seed={i} /></div>;
-          const p = PRODUCT_BY_KEY[c.key];
-          return (
-            <div key={i} className={`cf-cell${c.wide ? " wide" : ""}${tease[i] ? " tease" : ""}`}>
-              <a href={p.url} target="_blank" rel="noopener noreferrer" className={`cf-card${open[i] ? " open" : ""}`} aria-label={`${p.anchor}(新しいタブで開く)`}>
-                <span className="cf-inner">
-                  <CardBack />
-                  <span className="cf-front">
-                    <Image src={`/works/${p.key}.webp`} alt="" fill unoptimized className="cf-shot" />
-                    <span className="cf-caption"><b>{p.title}</b><span>{p.domain}</span></span>
-                  </span>
-                </span>
-              </a>
-            </div>
-          );
-        })}
-      </div>
-      <div className="cf-wordmark" aria-hidden="true"><span>Common Future</span></div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* round controls                                                      */
-/* ------------------------------------------------------------------ */
-
-function Orbs() {
+function Header() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+  useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; }, [open]);
   return (
     <>
-      <a href="#top" className="cf-orb cf-orb-mark" aria-label="Common Future & Company トップへ">
-        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M68 22A32 32 0 1 0 68 78" stroke="currentColor" strokeWidth="7" strokeLinecap="round" /><path d="M68 22L74 16" stroke="currentColor" strokeWidth="7" strokeLinecap="round" /></svg>
-      </a>
-      <button type="button" className="cf-orb cf-orb-info" aria-expanded={open} aria-controls="cf-panel" onClick={() => setOpen((o) => !o)}>{open ? "×" : "?"}</button>
-      <div id="cf-panel" className={`cf-panel${open ? " show" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setOpen(false); }}>
-        <p>Common Future &amp; Company 株式会社は、比べる・調べる・選ぶといった手間のかかる判断を、AIとデータで短くするプロダクトを企画から運営まで手がけています。</p>
-        <nav aria-label="ページ内">{NAV_ITEMS.map((n) => <a key={n.href} href={n.href}>{n.en}</a>)}</nav>
+      <header className="cf-header">
+        <a href="#top" className="cf-brand" aria-label="Common Future & Company トップへ">
+          <Logo size={30} color="currentColor" weight={9} />
+          <span>COMMON FUTURE</span>
+        </a>
+        <button type="button" className={`cf-burger${open ? " open" : ""}`} aria-expanded={open} aria-controls="cf-menu" aria-label={open ? "メニューを閉じる" : "メニューを開く"} onClick={() => setOpen((o) => !o)}>
+          <i /><i /><i />
+        </button>
+      </header>
+      <div id="cf-menu" className={`cf-menu${open ? " show" : ""}`} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setOpen(false); }}>
+        <nav aria-label="メニュー">
+          {MENU.map((m, i) => (
+            <a key={m.href} href={m.href} style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}>
+              <span className="en">{m.en}<b style={{ color: COLORS[i % COLORS.length] }}>.</b></span><span className="ja">{m.ja}</span>
+            </a>
+          ))}
+        </nav>
+        <p className="cf-menu-foot">Common Future &amp; Company 株式会社<br />info@cfac.co.jp</p>
       </div>
     </>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* bands                                                               */
+/* parts                                                               */
 /* ------------------------------------------------------------------ */
 
-function Band({ id, en, ja, children }: { id: string; en: string; ja: string; children: React.ReactNode }) {
+function Label({ children }: { children: React.ReactNode }) {
+  return <p className="cf-label">( {children} )</p>;
+}
+
+function More({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
   return (
-    <section className="cf-band" id={id}>
-      <div className="cf-band-in">
-        <div className="cf-label">{en}<b>{ja}</b></div>
-        <div className="cf-body">{children}</div>
-      </div>
-    </section>
+    <a className="cf-more" href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+      <span className="cf-more-dot" aria-hidden="true">
+        <svg viewBox="0 0 16 16" width="12" height="12"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </span>
+      {children}
+    </a>
   );
 }
+
+function Reveal({ children, className = "", as: Tag = "div" }: { children: React.ReactNode; className?: string; as?: "div" | "li" | "section" }) {
+  const ref = useRef<HTMLElement>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setOn(true); io.disconnect(); } }, { rootMargin: "0px 0px -8% 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return <Tag ref={ref as never} className={`cf-rv${on ? " on" : ""} ${className}`}>{children}</Tag>;
+}
+
+/* ------------------------------------------------------------------ */
+/* curved ring of service cards                                        */
+/* ------------------------------------------------------------------ */
+
+const RING = [...PRODUCTS, ...PRODUCTS];
+
+function Ring() {
+  const ringRef = useRef<HTMLDivElement>(null);
+  const [front, setFront] = useState(0);
+  useEffect(() => {
+    const ring = ringRef.current; if (!ring) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const step = 360 / RING.length;
+    const vel = reduce ? 0 : -0.06;
+    let angle = 0, raf = 0, last = performance.now(), visible = true;
+    let drag: { x: number; a: number } | null = null, lastFront = -1;
+    const radius = () => Math.round(ring.offsetWidth / (2 * Math.tan(Math.PI / RING.length)) * 1.02);
+    let R = radius();
+    const place = () => {
+      R = radius();
+      Array.from(ring.children).forEach((c, i) => { (c as HTMLElement).style.transform = `rotateY(${i * step}deg) translateZ(${R}px)`; });
+    };
+    place();
+    const apply = () => {
+      ring.style.transform = `translateZ(${-R}px) rotateY(${angle}deg)`;
+      const f = ((Math.round(-angle / step) % RING.length) + RING.length) % RING.length;
+      if (f !== lastFront) { lastFront = f; setFront(f % PRODUCTS.length); }
+    };
+    const tick = (t: number) => {
+      const dt = Math.min(64, t - last); last = t;
+      if (!drag) angle += vel * dt * 0.1;
+      apply();
+      if (visible) raf = requestAnimationFrame(tick);
+    };
+    apply();
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); } });
+    io.observe(ring);
+    const ro = new ResizeObserver(() => { place(); apply(); });
+    ro.observe(ring);
+    const stage = ring.parentElement!;
+    let moved = false;
+    const down = (e: PointerEvent) => { drag = { x: e.clientX, a: angle }; moved = false; };
+    const move = (e: PointerEvent) => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 4) moved = true; angle = drag.a + dx * 0.12; apply(); };
+    const up = () => { drag = null; };
+    const click = (e: MouseEvent) => { if (moved) { e.preventDefault(); e.stopPropagation(); } };
+    stage.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    stage.addEventListener("click", click, true);
+    return () => {
+      cancelAnimationFrame(raf); io.disconnect(); ro.disconnect();
+      stage.removeEventListener("pointerdown", down); window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); stage.removeEventListener("click", click, true);
+    };
+  }, []);
+  const p = PRODUCTS[front];
+  return (
+    <div className="cf-ring-wrap">
+      <div className="cf-stage">
+        <div className="cf-ring" ref={ringRef}>
+          {RING.map((r, i) => (
+            <a key={i} className="cf-card" href={r.url} target="_blank" rel="noopener noreferrer" tabIndex={i < PRODUCTS.length ? 0 : -1} aria-hidden={i >= PRODUCTS.length} aria-label={`${r.anchor}(新しいタブで開く)`} draggable={false}>
+              <span className="cf-card-img"><Image src={`/works/${r.key}.webp`} alt="" fill unoptimized sizes="360px" draggable={false} /></span>
+              <span className="cf-card-name"><i style={{ background: COLOR_BY_KEY[r.key] }} />{r.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <p className="cf-ring-label" aria-live="polite"><span>(</span><b key={p.key}>{p.title}</b><span>)</span></p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* page                                                                */
+/* ------------------------------------------------------------------ */
+
+const newsTag = (url: string) => (url.includes("prtimes.jp") ? "Press" : "Product");
 
 export default function Home() {
   return (
     <>
-      <Orbs />
+      <Header />
       <main id="top">
-        <Field />
+        {/* hero */}
+        <section className="cf-hero">
+          <h1 className="cf-tagline">Make choices simple.<span className="sr-only"> Common Future &amp; Company 株式会社</span></h1>
+          <p className="cf-sub">比べる、調べる、選ぶ。<br />その手間を、AIとデータで短くする</p>
+          <Wordmark />
+          <a href="#company" className="cf-scroll">Scroll Down</a>
+        </section>
 
-        <Band id="statement" en="Statement" ja="私たちについて">
-          <p className="cf-statement">Products that make<br /><em>hard choices simple.</em></p>
-          <p className="cf-lead">比べる、調べる、選ぶ。手間のかかる判断を、AIとデータで短くするプロダクトをつくっています。</p>
-          <p className="cf-lead cf-mute">比較サイトやデータベースは、載っている情報が一つ違うだけで、使う人の判断を誤らせます。私たちは、公式情報や公表データを一次資料まで確かめ、数字は一か所で管理し、画面はできるだけ迷わない形に整えています。少人数で、AIを道具として使いながら、長く役に立つサービスを運営しています。</p>
-        </Band>
+        {/* company statement */}
+        <section id="company" className="cf-statement">
+          <Reveal>
+            <Label>Company</Label>
+            <h2>比べる、調べる、選ぶ。<br />その手間を、短くする</h2>
+            <div className="cf-statement-body">
+              <p>Common Future &amp; Company は、<br />比較サイトやデータベースを企画から運営まで手がけています。</p>
+              <p>載っている情報が一つ違うだけで、使う人の判断は誤ります。<br />だから私たちは、公式情報や公表データを一次資料まで確かめ、<br />数字は一か所で管理し、画面は迷わない形に整えます。</p>
+              <p>少人数で、AIを道具として使いながら、<br />長く役に立つサービスを運営しています。</p>
+            </div>
+            <More href="#about">Learn More</More>
+          </Reveal>
+        </section>
 
-        <Band id="products" en="Products" ja={`運営サービス(${PRODUCTS.length})`}>
-          <ul className="cf-products">
-            {PRODUCTS.map((p) => (
-              <li key={p.key}>
-                <div className="cf-p-head">
-                  <span className="cf-p-logo"><Image src={p.logo} alt={p.title} width={120} height={32} /></span>
-                  {p.badge && <span className="cf-badge">{p.badge}</span>}
-                </div>
-                <p className="cf-p-cat">{p.category}</p>
-                <h3 className="cf-p-title">{p.title}</h3>
-                <p className="cf-p-sub">{p.subtitle}</p>
-                <p className="cf-p-desc">{p.description}</p>
-                <a className="cf-more" href={p.url} target="_blank" rel="noopener noreferrer">{p.domain} ↗</a>
+        {/* products */}
+        <section id="products" className="cf-products">
+          <Reveal className="cf-count">
+            <p><b>{PRODUCTS.length}</b> Products</p>
+            <span>金融・不動産・エネルギー・セキュリティ・健康の領域で運営中</span>
+          </Reveal>
+          <Ring />
+          <div className="cf-split">
+            <div className="cf-side">
+              <Label>Products</Label>
+              <p className="cf-side-note">カードを押すと、各サービスのサイトが開きます。</p>
+            </div>
+            <ul className="cf-plist">
+              {PRODUCTS.map((p) => (
+                <Reveal as="li" key={p.key}>
+                  <a href={p.url} target="_blank" rel="noopener noreferrer">
+                    <span className="cf-plist-name"><i style={{ background: COLOR_BY_KEY[p.key] }} />{p.title}</span>
+                    <span className="cf-pill">{p.category}</span>
+                    <span className="cf-plist-body">
+                      <b>{p.subtitle}{p.badge && <em>{p.badge}</em>}</b>
+                      <span>{p.description}</span>
+                    </span>
+                    <span className="cf-plist-domain">{p.domain} ↗</span>
+                  </a>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* news */}
+        <section id="news" className="cf-split cf-sec">
+          <div className="cf-side">
+            <Label>News</Label>
+            <More href="https://prtimes.jp/main/html/searchrlp/company_id/47698" external>Learn More</More>
+          </div>
+          <ul className="cf-news">
+            {NEWS.map((n) => (
+              <li key={n.date + n.title}>
+                <a href={n.url} target="_blank" rel="noopener noreferrer">
+                  <span className="d">{n.date.replaceAll(".", "/")}</span>
+                  <span className="cf-pill dark">{newsTag(n.url)}</span>
+                  <span className="t">{n.title}</span>
+                </a>
               </li>
             ))}
           </ul>
-        </Band>
+        </section>
 
-        <Band id="news" en="News" ja="ニュース">
-          <ul className="cf-news">
-            {NEWS.map((n) => (
-              <li key={n.date + n.title}><span>{n.date}</span><a href={n.url} target="_blank" rel="noopener noreferrer">{n.title}</a></li>
-            ))}
-          </ul>
-          <a className="cf-more" href="https://prtimes.jp/main/html/searchrlp/company_id/47698" target="_blank" rel="noopener noreferrer">プレスリリース一覧(PR TIMES) ↗</a>
-        </Band>
+        {/* about */}
+        <section id="about" className="cf-split cf-sec">
+          <div className="cf-side">
+            <Label>About</Label>
+            <p className="cf-side-note">会社概要</p>
+          </div>
+          <div>
+            <p className="cf-about-lead">AIを活用したプロダクトの開発・運営を行う会社です。金融・不動産・エネルギー・セキュリティなど、情報が分かりにくい領域で、比較サイトやデータベースを企画から運営まで一貫して手がけています。</p>
+            <dl className="cf-facts">
+              {COMPANY.map((c) => (
+                <div key={c.label}><dt>{c.label}</dt><dd>{c.value}{c.href && <a href={c.href} target="_blank" rel="noopener noreferrer">{c.linkText}</a>}</dd></div>
+              ))}
+            </dl>
+          </div>
+        </section>
 
-        <Band id="about" en="About" ja="会社概要">
-          <p className="cf-lead">AIを活用したプロダクトの開発・運営を行う会社です。金融・不動産・エネルギー・セキュリティなど、情報が分かりにくい領域で、比較サイトやデータベースを企画から運営まで一貫して手がけています。</p>
-          <dl className="cf-facts">
-            {COMPANY.map((c) => (
-              <div key={c.label} className="cf-fact"><dt>{c.label}</dt><dd>{c.value}{c.href && <a href={c.href} target="_blank" rel="noopener noreferrer">{c.linkText}</a>}</dd></div>
-            ))}
-          </dl>
-        </Band>
+        {/* domains */}
+        <section id="domains" className="cf-split cf-sec">
+          <div className="cf-side">
+            <Label>Domains</Label>
+            <p className="cf-side-note">保有ドメイン</p>
+            <More href="mailto:info@cfac.co.jp?subject=ドメイン取得に関するお問い合わせ">Contact</More>
+          </div>
+          <div>
+            <p className="cf-about-lead">当社が保有しているドメインの一覧です。取得をご検討の方は、お問い合わせください。</p>
+            <ul className="cf-domains">{DOMAINS.map((d) => <li key={d}>{d}</li>)}</ul>
+          </div>
+        </section>
 
-        <Band id="domains" en="Domains" ja="保有ドメイン">
-          <p className="cf-lead cf-mute">当社が保有しているドメインの一覧です。取得をご検討の方は、お問い合わせください。</p>
-          <ul className="cf-domains">{DOMAINS.map((d) => <li key={d}>{d}</li>)}</ul>
-          <a className="cf-more" href="mailto:info@cfac.co.jp?subject=ドメイン取得に関するお問い合わせ">ドメインについてお問い合わせ ↗</a>
-        </Band>
-
-        <Band id="contact" en="Contact" ja="お問い合わせ">
-          <p className="cf-lead">サービスへの掲載、事業提携、ドメイン、取材などのご相談は、メールでお受けしています。内容が固まっていない段階でも、お気軽にご連絡ください。</p>
-          <p className="cf-mail"><a href="mailto:info@cfac.co.jp">info@cfac.co.jp</a></p>
-          <p className="cf-mute cf-small">営業時間: 平日 10:00〜18:00</p>
-        </Band>
+        {/* contact */}
+        <section id="contact" className="cf-contact">
+          <Reveal>
+            <Label>Contact</Label>
+            <h2>Let&rsquo;s talk.</h2>
+            <p>サービスへの掲載、事業提携、ドメイン、取材などのご相談は、メールでお受けしています。<br />内容が固まっていない段階でも、お気軽にご連絡ください。</p>
+            <a className="cf-mail" href="mailto:info@cfac.co.jp">
+              <span className="cf-more-dot" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+              info@cfac.co.jp
+            </a>
+            <p className="cf-hours">営業時間: 平日 10:00〜18:00</p>
+          </Reveal>
+        </section>
       </main>
 
       <footer className="cf-footer">
-        <div className="cf-footer-in">
-          <div>
-            <LogoFull height={26} color="#111111" />
-            <p className="cf-small cf-mute">Common Future &amp; Company 株式会社<br />神奈川県逗子市小坪6-6-46</p>
+        <div className="cf-strip" aria-hidden="true">
+          <div className="cf-strip-track">
+            {Array.from({ length: 12 }).map((_, i) => <span key={i}>Make choices simple.</span>)}
           </div>
-          <ul className="cf-footer-products">
-            {PRODUCTS.map((p) => <li key={p.key}><a href={p.url} target="_blank" rel="noopener noreferrer">{p.anchor}</a></li>)}
-          </ul>
         </div>
-        <div className="cf-footer-bottom">
-          <p>&copy; 2026 Common Future &amp; Co. 株式会社</p>
-          <nav aria-label="規約">
-            <a href="/privacy">プライバシーポリシー</a><a href="/terms">利用規約</a><a href="/tokushoho">特商法表記</a><a href="#top">Back to top ↑</a>
+        <div className="cf-footer-mark"><Wordmark dots={false} /></div>
+        <div className="cf-footer-in">
+          <a href="#top" className="cf-brand big" aria-label="トップへ戻る">
+            <Logo size={44} color="currentColor" weight={9} />
+            <span>COMMON FUTURE</span>
+          </a>
+          <nav className="cf-footer-nav" aria-label="フッター">
+            {MENU.filter((m) => m.href !== "#domains").map((m) => <a key={m.href} href={m.href}><b>{m.en}</b><span>{m.ja}</span></a>)}
           </nav>
+        </div>
+        <ul className="cf-footer-products">
+          {PRODUCTS.map((p) => <li key={p.key}><a href={p.url} target="_blank" rel="noopener noreferrer">{p.anchor}</a></li>)}
+        </ul>
+        <div className="cf-footer-bottom">
+          <p>&copy; 2026 Common Future &amp; Co. 株式会社 / 神奈川県逗子市小坪6-6-46</p>
+          <nav aria-label="規約"><a href="/privacy">Privacy Policy</a><a href="/terms">利用規約</a><a href="/tokushoho">特商法表記</a></nav>
         </div>
       </footer>
     </>

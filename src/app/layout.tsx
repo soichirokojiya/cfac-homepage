@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Inter_Tight } from "next/font/google";
+import { Noto_Sans_JP, Poppins, Oswald } from "next/font/google";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
+  variable: "--font-jp",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "500", "700"],
 });
 
-const interTight = Inter_Tight({
+const poppins = Poppins({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const oswald = Oswald({
+  variable: "--font-condensed",
+  subsets: ["latin"],
+  weight: ["500"],
 });
 
 export const metadata: Metadata = {
@@ -54,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoSansJP.variable} ${interTight.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--font-noto-sans-jp), sans-serif" }}>
+    <html lang="ja" className={`${notoSansJP.variable} ${poppins.variable} ${oswald.variable} antialiased`}>
+      <body>
         {children}
       </body>
     </html>

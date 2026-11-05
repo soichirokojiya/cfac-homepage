@@ -1,4 +1,4 @@
-export function Logo({ size = 40, color = "currentColor" }: { size?: number; color?: string }) {
+export function Logo({ size = 40, color = "currentColor", weight = 5 }: { size?: number; color?: string; weight?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Concept A: 解放 — The Release
@@ -7,13 +7,13 @@ export function Logo({ size = 40, color = "currentColor" }: { size?: number; col
       <path
         d="M68 22A32 32 0 1 0 68 78"
         stroke={color}
-        strokeWidth="5"
+        strokeWidth={weight}
         strokeLinecap="round"
       />
       <path
         d="M68 22L74 16"
         stroke={color}
-        strokeWidth="5"
+        strokeWidth={weight}
         strokeLinecap="round"
       />
     </svg>
