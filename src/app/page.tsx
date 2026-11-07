@@ -59,6 +59,19 @@ const PRODUCTS: Product[] = [
     anchor: "訳あり不動産の買取業者比較サイト「ワケット」",
   },
   {
+    // 2026-11-08 ユーザー指示: ビズピタ(bizpita.com、運営 Common Future & Co.)を運営サービスに追加
+    key: "bizpita",
+    logo: "/logos/bizpita.png",
+    title: "ビズピタ",
+    category: "Comparison Media",
+    subtitle: "中小企業向けAI・SaaS 比較サイト",
+    description:
+      "電話代行・AI電話、クラウドPBX、バーチャルオフィス、会計ソフト、勤怠管理など、中小企業・個人事業主向けのAI・SaaSを、公式情報にもとづく同じ基準で比較できます。",
+    url: "https://bizpita.com/",
+    domain: "bizpita.com",
+    anchor: "中小企業向けAI・SaaS比較サイト「ビズピタ」",
+  },
+  {
     key: "sds",
     logo: "/logos/sds.png",
     title: "ソーラーディールサーチ",
@@ -122,6 +135,11 @@ const PRODUCTS: Product[] = [
 ];
 
 const NEWS = [
+  {
+    date: "2026.11.08",
+    title: "電話代行・AI電話、会計ソフト、勤怠管理など、中小企業向けのAI・SaaSを公式情報で比較できるサイト「ビズピタ」を公開",
+    url: "https://bizpita.com/",
+  },
   {
     date: "2026.11.05",
     title: "78枚のカードから自分で選び、いまの気持ちを静かに読み解く、気持ちを整理するAIタロット「タロットノア」を公開",
