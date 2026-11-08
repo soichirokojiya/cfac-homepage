@@ -15,6 +15,8 @@ type Product = {
   category: string;
   subtitle: string;
   description: string;
+  /** このサービスで解決する悩み(使う人の言葉で) */
+  problem: string;
   url: string;
   domain: string;
   anchor: string;
@@ -24,6 +26,7 @@ type Product = {
 const PRODUCTS: Product[] = [
   {
     key: "facutto",
+    problem: "「どのファクタリング会社に頼めばいいのか分からない」",
     logo: "/logos/facutto.svg",
     title: "ファクット",
     category: "Comparison Media",
@@ -36,6 +39,7 @@ const PRODUCTS: Product[] = [
   {
     // 2026-10-24 ユーザー指示: 運営サービスに CASH NOW を追加 (2026-11-05 稼働中につきメンテナンス表記を削除)
     key: "cashnow",
+    problem: "「入金は先なのに、今月の支払いが間に合わない」",
     logo: "/logos/cashnow.png",
     title: "CASH NOW",
     category: "Fintech Service",
@@ -48,6 +52,7 @@ const PRODUCTS: Product[] = [
   },
   {
     key: "waketto",
+    problem: "「訳ありの家や土地が、どこにも買い取ってもらえない」",
     logo: "/logos/waketto.svg",
     title: "ワケット",
     category: "Comparison Media",
@@ -61,6 +66,7 @@ const PRODUCTS: Product[] = [
   {
     // 2026-11-08 ユーザー指示: ビズピタ(bizpita.com、運営 Common Future & Co.)を運営サービスに追加
     key: "bizpita",
+    problem: "「電話番や事務作業に手が回らない。でも、どのツールを選べばいいか分からない」",
     logo: "/logos/bizpita.png",
     title: "ビズピタ",
     category: "Comparison Media",
@@ -73,6 +79,7 @@ const PRODUCTS: Product[] = [
   },
   {
     key: "sds",
+    problem: "「太陽光発電所の相場や売買の実態が見えない」",
     logo: "/logos/sds.png",
     title: "ソーラーディールサーチ",
     category: "Data Platform",
@@ -85,6 +92,7 @@ const PRODUCTS: Product[] = [
   },
   {
     key: "secutto",
+    problem: "「何から対策すればいいのか、誰に相談すればいいのか分からない」",
     logo: "/logos/secutto.png",
     title: "セキュット",
     category: "Comparison Media",
@@ -96,6 +104,7 @@ const PRODUCTS: Product[] = [
   },
   {
     key: "first90",
+    problem: "「眠っても疲れが取れない。何を信じればいいか分からない」",
     logo: "/logos/first90.svg",
     title: "THE FIRST 90",
     category: "Editorial Media",
@@ -109,6 +118,7 @@ const PRODUCTS: Product[] = [
   {
     // 2026-11-05 ユーザー指示: じーざすAI(jesusai.jp)を運営サービスに追加
     key: "jesusai",
+    problem: "「誰にも言えない悩みを、気軽に聞いてほしい」",
     logo: "/logos/jesusai.png",
     title: "じーざすAI",
     category: "AI Service",
@@ -122,6 +132,7 @@ const PRODUCTS: Product[] = [
   {
     // 2026-11-05 ユーザー指示: タロットノア(tarot-noa.jp、運営 Common Future & Co.)を追加
     key: "tarot-noa",
+    problem: "「気持ちが絡まって、自分でも整理できない」",
     logo: "/logos/tarot-noa.svg",
     title: "タロットノア",
     category: "AI Service",
@@ -487,7 +498,7 @@ export default function Home() {
         {/* hero */}
         <section className="cf-hero">
           <h1 className="cf-tagline">Make choices simple.<span className="sr-only"> Common Future &amp; Company 株式会社</span></h1>
-          <p className="cf-sub">比べる、調べる、選ぶ。<br />AIとデータで、もっとかんたんに</p>
+          <p className="cf-sub">人々の悩みを、<br />ネットサービスで解決する</p>
           <Wordmark />
           <a href="#company" className="cf-scroll">Scroll Down</a>
         </section>
@@ -496,9 +507,10 @@ export default function Home() {
         <section id="company" className="cf-statement">
           <Reveal>
             <Label>Company</Label>
-            <h2>選ぶまでの手間を、<br />AIとデータで減らす</h2>
+            <h2>人々の悩みを、<br />ネットサービスで解決する</h2>
             <div className="cf-statement-body">
-              <p>Common Future &amp; Company は、<br />比較サイトやデータベースを企画から運営まで手がけています。</p>
+              <p>人間関係の悩み。お金の悩み。会社や組織を運営する悩み。<br />誰もが抱える悩みなのに、ひとりで調べて、比べて、決めるには重すぎることがあります。</p>
+              <p>Common Future &amp; Company は、こうした悩みを解決することを主眼に、<br />比較サイト・データベース・AIサービスを企画から運営まで手がけています。<br />いつでも、どこからでも、すぐに答えにたどり着けることが、ネットサービスの強みです。</p>
               <p>載っている情報が一つ違うだけで、使う人の判断は誤ります。<br />だから私たちは、公式情報や公表データを一次資料まで確かめ、<br />数字は一か所で管理し、画面は迷わない形に整えます。</p>
               <p>少人数で、AIを道具として使いながら、<br />長く役に立つサービスを運営しています。</p>
             </div>
@@ -510,7 +522,7 @@ export default function Home() {
         <section id="products" className="cf-products">
           <Reveal className="cf-count">
             <p><b>{PRODUCTS.length}</b> Products</p>
-            <span>金融・不動産・エネルギー・セキュリティ・健康・お悩み相談の領域で運営中</span>
+            <span>人間関係・お金・会社組織運営などの悩みを解決するサービスを運営中</span>
           </Reveal>
           <Ring />
           <div className="cf-split">
@@ -525,6 +537,7 @@ export default function Home() {
                     <span className="cf-plist-name"><i style={{ background: COLOR_BY_KEY[p.key] }} />{p.title}</span>
                     <span className="cf-pill">{p.category}</span>
                     <span className="cf-plist-body">
+                      <small className="cf-plist-problem">{p.problem}に</small>
                       <b>{p.subtitle}{p.badge && <em>{p.badge}</em>}</b>
                       <span>{p.description}</span>
                     </span>
@@ -562,7 +575,7 @@ export default function Home() {
             <p className="cf-side-note">会社概要</p>
           </div>
           <div>
-            <p className="cf-about-lead">AIを活用したプロダクトの開発・運営を行う会社です。金融・不動産・エネルギー・セキュリティなど、情報が分かりにくい領域で、比較サイトやデータベースを企画から運営まで一貫して手がけています。</p>
+            <p className="cf-about-lead">人間関係の悩み、お金の悩み、会社・組織運営の悩みなど、人々の悩みをネットサービスで解決することを主眼に、AIを活用したプロダクトの開発・運営を行う会社です。困っている人が正しい情報や相談先にたどり着きにくい領域で、比較サイト・データベース・AIサービスを企画から運営まで一貫して手がけています。</p>
             <dl className="cf-facts">
               {COMPANY.map((c) => (
                 <div key={c.label}><dt>{c.label}</dt><dd>{c.value}{c.href && <a href={c.href} target="_blank" rel="noopener noreferrer">{c.linkText}</a>}</dd></div>

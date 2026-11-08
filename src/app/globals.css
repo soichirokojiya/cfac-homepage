@@ -199,6 +199,7 @@ section[id] { scroll-margin-top: 80px; }
 .cf-plist-name { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
 .cf-plist .cf-pill { align-self: start; }
 .cf-plist-body b { display: block; font-weight: 700; }
+.cf-plist-problem { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 700; color: var(--gray); line-height: 1.7; }
 .cf-plist-body em { margin-left: 10px; font-style: normal; font-size: 11px; padding: 2px 8px; border-radius: 99px; background: var(--lime); }
 .cf-plist-body > span { display: block; margin-top: 4px; font-size: 13px; color: var(--gray); line-height: 1.85; }
 .cf-plist-domain { font-family: var(--display); font-weight: 500; font-size: 13px; letter-spacing: 0; white-space: nowrap; }
