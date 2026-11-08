@@ -327,6 +327,15 @@ section[id] { scroll-margin-top: 80px; }
 .cf-list li::before { content: ""; position: absolute; left: 2px; top: 1.45em; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 1px var(--ink); }
 .cf-list b { background: none; }
 
+.cf-faq { margin-top: 8px; border-top: 1px solid var(--line); }
+.cf-faq > div { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.cf-faq dt, .cf-faq dd { display: grid; grid-template-columns: 2.2em 1fr; margin: 0; }
+.cf-faq dt { font-weight: 700; font-size: 16px; line-height: 1.8; }
+.cf-faq dd { margin-top: 10px; font-size: 15px; line-height: 2; color: #444; }
+.cf-faq span { font-family: var(--display); font-weight: 600; font-size: 18px; line-height: 1.6; letter-spacing: 0; }
+.cf-faq dd span { color: var(--gray); }
+.cf-summary { padding: 24px 28px; background: var(--soft); border-radius: 16px; font-weight: 700; line-height: 2; }
+.cf-summary + .cf-list { margin-top: 24px; }
 .cf-note { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--gray); line-height: 1.9; }
 .cf-note p + p { margin-top: 10px; }
 .cf-col-back { text-align: center; padding: clamp(80px, 10vw, 140px) var(--side) clamp(100px, 12vw, 160px); }

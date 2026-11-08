@@ -18,8 +18,12 @@ export type Column = {
   category: string;
   title: string;
   description: string;
-  date: string; // YYYY.MM.DD
+  date: string; // 公開日 YYYY.MM.DD
+  updated?: string; // 更新日 YYYY.MM.DD(本文を直したら更新する。なければ公開日)
 };
+
+/** 全コラム共通の執筆者 */
+export const COLUMN_AUTHOR = "CFAC編集部";
 
 export const COLUMNS: Column[] = [
   // 新しい記事を先頭に足す(TOPには先頭5件)
@@ -30,6 +34,7 @@ export const COLUMNS: Column[] = [
     description:
       "職場や家族、友人との人間関係に疲れたときに、気持ちを書き出して整理する方法、変えられることと変えられないことの分け方、距離のとり方、話を聞いてもらえる場所と公的な相談先をまとめます。",
     date: "2026.11.08",
+    updated: "2026.11.09",
   },
   {
     slug: "te-ga-mawaranai",
@@ -38,6 +43,7 @@ export const COLUMNS: Column[] = [
     description:
       "電話番で作業が止まる、請求書や経費精算が月末に溜まる、勤怠の集計が大変。少人数の会社や組織でよくある悩みごとに、電話代行・AI電話、会計ソフト、勤怠管理などのAI・クラウドサービスで仕事を減らす方法を整理します。",
     date: "2026.11.08",
+    updated: "2026.11.09",
   },
   {
     slug: "shikin-chotatsu",
@@ -46,6 +52,7 @@ export const COLUMNS: Column[] = [
     description:
       "「今月の支払いが足りない」「売上の入金が先で手元にお金がない」。会社や個人事業のお金の悩みを解決する手段として、公庫融資・保証付き融資・銀行融資・ファクタリング・ビジネスローンの違いと、場面ごとの選び方を解説します。",
     date: "2026.11.08",
+    updated: "2026.11.09",
   },
 ];
 

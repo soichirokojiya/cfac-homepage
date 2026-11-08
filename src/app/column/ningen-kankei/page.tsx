@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArticleShell, H2, Table, Ext, type Toc } from "../article";
+import { ArticleShell, H2, Table, Ext, Faq, type Toc, type FaqItem } from "../article";
 import { COLUMNS, SITE_URL, eyecatch } from "../../../content/columns";
 
 const column = COLUMNS.find((c) => c.slug === "ningen-kankei")!;
@@ -30,7 +30,15 @@ const TOC: Toc = [
   { id: "distance", label: "距離をとるのも、立派な解決策" },
   { id: "talk", label: "話して、聞いてもらう" },
   { id: "help", label: "眠れない・食べられないが続くときは" },
+  { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
+];
+
+const FAQ: FaqItem[] = [
+  { q: "職場の人間関係がつらくて、会社に行きたくありません。", a: "まず心と体を休めることを優先してください。会社によっては、上司や人事のほかに産業医にも相談できます。眠れない・食べられない状態が続くなら、医療機関を受診してください。" },
+  { q: "相手に気持ちを伝えるとき、どう言えばよいですか？", a: "「あなたは〜だ」と相手を主語にせず、「私は〜と感じた」と自分を主語にして伝えてみてください。責められていると受け取られにくくなり、話し合いが落ち着いて進みやすくなります。" },
+  { q: "AIに悩みを話しても大丈夫ですか？", a: "気持ちを言葉にして整理する場所として使えます。ただし、AIは医師やカウンセラーの代わりにはなりません。名前や住所など、自分や相手を特定できる情報は書かないでください。" },
+  { q: "家族や友人から悩みを打ち明けられたら、どうすればよいですか？", a: "途中で助言をはさまず、最後まで話を聞いてください。つらさが強いときは、ひとりで支えようとせず、公的な相談窓口や医療機関につなぐことも考えてください。" },
 ];
 
 export default function Page() {
@@ -136,7 +144,11 @@ export default function Page() {
         眠りは心の状態と深く結びついています。日々の眠りを整えるヒントは、当社が運営する<Ext href="https://first90.jp/">睡眠の質を上げる情報サイト「THE FIRST 90」</Ext>でもまとめています。
       </p>
 
-      <H2 id="summary" num={7}>まとめ</H2>
+      <H2 id="faq" num={7}>よくある質問</H2>
+      <Faq items={FAQ} />
+
+      <H2 id="summary" num={8}>まとめ</H2>
+      <p className="cf-summary">人間関係の悩みは、相手を変えられないぶん、ひとりで抱え込みやすい悩みです。気持ちを書き出して事実と解釈を分け、変えられる自分の受け止め方と距離のとり方に力を使うと、心は少し軽くなります。話せる場所をつくり、不調が2週間以上続くときは、医療機関や公的な相談窓口を頼ってください。</p>
       <ul className="cf-list">
         <li>人間関係の悩みが重いのは、相手を変えられず、逃げにくく、言葉にしにくいから</li>
         <li>書き出して、事実と解釈を分けると、別の見方ができるようになる</li>

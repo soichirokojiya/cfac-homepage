@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Header, SiteFooter, Label, More } from "../chrome";
-import { categoryOf, eyecatch, SITE_URL, type Column } from "../../content/columns";
+import { categoryOf, eyecatch, COLUMN_AUTHOR, SITE_URL, type Column } from "../../content/columns";
 import { PRODUCTS, COLOR_BY_KEY } from "../../content/products";
 
 /* コラム記事の共通レイアウト(TOP と同じ白地・( Label )・罫線・ピル) */
@@ -21,6 +21,8 @@ export function ArticleShell({
   const cat = categoryOf(column.category);
   const url = `${SITE_URL}/column/${column.slug}`;
   const isoDate = column.date.replaceAll(".", "-");
+  const updated = column.updated ?? column.date;
+  const isoUpdated = updated.replaceAll(".", "-");
   const ld = [
     {
       "@context": "https://schema.org",
@@ -28,10 +30,10 @@ export function ArticleShell({
       headline: column.title,
       description: column.description,
       datePublished: isoDate,
-      dateModified: isoDate,
+      dateModified: isoUpdated,
       mainEntityOfPage: url,
       image: `${SITE_URL}${eyecatch(column.slug).png}`,
-      author: { "@type": "Organization", name: "Common Future & Company 編集部", url: SITE_URL },
+      author: { "@type": "Organization", name: COLUMN_AUTHOR, url: SITE_URL },
       publisher: { "@id": "https://www.cfac.co.jp/#organization" },
     },
     {
@@ -62,8 +64,9 @@ export function ArticleShell({
           <span className="cf-pill dark">{cat.ja}</span>
           <h1>{column.title}</h1>
           <p className="cf-col-meta">
-            <time dateTime={isoDate}>{column.date.replaceAll(".", "/")}</time>
-            <span>文：Common Future &amp; Company 編集部</span>
+            <span>執筆者：{COLUMN_AUTHOR}</span>
+            <span>公開日：<time dateTime={isoDate}>{column.date.replaceAll(".", "/")}</time></span>
+            <span>更新日：<time dateTime={isoUpdated}>{updated.replaceAll(".", "/")}</time></span>
           </p>
         </section>
 
@@ -149,6 +152,30 @@ export function Table({ head, rows }: { head: string[]; rows: string[][] }) {
         </tbody>
       </table>
     </div>
+  );
+}
+
+export type FaqItem = { q: string; a: string };
+
+/** よくある質問。表示と FAQPage 構造化データを同じ中身で出す */
+export function Faq({ items }: { items: FaqItem[] }) {
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <dl className="cf-faq">
+        {items.map((f) => (
+          <div key={f.q}>
+            <dt><span>Q</span>{f.q}</dt>
+            <dd><span>A</span>{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </>
   );
 }
 

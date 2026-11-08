@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArticleShell, H2, Table, Ext, type Toc } from "../article";
+import { ArticleShell, H2, Table, Ext, Faq, type Toc, type FaqItem } from "../article";
 import { COLUMNS, SITE_URL, eyecatch } from "../../../content/columns";
 
 const column = COLUMNS.find((c) => c.slug === "te-ga-mawaranai")!;
@@ -31,10 +31,19 @@ const TOC: Toc = [
   { id: "attendance", label: "勤怠・給与：集計と計算を自動にする" },
   { id: "meeting", label: "会議・営業：記録と共有を道具に任せる" },
   { id: "choose", label: "道具選びで失敗しないために" },
+  { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
 
 const BIZPITA = "https://bizpita.com";
+
+const FAQ: FaqItem[] = [
+  { q: "何人くらいの会社から、道具を入れる意味がありますか？", a: "ひとりの個人事業主でも意味があります。電話代行や会計ソフトは、ひとりで何役もこなしている人ほど、取り戻せる時間が大きくなります。" },
+  { q: "AI電話で受けると、取引先に失礼になりませんか？", a: "大事な取引先からの電話が多いなら、人が出る電話代行のほうが安心です。営業電話のふるい分けや夜間の受付のように、用件が決まっている電話ならAI電話でも十分に対応できます。" },
+  { q: "無料プランだけで足りますか？", a: "人数や件数が少ないうちは足りることもあります。上限を超えたときの料金と、有料プランに移るときの手間を、先に確かめておくと安心です。" },
+  { q: "道具を入れるときに補助金は使えますか？", a: "国や自治体には、中小企業のITツール導入を支援する補助金があります。対象になるツールや募集の時期が決まっているので、申し込む前に公式の募集要項を確認してください。" },
+  { q: "社員が新しい道具を使ってくれません。", a: "一度に全部を変えず、一番困っている作業から始めると定着しやすくなります。使い方を教える担当者を決めて、紙や表計算ソフトとの二重管理をやめる日を決めるのも効果があります。" },
+];
 
 export default function Page() {
   return (
@@ -145,7 +154,11 @@ export default function Page() {
         <li><b>社内の担当者を決める。</b>入れて終わりにせず、使われているかを誰かが見守ると定着します。</li>
       </ul>
 
-      <H2 id="summary" num={8}>まとめ</H2>
+      <H2 id="faq" num={8}>よくある質問</H2>
+      <Faq items={FAQ} />
+
+      <H2 id="summary" num={9}>まとめ</H2>
+      <p className="cf-summary">少人数の会社で手が回らないときは、人を増やす前に、何に時間を取られているかを書き出してください。電話は電話代行・AI電話、経理と請求は会計ソフト・請求書発行・経費精算、勤怠と給与は勤怠管理・給与計算と、道具に任せられる仕事は多くあります。一番困っている所から1つずつ、試してから入れていくのが失敗しないコツです。</p>
       <ul className="cf-list">
         <li>手が回らないときは、まず何に時間を取られているかを1週間書き出す</li>
         <li>電話は電話代行・AI電話・クラウドPBXで、電話番から離れる</li>
