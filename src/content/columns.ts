@@ -51,4 +51,7 @@ export const COLUMNS: Column[] = [
 
 export const SITE_URL = "https://cfac.co.jp";
 
+/** アイキャッチ: scripts/eyecatch/make.py で public/column/<slug>.webp(表示用)・.png(OG用) を作る */
+export const eyecatch = (slug: string) => ({ webp: `/column/${slug}.webp`, png: `/column/${slug}.png` });
+
 export const categoryOf = (key: string) => COLUMN_CATEGORIES.find((c) => c.key === key)!;

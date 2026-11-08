@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArticleShell, H2, Table, Ext, type Toc } from "../article";
-import { COLUMNS, SITE_URL } from "../../../content/columns";
+import { COLUMNS, SITE_URL, eyecatch } from "../../../content/columns";
 
 const column = COLUMNS.find((c) => c.slug === "te-ga-mawaranai")!;
 
@@ -13,7 +13,13 @@ export const metadata: Metadata = {
     description: column.description,
     url: `${SITE_URL}/column/${column.slug}`,
     type: "article",
-    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}${eyecatch(column.slug).png}`, width: 1200, height: 630, alt: column.title }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: column.title,
+    description: column.description,
+    images: [`${SITE_URL}${eyecatch(column.slug).png}`],
   },
 };
 

@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { Header, SiteFooter, Label, More } from "../chrome";
-import { categoryOf, SITE_URL, type Column } from "../../content/columns";
+import { categoryOf, eyecatch, SITE_URL, type Column } from "../../content/columns";
 import { PRODUCTS, COLOR_BY_KEY } from "../../content/products";
 
 /* コラム記事の共通レイアウト(TOP と同じ白地・( Label )・罫線・ピル) */
@@ -29,6 +30,7 @@ export function ArticleShell({
       datePublished: isoDate,
       dateModified: isoDate,
       mainEntityOfPage: url,
+      image: `${SITE_URL}${eyecatch(column.slug).png}`,
       author: { "@type": "Organization", name: "Common Future & Company 編集部", url: SITE_URL },
       publisher: { "@id": "https://www.cfac.co.jp/#organization" },
     },
@@ -64,6 +66,10 @@ export function ArticleShell({
             <span>文：Common Future &amp; Company 編集部</span>
           </p>
         </section>
+
+        <figure className="cf-col-eye">
+          <Image src={eyecatch(column.slug).webp} alt={column.title} width={2400} height={1260} unoptimized priority />
+        </figure>
 
         <div className="cf-split cf-col-body">
           <aside className="cf-side cf-col-toc">

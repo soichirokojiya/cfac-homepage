@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Header, SiteFooter, Label } from "../chrome";
-import { COLUMNS, COLUMN_CATEGORIES, SITE_URL } from "../../content/columns";
+import { COLUMNS, COLUMN_CATEGORIES, SITE_URL, eyecatch } from "../../content/columns";
 
 export const metadata: Metadata = {
   title: "コラム | Common Future & Company 株式会社",
@@ -37,12 +38,17 @@ export default function ColumnIndex() {
                 </p>
               </div>
               {items.length ? (
-                <ul className="cf-news cf-col-list">
+                <ul className="cf-col-cards">
                   {items.map((a) => (
                     <li key={a.slug}>
                       <a href={`/column/${a.slug}`}>
-                        <span className="d">{a.date.replaceAll(".", "/")}</span>
-                        <span className="cf-pill dark">{c.ja}</span>
+                        <span className="cf-col-thumb">
+                          <Image src={eyecatch(a.slug).webp} alt="" width={2400} height={1260} unoptimized />
+                        </span>
+                        <span className="cf-col-card-meta">
+                          <span className="d">{a.date.replaceAll(".", "/")}</span>
+                          <span className="cf-pill dark">{c.ja}</span>
+                        </span>
                         <span className="t">{a.title}</span>
                       </a>
                     </li>
