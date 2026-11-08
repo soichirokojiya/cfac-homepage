@@ -22,6 +22,23 @@ export type Column = {
 };
 
 export const COLUMNS: Column[] = [
+  // 新しい記事を先頭に足す(TOPには先頭5件)
+  {
+    slug: "ningen-kankei",
+    category: "relationships",
+    title: "人間関係に疲れたときの心の整理法｜ひとりで抱え込まないための考え方と相談先",
+    description:
+      "職場や家族、友人との人間関係に疲れたときに、気持ちを書き出して整理する方法、変えられることと変えられないことの分け方、距離のとり方、話を聞いてもらえる場所と公的な相談先をまとめます。",
+    date: "2026.11.08",
+  },
+  {
+    slug: "te-ga-mawaranai",
+    category: "organization",
+    title: "少人数の会社で「手が回らない」を解決する｜電話・経理・勤怠をAIとクラウドで減らす方法",
+    description:
+      "電話番で作業が止まる、請求書や経費精算が月末に溜まる、勤怠の集計が大変。少人数の会社や組織でよくある悩みごとに、電話代行・AI電話、会計ソフト、勤怠管理などのAI・クラウドサービスで仕事を減らす方法を整理します。",
+    date: "2026.11.08",
+  },
   {
     slug: "shikin-chotatsu",
     category: "money",

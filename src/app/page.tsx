@@ -241,7 +241,7 @@ export default function Home() {
             <p className="cf-side-note">悩みから考えるコラム</p>
             <More href="/column">Learn More</More>
           </div>
-          <ul className="cf-news">
+          <ul className="cf-news cf-col-list">
             {COLUMNS.slice(0, 5).map((c) => (
               <li key={c.slug}>
                 <a href={`/column/${c.slug}`}>
@@ -280,7 +280,7 @@ export default function Home() {
             <p className="cf-side-note">会社概要</p>
           </div>
           <div>
-            <p className="cf-about-lead">人間関係の悩み、お金の悩み、会社・組織運営の悩みなど、人々の悩みをネットサービスで解決することを主眼に、AIを活用したプロダクトの開発・運営を行う会社です。困っている人が正しい情報や相談先にたどり着きにくい領域で、比較サイト・データベース・AIサービスを企画から運営まで一貫して手がけています。</p>
+            <p className="cf-about-lead">人間関係の悩み、お金の悩み、会社・組織運営の悩みなど、人々の悩みをネットサービスで解決することを主眼に、AIを使ったプロダクトを開発・運営している会社です。困っている人が正しい情報や相談先にたどり着きにくい領域で、比較サイト・データベース・AIサービスを企画から運営まで一貫して手がけています。</p>
             <dl className="cf-facts">
               {COMPANY.map((c) => (
                 <div key={c.label}><dt>{c.label}</dt><dd>{c.value}{c.href && <a href={c.href} target="_blank" rel="noopener noreferrer">{c.linkText}</a>}</dd></div>

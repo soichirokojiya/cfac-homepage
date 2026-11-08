@@ -37,7 +37,7 @@ export default function ColumnIndex() {
                 </p>
               </div>
               {items.length ? (
-                <ul className="cf-news">
+                <ul className="cf-news cf-col-list">
                   {items.map((a) => (
                     <li key={a.slug}>
                       <a href={`/column/${a.slug}`}>
