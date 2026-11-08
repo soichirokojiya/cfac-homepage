@@ -262,6 +262,72 @@ section[id] { scroll-margin-top: 80px; }
 .cf-footer-bottom nav { display: flex; gap: 20px; color: var(--gray); }
 
 /* ------------------------------------------------------------------ */
+/* column (2026-11-08: TOP と同じ白地・( Label )・罫線・ピルで組む)    */
+/* ------------------------------------------------------------------ */
+
+.cf-col-hero { max-width: 1440px; margin: 0 auto; padding: clamp(140px, 16vw, 220px) var(--side) clamp(56px, 7vw, 100px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.cf-col-hero h1 { font-weight: 700; font-size: clamp(26px, 3.4vw, 48px); line-height: 1.5; letter-spacing: 0.04em; max-width: 24em; }
+.cf-col-hero > p { color: var(--gray); font-weight: 700; font-size: clamp(13px, 1.1vw, 16px); line-height: 2.1; }
+.cf-col-hero-article h1 { font-size: clamp(22px, 2.6vw, 38px); line-height: 1.6; }
+.cf-crumb { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; font-family: var(--display); font-size: 13px; letter-spacing: 0; color: var(--gray); }
+.cf-crumb a:hover { color: var(--ink); }
+.cf-col-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; font-size: 13px; color: var(--gray); }
+.cf-col-meta time { font-family: var(--display); letter-spacing: 0; }
+.cf-col-cat { padding-top: clamp(56px, 7vw, 96px); }
+.cf-col-cat .cf-side-note b { color: var(--ink); font-size: 14px; }
+.cf-col-empty { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; font-size: 14px; color: var(--gray); }
+.cf-col-spacer { height: clamp(100px, 12vw, 160px); }
+
+.cf-split > * { min-width: 0; }
+.cf-col-body { border-top: 1px solid var(--line); padding-top: clamp(48px, 6vw, 80px); }
+.cf-col-toc { position: sticky; top: 100px; align-self: start; }
+.cf-col-toc ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); width: 100%; }
+.cf-col-toc li a { display: grid; grid-template-columns: 2.2em 1fr; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.7; font-weight: 700; }
+.cf-col-toc li a span { font-family: var(--display); font-weight: 500; color: var(--gray); letter-spacing: 0; }
+.cf-col-toc li a:hover { color: var(--gray); }
+
+.cf-article { max-width: 46em; font-size: 16px; line-height: 2.05; }
+.cf-article p + p, .cf-article p + .cf-list, .cf-article .cf-table + p { margin-top: 1.4em; }
+.cf-article .cf-lead { font-weight: 700; font-size: 17px; }
+.cf-article b { font-weight: 700; background: linear-gradient(transparent 62%, var(--lime) 62%); }
+.cf-article a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.cf-article a:hover { color: var(--gray); }
+.cf-article h2 { display: flex; align-items: baseline; gap: 16px; margin: clamp(64px, 7vw, 96px) 0 24px; padding-top: 22px; border-top: 2px solid var(--ink); font-weight: 700; font-size: clamp(20px, 2vw, 27px); line-height: 1.6; scroll-margin-top: 90px; }
+.cf-article h2 span { font-family: var(--display); font-weight: 600; font-size: 0.8em; letter-spacing: 0; flex: none; }
+.cf-article h3 { margin: 40px 0 12px; font-weight: 700; font-size: 18px; line-height: 1.7; display: flex; align-items: center; gap: 10px; }
+.cf-article h3::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); flex: none; }
+
+.cf-points { list-style: none; margin: 40px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.cf-points li { display: grid; grid-template-columns: 3em 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.cf-points li > span { font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.3; letter-spacing: 0; }
+.cf-points b { display: block; font-size: 16px; color: var(--ink); background: none; }
+.cf-points div { font-size: 14px; color: #555; line-height: 1.9; }
+
+.cf-table { margin: 24px 0 0; overflow-x: auto; }
+.cf-table table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 1.75; }
+.cf-table th, .cf-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.cf-table thead th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); font-size: 12px; color: var(--gray); font-weight: 700; }
+.cf-table tbody th { font-weight: 700; min-width: 9em; }
+
+.cf-list { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.cf-list li { position: relative; padding: 14px 0 14px 22px; border-bottom: 1px solid var(--line); line-height: 1.9; }
+.cf-list li::before { content: ""; position: absolute; left: 2px; top: 1.45em; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 1px var(--ink); }
+.cf-list b { background: none; }
+
+.cf-note { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--gray); line-height: 1.9; }
+.cf-note p + p { margin-top: 10px; }
+.cf-col-back { text-align: center; padding: clamp(80px, 10vw, 140px) var(--side) clamp(100px, 12vw, 160px); }
+
+@media (max-width: 900px) {
+  .cf-col-toc { position: static; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .cf-col-hero br { display: none; }
+  .cf-col-hero > p { text-align: left; }
+  .cf-article { font-size: 15px; }
+}
+
+/* ------------------------------------------------------------------ */
 /* responsive                                                          */
 /* ------------------------------------------------------------------ */
 
