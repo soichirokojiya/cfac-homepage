@@ -10,5 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/terms`, priority: 0.2 },
     { url: `${SITE_URL}/tokushoho`, priority: 0.2 },
     { url: `${SITE_URL}/consumer-oriented`, priority: 0.3 },
+    { url: `${SITE_URL}/sdgs`, priority: 0.3 },
   ];
 }
