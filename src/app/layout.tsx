@@ -21,15 +21,15 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "Common Future & Company 株式会社",
+  title: "Common Future & Co. 株式会社",
   description:
-    "Common Future & Company 株式会社は、人間関係・お金・会社組織運営などの悩みをネットサービスで解決する会社です。ファクタリング比較のファクット、訳あり不動産のワケット、中小企業向けAI・SaaS比較のビズピタなどを開発・運営しています。",
+    "Common Future & Co. 株式会社は、人間関係・お金・会社組織運営などの悩みをネットサービスで解決する会社です。ファクタリング比較のファクット、訳あり不動産のワケット、中小企業向けAI・SaaS比較のビズピタなどを開発・運営しています。",
   openGraph: {
-    title: "Common Future & Company 株式会社",
+    title: "Common Future & Co. 株式会社",
     description:
       "人間関係・お金・会社組織運営などの悩みをネットサービスで解決する会社です。ファクット・ワケット・ビズピタなどを開発・運営しています。",
     url: "https://cfac.co.jp",
-    siteName: "Common Future & Company 株式会社",
+    siteName: "Common Future & Co. 株式会社",
     locale: "ja_JP",
     type: "website",
     images: [
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
         url: "https://cfac.co.jp/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Common Future & Company 株式会社",
+        alt: "Common Future & Co. 株式会社",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Common Future & Company 株式会社",
+    title: "Common Future & Co. 株式会社",
     description:
       "人間関係・お金・会社組織運営などの悩みをネットサービスで解決する会社です。ファクット・ワケット・ビズピタなどを開発・運営しています。",
     images: ["https://cfac.co.jp/og-image.png"],

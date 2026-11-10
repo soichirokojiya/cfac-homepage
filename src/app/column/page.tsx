@@ -4,9 +4,9 @@ import { Header, SiteFooter, Label } from "../chrome";
 import { COLUMNS, COLUMN_CATEGORIES, SITE_URL, eyecatch } from "../../content/columns";
 
 export const metadata: Metadata = {
-  title: "コラム | Common Future & Company 株式会社",
+  title: "コラム | Common Future & Co. 株式会社",
   description:
-    "お金の悩み、人間関係の悩み、会社組織運営の悩み。Common Future & Company が、暮らしと仕事の悩みを解決するためのヒントを、悩みごとにまとめたコラムです。",
+    "お金の悩み、人間関係の悩み、会社組織運営の悩み。Common Future & Co. が、暮らしと仕事の悩みを解決するためのヒントを、悩みごとにまとめたコラムです。",
   alternates: { canonical: `${SITE_URL}/column` },
 };
 

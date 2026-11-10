@@ -41,7 +41,7 @@ export default function TermsPage() {
       <main className="max-w-3xl mx-auto px-6 py-16 md:py-20">
         <div className="prose-policy">
           <p className="text-sm text-[#374151] leading-loose mb-10">
-            この利用規約（以下「本規約」）は、Common Future & Company
+            この利用規約（以下「本規約」）は、Common Future & Co.
             株式会社（以下「当社」）が運営するウェブサイトおよびサービス（以下「本サービス」）の利用に関する条件を定めるものです。利用者の皆さまには、本規約に同意いただいたうえで本サービスをご利用いただきます。
           </p>
 
@@ -160,7 +160,7 @@ export default function TermsPage() {
           <Section num={11} title="お問い合わせ先">
             <div className="bg-[#f8f9fa] rounded-lg p-6">
               <p className="font-medium text-[#1a1a1a] mb-2">
-                Common Future & Company 株式会社
+                Common Future & Co. 株式会社
               </p>
               <p>所在地：神奈川県逗子市小坪6-6-46</p>
               <p>

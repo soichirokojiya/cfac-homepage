@@ -86,7 +86,7 @@ const DOMAINS = [
 ];
 
 const COMPANY: { label: string; value: string; href?: string; linkText?: string }[] = [
-  { label: "会社名", value: "Common Future & Company 株式会社" },
+  { label: "会社名", value: "Common Future & Co. 株式会社" },
   { label: "代表者", value: "代表取締役 ", linkText: "糀屋総一朗", href: "https://souichirou.org/" },
   { label: "法人番号", value: "9011001105902" },
   { label: "設立", value: "2015年10月5日" },
@@ -183,7 +183,7 @@ export default function Home() {
       <main id="top">
         {/* hero */}
         <section className="cf-hero">
-          <h1 className="cf-tagline">Make choices simple.<span className="sr-only"> Common Future &amp; Company 株式会社</span></h1>
+          <h1 className="cf-tagline">Make choices simple.<span className="sr-only"> Common Future &amp; Co. 株式会社</span></h1>
           <p className="cf-sub">人々の悩みを、<br />ネットサービスで解決する</p>
           <Wordmark />
           <a href="#company" className="cf-scroll">Scroll Down</a>
@@ -196,7 +196,7 @@ export default function Home() {
             <h2>人々の悩みを、<br />ネットサービスで解決する</h2>
             <div className="cf-statement-body">
               <p>人間関係の悩み。お金の悩み。会社や組織を運営する悩み。<br />誰もが抱える悩みなのに、ひとりで調べて、比べて、決めるには重すぎることがあります。</p>
-              <p>Common Future &amp; Company は、こうした悩みを解決することを主眼に、<br />比較サイト・データベース・AIサービスを企画から運営まで手がけています。<br />いつでも、どこからでも、すぐに答えにたどり着けることが、ネットサービスの強みです。</p>
+              <p>Common Future &amp; Co. は、こうした悩みを解決することを主眼に、<br />比較サイト・データベース・AIサービスを企画から運営まで手がけています。<br />いつでも、どこからでも、すぐに答えにたどり着けることが、ネットサービスの強みです。</p>
               <p>少人数で、AIを道具として使いながら、<br />長く役に立つサービスを運営しています。</p>
             </div>
             <More href="#about">Learn More</More>

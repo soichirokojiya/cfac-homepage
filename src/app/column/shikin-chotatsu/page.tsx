@@ -5,7 +5,7 @@ import { COLUMNS, SITE_URL, eyecatch } from "../../../content/columns";
 const column = COLUMNS.find((c) => c.slug === "shikin-chotatsu")!;
 
 export const metadata: Metadata = {
-  title: `${column.title} | Common Future & Company`,
+  title: `${column.title} | Common Future & Co.`,
   description: column.description,
   alternates: { canonical: `${SITE_URL}/column/${column.slug}` },
   openGraph: {

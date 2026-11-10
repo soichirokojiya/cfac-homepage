@@ -42,7 +42,7 @@ export default function PrivacyPage() {
       <main className="max-w-3xl mx-auto px-6 py-16 md:py-20">
         <div className="prose-policy">
           <p className="text-sm text-[#374151] leading-loose mb-10">
-            Common Future & Company
+            Common Future & Co.
             株式会社（以下「当社」）は、当社が運営するウェブサイトおよびサービス（以下「本サービス」）における利用者の個人情報の取り扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」）を定めます。
           </p>
 
@@ -132,7 +132,7 @@ export default function PrivacyPage() {
           <Section num={10} title="お問い合わせ先">
             <div className="bg-[#f8f9fa] rounded-lg p-6">
               <p className="font-medium text-[#1a1a1a] mb-2">
-                Common Future & Company 株式会社
+                Common Future & Co. 株式会社
               </p>
               <p>所在地：神奈川県逗子市小坪6-6-46</p>
               <p>

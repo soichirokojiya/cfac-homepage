@@ -128,7 +128,7 @@ export function Header({ home = false }: { home?: boolean }) {
   return (
     <>
       <header className="cf-header">
-        <a href={home ? "#top" : "/"} className="cf-brand" aria-label="Common Future & Company トップへ">
+        <a href={home ? "#top" : "/"} className="cf-brand" aria-label="Common Future & Co. トップへ">
           <Logo size={30} color="currentColor" weight={9} />
           <span>COMMON FUTURE</span>
         </a>
@@ -144,7 +144,7 @@ export function Header({ home = false }: { home?: boolean }) {
             </a>
           ))}
         </nav>
-        <p className="cf-menu-foot">Common Future &amp; Company 株式会社<br />info@cfac.co.jp</p>
+        <p className="cf-menu-foot">Common Future &amp; Co. 株式会社<br />info@cfac.co.jp</p>
       </div>
     </>
   );
