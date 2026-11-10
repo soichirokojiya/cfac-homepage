@@ -4,11 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "消費者志向自主宣言 | Common Future & Co. 株式会社",
   description:
-    "Common Future & Co. 株式会社の消費者志向自主宣言です。ファクットなど当社が運営するサービスで、利用者の声をいかし、正確な情報を届けるための方針を定めています。",
+    "Common Future & Co. 株式会社の消費者志向自主宣言です。お金・会社運営・人間関係・暮らしの悩みに役立つサービスで、利用者の声をいかし、正確な情報を届けるための方針を定めています。",
   alternates: { canonical: "/consumer-oriented" },
 };
-
-const FACUTTO = "https://facutto.jp";
 
 export default function ConsumerOrientedPage() {
   return (
@@ -37,10 +35,10 @@ export default function ConsumerOrientedPage() {
         <div className="text-sm text-[#374151] leading-loose">
           <Block title="理念">
             <p>
-              当社は「人々の悩みを、ネットサービスで解決する」を掲げ、お金や会社運営、人間関係の悩みに役立つサービスを運営しています。
+              当社は「人々の悩みを、ネットサービスで解決する」を掲げています。お金、会社の運営、人間関係、暮らしの悩みに役立つサービスを運営しています。
             </p>
             <p>
-              資金繰りに困っているときほど、人は急いで決めてしまいがちです。そうしたときでも、正確で偏りのない情報をもとに選べるようにすることが、当社の役目だと考えています。
+              悩みを抱えているときほど、人は急いで決めてしまいがちです。そうしたときでも、正確で偏りのない情報をもとに、自分に合う方法を落ち着いて選べるようにする。それが当社の役目だと考えています。
             </p>
             <p>
               当社はこの考えに基づき、消費者志向経営（消費者の立場に立って事業を運営すること）に取り組むと宣言します。
@@ -50,17 +48,15 @@ export default function ConsumerOrientedPage() {
           <Block title="1. みんなの声を聴き、かついかします">
             <ul>
               <li>
-                ファクタリング比較サイト「
-                <a href={FACUTTO} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">ファクット</a>
-                」では、利用者の口コミやお問い合わせ、掲載会社からの連絡を受けて、掲載内容を見直します。
+                各サービスへのお問い合わせや利用者の声を受けて、サービスの内容と使い勝手を見直します。お問い合わせはメール（info@cfac.co.jp）で受け付けています。
               </li>
               <li>
-                掲載会社の公式サイトを定期的に確認し、手数料や入金スピードなどが変わっていれば修正します。修正や掲載終了の記録は「
-                <a href={`${FACUTTO}/companies/updates`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">掲載情報の更新履歴</a>
-                」で公開します。
+                比較サイトでは、掲載している会社の公式サイトを定期的に確認し、内容が変わっていれば修正します。修正の記録は公開します（例：
+                <a href="https://facutto.jp/companies/updates" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">ファクットの掲載情報の更新履歴</a>
+                ）。
               </li>
               <li>
-                お問い合わせはメール（info@cfac.co.jp）で受け付け、いただいた声はサービスの改善に使います。
+                年配の方も使うサービスでは、文字の大きさや読みやすさに配慮した画面にします。
               </li>
             </ul>
           </Block>
@@ -68,17 +64,22 @@ export default function ConsumerOrientedPage() {
           <Block title="2. 未来・次世代のために取り組みます">
             <ul>
               <li>
-                中小企業や個人事業主が、悪質な業者や不利な契約で損をしないよう、注意点を分かりやすく伝えます。例として「
-                <a href={`${FACUTTO}/column/factoring-akushitsu-switch`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">悪質ファクタリング業者からの乗り換え方</a>
-                」の記事を公開しています。
+                悩み別の
+                <Link href="/column" className="underline underline-offset-4">コラム</Link>
+                で、お金、会社運営、人間関係の悩みへの対処法を無料で公開します。
               </li>
               <li>
-                ファクタリング手数料の相場を毎月まとめた「
-                <a href={`${FACUTTO}/fee-index`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">ファクタリング手数料指数</a>
-                」を公開し、適正な手数料を判断できる材料を届けます。
+                心の悩みを扱う記事では、公的な相談窓口と医療機関をあわせて案内します。AIの相談サービスを紹介するときは、AIが専門家の代わりにはならないことも明記します（例：
+                <Link href="/column/ningen-kankei" className="underline underline-offset-4">人間関係に疲れたときの心の整理法</Link>
+                ）。
               </li>
               <li>
-                融資やビジネスローンなど、ファクタリング以外の資金調達の方法もあわせて紹介し、利用者が自分に合う方法を選べるようにします。
+                人手の少ない中小企業や個人事業主が、AIやクラウドの道具で負担を減らせるよう、選び方を分かりやすく伝えます（例：
+                <Link href="/column/te-ga-mawaranai" className="underline underline-offset-4">少人数の会社で「手が回らない」を解決する</Link>
+                ）。
+              </li>
+              <li>
+                空き家や相続した不動産など、扱いに困る物件の相談先が見つかるよう、専門の買取業者の情報をまとめます。
               </li>
             </ul>
           </Block>
@@ -86,22 +87,18 @@ export default function ConsumerOrientedPage() {
           <Block title="3. 法令を守り、コーポレートガバナンスを強化します">
             <ul>
               <li>
-                景品表示法（広告の不当な表示を禁じる法律）や、ステルスマーケティング規制を守ります。広告を含むページには、その旨をはっきり表示します。
+                景品表示法（広告の不当な表示を禁じる法律）とステルスマーケティング規制を守ります。広告を含むページには、その旨をはっきり表示します。
               </li>
               <li>
-                「No.1」などの表現は、第三者の客観的なデータで裏付けられるときだけ使います。
-              </li>
-              <li>
-                掲載の基準やランキングの決め方は「
-                <a href={`${FACUTTO}/about/listing-policy`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">比較基準・掲載審査ポリシー</a>
-                」「
-                <a href={`${FACUTTO}/about/ranking-method`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">ランキング基準・スコアリング方式</a>
-                」で公開します。
+                「No.1」などの表現は、第三者の客観的なデータで裏付けられるときだけ使います。比較は公式情報にもとづき、同じ基準で行います。
               </li>
               <li>
                 個人情報は
                 <Link href="/privacy" className="underline underline-offset-4">プライバシーポリシー</Link>
-                に沿って扱い、反社会的勢力とは一切関係を持ちません。
+                に沿って扱います。
+              </li>
+              <li>
+                反社会的勢力とは一切関係を持ちません。
               </li>
             </ul>
           </Block>
