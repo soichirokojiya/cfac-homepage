@@ -209,7 +209,7 @@ export function SiteFooter({ home = false }: { home?: boolean }) {
       </ul>
       <div className="cf-footer-bottom">
         <p>&copy; 2026 Common Future &amp; Co. 株式会社 / 神奈川県逗子市小坪6-6-46</p>
-        <nav aria-label="規約"><a href="/privacy">Privacy Policy</a><a href="/terms">利用規約</a><a href="/tokushoho">特商法表記</a></nav>
+        <nav aria-label="規約"><a href="/privacy">Privacy Policy</a><a href="/terms">利用規約</a><a href="/tokushoho">特商法表記</a><a href="/consumer-oriented">消費者志向自主宣言</a></nav>
       </div>
     </footer>
   );
