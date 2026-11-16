@@ -174,6 +174,30 @@ function Ring() {
 /* page                                                                */
 /* ------------------------------------------------------------------ */
 
+/* 制作実績(2026-11-16 ユーザー指示: MINAWA・THERMのサイト制作を掲載) */
+const WORKS = [
+  {
+    key: "minawa",
+    title: "VILLA MINAWA",
+    category: "Website",
+    client: "宿泊施設の公式サイト",
+    description: "福岡・宗像大島にある、海沿いの一棟貸しヴィラの公式サイトです。世界遺産「沖ノ島」を望むテラスや島の食・アクティビティを、動画と写真で伝えています。日本語・英語の2言語に対応しています。",
+    scope: "企画・デザイン・制作",
+    url: "https://minawa.jp/",
+    domain: "minawa.jp",
+  },
+  {
+    key: "therm",
+    title: "THE THERM",
+    category: "Website",
+    client: "宿泊施設の公式サイト",
+    description: "宗像大島にある、1日1組限定のサウナ付きヴィラの公式サイトです。バレル薪サウナや焚き火テラス、宿泊プラン、アクセスまでを1つのサイトにまとめ、予約ページへ迷わず進めるようにしています。",
+    scope: "企画・デザイン・制作",
+    url: "https://the-therm.jp/",
+    domain: "the-therm.jp",
+  },
+];
+
 const newsTag = (url: string) => (url.includes("prtimes.jp") ? "Press" : "Product");
 
 export default function Home() {
@@ -227,6 +251,30 @@ export default function Home() {
                       <span>{p.description}</span>
                     </span>
                     <span className="cf-plist-domain">{p.domain} ↗</span>
+                  </a>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* works: サイト制作の実績 */}
+        <section id="works" className="cf-split cf-sec">
+          <div className="cf-side">
+            <Label>Works</Label>
+            <p className="cf-side-note">サイト制作の実績</p>
+          </div>
+          <div>
+            <p className="cf-about-lead">自社サービスのほかに、宿泊施設などの公式サイトも制作しています。</p>
+            <ul className="cf-works">
+              {WORKS.map((w) => (
+                <Reveal as="li" key={w.key}>
+                  <a href={w.url} target="_blank" rel="noopener noreferrer" aria-label={`${w.title}の公式サイト(新しいタブで開く)`}>
+                    <span className="cf-works-img"><Image src={`/works/${w.key}.webp`} alt={`${w.title}の公式サイトのトップページ`} fill unoptimized sizes="(max-width: 900px) 100vw, 40vw" /></span>
+                    <span className="cf-works-head"><b>{w.title}</b><span className="cf-pill">{w.category}</span></span>
+                    <small>{w.client}／{w.scope}</small>
+                    <span className="cf-works-desc">{w.description}</span>
+                    <span className="cf-plist-domain">{w.domain} ↗</span>
                   </a>
                 </Reveal>
               ))}

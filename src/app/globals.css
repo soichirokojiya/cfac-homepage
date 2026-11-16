@@ -349,6 +349,18 @@ section[id] { scroll-margin-top: 80px; }
   .cf-article { font-size: 15px; }
 }
 
+/* works(制作実績) */
+.cf-works { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px; margin-top: 32px; }
+.cf-works a { display: flex; flex-direction: column; gap: 10px; }
+.cf-works-img { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: var(--soft); border: 1px solid var(--line); }
+.cf-works-img img { object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.cf-works a:hover .cf-works-img img { transform: scale(1.03); }
+.cf-works-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+.cf-works-head b { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: 0; }
+.cf-works small { font-size: 12px; font-weight: 700; color: var(--gray); }
+.cf-works-desc { font-size: 13px; color: var(--gray); line-height: 1.85; }
+@media (max-width: 640px) { .cf-works { grid-template-columns: 1fr; } }
+
 /* ------------------------------------------------------------------ */
 /* responsive                                                          */
 /* ------------------------------------------------------------------ */

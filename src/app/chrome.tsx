@@ -107,6 +107,7 @@ export function Wordmark({ dots = true, className = "" }: { dots?: boolean; clas
 const MENU = [
   { en: "Company", ja: "私たちについて", href: "#company" },
   { en: "Products", ja: "運営サービス", href: "#products" },
+  { en: "Works", ja: "制作実績", href: "#works" },
   { en: "Column", ja: "コラム", href: "/column" },
   { en: "News", ja: "ニュース", href: "#news" },
   { en: "About", ja: "会社概要", href: "#about" },
