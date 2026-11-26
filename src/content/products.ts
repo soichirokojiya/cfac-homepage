@@ -135,6 +135,20 @@ export const PRODUCTS: Product[] = [
     domain: "tarot-noa.jp",
     anchor: "気持ちを整理するAIタロット「タロットノア」",
   },
+  {
+    // 2026-11-26 ユーザー指示: フォナクル(phonacle.jp、運営 Common Future & Co.)を運営サービスに追加
+    key: "phonacle",
+    problem: "「電話占いを使ってみたいけど、料金や仕組みがよく分からない」",
+    logo: "/logos/phonacle.png",
+    title: "フォナクル",
+    category: "Comparison Media",
+    subtitle: "電話占いの料金・初回特典 比較サイト",
+    description:
+      "電話占い20社の1分あたりの料金、初回特典で無料で話せる時間、後払いの有無、運営会社を、各社の公式サイトで確かめた内容だけで比べられます。",
+    url: "https://phonacle.jp/",
+    domain: "phonacle.jp",
+    anchor: "電話占いの比較サイト「フォナクル」",
+  },
 ];
 
 export const COLORS = ["#1f3dff", "#ff4b12", "#00c35a", "#e2ff1c", "#ff8ad2", "#6fd1ff", "#ffc21a", "#9b6bff"];

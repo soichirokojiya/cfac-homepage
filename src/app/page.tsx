@@ -13,6 +13,11 @@ import { COLUMNS, categoryOf } from "../content/columns";
 
 const NEWS = [
   {
+    date: "2026.11.26",
+    title: "電話占いの料金・初回特典・後払いを、各社の公式情報で比べられるサイト「フォナクル」を公開",
+    url: "https://phonacle.jp/",
+  },
+  {
     date: "2026.11.08",
     title: "電話代行・AI電話、会計ソフト、勤怠管理など、中小企業向けのAI・SaaSを公式情報で比較できるサイト「ビズピタ」を公開",
     url: "https://bizpita.com/",
